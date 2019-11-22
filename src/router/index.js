@@ -23,6 +23,7 @@ const routes = [
     path: '/member',
     name: 'member',
     component: Member,
+    meta: { layout: 'abc' },
     children: [
       {
         path: '/:id',
