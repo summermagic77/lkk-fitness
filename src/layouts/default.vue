@@ -2,9 +2,9 @@
   <div>
     <b-container fluid>
       <b-row>
-        <side-bar :fullPage.sync="fullPage" :width="siderBarWidth" />
-        <b-col cols="12" :style="maninContentStyle">
-          {{ fullPage }}
+        <side-bar />
+        <!-- <b-col cols="12" :style="maninContentStyle"> -->
+        <b-col cols="12">
           <slot />
         </b-col>
       </b-row>
@@ -21,18 +21,18 @@ export default {
   },
   data() {
     return {
-      fullPage: true,
-      siderBarWidth: 350,
+      // fullPage: true,
+      // siderBarWidth: 350,
     };
   },
   computed: {
-    maninContentStyle() {
-      const menuMaxWidth = this.fullPage ? 45 : this.siderBarWidth;
-      return {
-        maxWidth: `calc(100% - ${menuMaxWidth}px)`,
-        marginLeft: `${menuMaxWidth}px`,
-      };
-    },
+    // maninContentStyle() {
+    //   const menuMaxWidth = this.fullPage ? 45 : this.siderBarWidth;
+    //   return {
+    //     maxWidth: `calc(100% - ${menuMaxWidth}px)`,
+    //     marginLeft: `${menuMaxWidth}px`,
+    //   };
+    // },
   },
 };
 </script>

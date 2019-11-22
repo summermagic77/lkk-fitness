@@ -1,23 +1,18 @@
 <template>
-  <sidebar-menu
-    :menu="menu"
-    theme="white-theme"
-    :collapsed="true"
-    @toggle-collapse="onCollapse"
-  >
-    <span slot="toggle-icon"><font-awesome-icon icon="arrows-alt-h" /></span>
-    <span slot="dropdown-icon"><font-awesome-icon icon="caret-right" /></span>
-  </sidebar-menu>
+  <Slide>
+    <a id="home" href="#">
+      <span>Home</span>
+    </a>
+  </Slide>
 </template>
 
 <script>
+import { Slide } from 'vue-burger-menu';
+
 export default {
   name: 'SideBar',
-  props: {
-    fullPage: {
-      type: Boolean,
-      required: true,
-    },
+  components: {
+    Slide,
   },
   data() {
     return {
