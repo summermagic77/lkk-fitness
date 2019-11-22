@@ -3,7 +3,7 @@ import BootstrapVue from 'bootstrap-vue';
 import VueSidebarMenu from 'vue-sidebar-menu';
 import VueQrcodeReader from 'vue-qrcode-reader';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCaretRight, faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
+import { faCaretRight, faArrowsAltH, faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import App from './App.vue';
@@ -23,7 +23,7 @@ Vue.use(BootstrapVue);
 Vue.use(VueSidebarMenu);
 Vue.use(VueQrcodeReader);
 
-library.add(faCaretRight, faArrowsAltH);
+library.add(faCaretRight, faArrowsAltH, faHome);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('default-layout', Default);
 
