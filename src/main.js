@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import BootstrapVue from 'bootstrap-vue';
 import VueQrcodeReader from 'vue-qrcode-reader';
+import ElementUI from 'element-ui';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCaretRight, faArrowsAltH, faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -11,13 +11,12 @@ import router from './router';
 
 import Default from './layouts/default.vue';
 
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
+import 'element-ui/lib/theme-chalk/index.css';
 import './scss/custom.scss';
 
 Vue.config.productionTip = false;
 
-Vue.use(BootstrapVue);
+Vue.use(ElementUI);
 Vue.use(VueQrcodeReader);
 
 library.add(faCaretRight, faArrowsAltH, faHome);

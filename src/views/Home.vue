@@ -1,5 +1,6 @@
 <template>
-  <div>Home</div>
+  <div>HOME</div>
+  <!-- <el-button>默认按钮</el-button> -->
 </template>
 
 <script>
