@@ -86,7 +86,7 @@ button:focus {
   transform: rotate(-180deg);
 }
 #burger.active .burger-bar {
-  background-color: #fff;
+  background-color: #C0C4CC;
 }
 #burger.active .burger-bar--1 {
   transform: rotate(45deg);

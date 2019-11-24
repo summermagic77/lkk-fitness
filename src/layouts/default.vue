@@ -2,15 +2,10 @@
   <div>
     <nav class="main-nav">
       <div class="logo" />
-      <Burger></Burger>
-      </nav>
-      <Sidebar>
-        <ul class="sidebar-panel-nav">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </Sidebar>
+      <Burger />
+    </nav>
+    <Sidebar />
+    <slot />
   </div>
 </template>
 
@@ -41,12 +36,12 @@ html {
     border: 0; margin: 0; padding: 0;
     font-family: 'Lato';
     height: 100%;
-    background: rgb(101,31,87);
+    /* background: rgb(101,31,87);
     background:
       linear-gradient(45deg,
       rgba(101,31,87,1) 0%,
       rgba(225,113,87,1) 48%,
-      rgba(249,248,113,1) 100%);
+      rgba(249,248,113,1) 100%); */
   }
   .logo {
     align-self: center;
@@ -59,17 +54,5 @@ html {
     display: flex;
     justify-content: space-between;
     padding: 0.5rem 0.8rem;
-  }
-
-  ul.sidebar-panel-nav {
-    list-style-type: none;
-  }
-
-  ul.sidebar-panel-nav > li > a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.5rem;
-    display: block;
-    padding-bottom: 0.5em;
   }
 </style>

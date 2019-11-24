@@ -3,7 +3,12 @@
     <div class="sidebar-backdrop" @click="closeSidebarPanel" v-if="isPanelOpen"></div>
     <transition name="slide">
       <div v-if="isPanelOpen" class="sidebar-panel">
-        <slot></slot>
+        <ul class="sidebar-panel-nav">
+          <li><el-link href="/" :underline="false">首頁</el-link></li>
+          <li><el-link href="/member" :underline="false">會員</el-link></li>
+          <li><el-link href="/employee" :underline="false">員工</el-link></li>
+          <li><el-link href="/coach" :underline="false">教練</el-link></li>
+        </ul>
       </div>
     </transition>
   </div>
@@ -35,7 +40,7 @@ export default {
   }
 
   .sidebar-backdrop {
-    background-color: rgba(19, 15, 64, .4);
+    /* background-color: rgba(19, 15, 64, .4); */
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -46,13 +51,25 @@ export default {
 
   .sidebar-panel {
     overflow-y: auto;
-    background-color: #130f40;
+    background-color: #EBEEF5;
     position: fixed;
     left: 0;
     top: 0;
     height: 100vh;
     z-index: 999;
     padding: 3rem 20px 2rem 20px;
-    width: 300px;
+    width: 250px;
+  }
+  ul.sidebar-panel-nav {
+    list-style-type: none;
+  }
+
+  ul.sidebar-panel-nav > li > a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 400;
+    display: block;
+    padding-bottom: 0.5em;
   }
 </style>
