@@ -1,7 +1,8 @@
 <template>
   <div class="sidebar">
     <el-drawer
-      title="LKKWellnessCenter"
+      title="練健康"
+      :size="$device.mobile ? '50%' : '25%'"
       :visible.sync="isPanelOpen"
       :direction="direction">
       <ul class="sidebar-panel-nav">

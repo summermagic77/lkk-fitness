@@ -13,7 +13,7 @@
       <el-row :gutter="20" type="flex" class="row-bg" justify="center">
         <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
           <el-card :body-style="{ padding: '0px' }" shadow="hover">
-            <el-link href="/member" class="w-100 py-2" :underline="false">
+            <el-link href="/member" class="w-100 py-1" :underline="false">
               <account-check class="icon-4x" />
               <h1 class="font-weight-light">
                 會員進場
@@ -23,7 +23,7 @@
         </el-col>
         <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
           <el-card :body-style="{ padding: '0px' }" shadow="hover">
-            <el-link href="/member" class="w-100 py-2" :underline="false">
+            <el-link href="/member" class="w-100 py-1" :underline="false">
               <account-plus class="icon-4x" />
               <h1 class="font-weight-light">
                 建立新會員

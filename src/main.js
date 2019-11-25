@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueQrcodeReader from 'vue-qrcode-reader';
 import ElementUI from 'element-ui';
+import device from 'vue-device-detector';
 
 import App from './App.vue';
 import './registerServiceWorker';
@@ -16,6 +17,7 @@ Vue.config.productionTip = false;
 
 Vue.use(ElementUI);
 Vue.use(VueQrcodeReader);
+Vue.use(device);
 
 Vue.component('default-layout', Default);
 
