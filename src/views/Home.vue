@@ -1,6 +1,7 @@
 <template>
-  <el-container>
-    <el-header class="home-header">
+  <div>
+  <!-- <el-container> -->
+    <!-- <el-header class="home-header">
       <el-link href="/" :underline="false">
         <el-image
           style="height: 50px;"
@@ -8,54 +9,68 @@
           fit="contain"
         />
       </el-link>
-    </el-header>
-    <el-main>
-      <el-row :gutter="20" type="flex" class="row-bg" justify="center">
-        <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
-          <el-card :body-style="{ padding: '0px' }" shadow="hover">
-            <el-link href="/member" class="w-100 py-1" :underline="false">
-              <account-check class="icon-4x" />
-              <h1 class="font-weight-light">
-                會員進場
-              </h1>
-            </el-link>
-          </el-card>
-        </el-col>
-        <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
-          <el-card :body-style="{ padding: '0px' }" shadow="hover">
-            <el-link href="/member" class="w-100 py-1" :underline="false">
-              <account-plus class="icon-4x" />
-              <h1 class="font-weight-light">
-                建立新會員
-              </h1>
-            </el-link>
-          </el-card>
-        </el-col>
-      </el-row>
-      <el-row :gutter="20" type="flex" class="row-bg" justify="center">
-        <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
-          <el-card :body-style="{ padding: '0px' }" shadow="hover">
-            <el-link href="/employee" class="w-100 py-1" :underline="false">
-              <account-badge-outline class="icon-4x" />
-              <h1 class="font-weight-light">
-                員工打卡
-              </h1>
-            </el-link>
-          </el-card>
-        </el-col>
-        <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
-          <el-card :body-style="{ padding: '0px' }" shadow="hover">
-            <el-link href="/coach" class="w-100 py-1" :underline="false">
-              <account-multiple-check class="icon-4x" />
-              <h1 class="font-weight-light">
-                教練場租
-              </h1>
-            </el-link>
-          </el-card>
-        </el-col>
-      </el-row>
-    </el-main>
-  </el-container>
+    </el-header> -->
+    <!-- <el-main> -->
+    <el-link href="/" :underline="false" style="margin-bottom: 40px;">
+      <el-image
+        style="height: 50px;"
+        :src="require('@/assets/lkk-logo.png')"
+        fit="contain"
+      />
+    </el-link>
+    <el-row
+      :gutter="20"
+      type="flex"
+      class="row-bg"
+      justify="center"
+      align="bottom"
+    >
+      <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
+        <el-card :body-style="{ padding: '0px' }" shadow="hover">
+          <el-link href="/member" class="w-100 py-1" :underline="false">
+            <account-check class="icon-4x" />
+            <h1 class="font-weight-light">
+              會員進場
+            </h1>
+          </el-link>
+        </el-card>
+      </el-col>
+      <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
+        <el-card :body-style="{ padding: '0px' }" shadow="hover">
+          <el-link href="/member" class="w-100 py-1" :underline="false">
+            <account-plus class="icon-4x" />
+            <h1 class="font-weight-light">
+              建立新會員
+            </h1>
+          </el-link>
+        </el-card>
+      </el-col>
+    </el-row>
+    <el-row :gutter="20" type="flex" class="row-bg" justify="center">
+      <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
+        <el-card :body-style="{ padding: '0px' }" shadow="hover">
+          <el-link href="/employee" class="w-100 py-1" :underline="false">
+            <account-badge-outline class="icon-4x" />
+            <h1 class="font-weight-light">
+              員工打卡
+            </h1>
+          </el-link>
+        </el-card>
+      </el-col>
+      <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
+        <el-card :body-style="{ padding: '0px' }" shadow="hover">
+          <el-link href="/coach" class="w-100 py-1" :underline="false">
+            <account-multiple-check class="icon-4x" />
+            <h1 class="font-weight-light">
+              教練場租
+            </h1>
+          </el-link>
+        </el-card>
+      </el-col>
+    </el-row>
+  </div>
+    <!-- </el-main>
+  </el-container> -->
 </template>
 
 <script>

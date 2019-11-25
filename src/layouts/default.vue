@@ -1,12 +1,15 @@
 <template>
-  <div>
-    <nav class="main-nav">
-      <!-- <div class="logo" /> -->
+  <el-container>
+    <el-header>
       <Burger />
-    </nav>
-    <Sidebar />
-    <slot />
-  </div>
+    </el-header>
+    <el-aside>
+      <Sidebar />
+    </el-aside>
+    <el-main>
+      <slot />
+    </el-main>
+  </el-container>
 </template>
 
 <script>
@@ -30,9 +33,9 @@ export default {
 </script>
 <style>
 html {
-    height: 100%;
-    overflow:hidden;
-  }
+  height: 100%;
+  overflow:hidden;
+}
 body {
   border: 0; margin: 0; padding: 0;
   font-family: 'Lato';
