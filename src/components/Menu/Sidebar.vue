@@ -1,6 +1,18 @@
 <template>
   <div class="sidebar">
-    <div class="sidebar-backdrop" @click="closeSidebarPanel" v-if="isPanelOpen"></div>
+    <el-drawer
+      title="LKKWellnessCenter"
+      size="20%"
+      :visible.sync="isPanelOpen"
+      :direction="direction">
+      <ul class="sidebar-panel-nav">
+        <li><el-link href="/" :underline="false">首頁</el-link></li>
+        <li><el-link href="/member" :underline="false">會員</el-link></li>
+        <li><el-link href="/employee" :underline="false">員工</el-link></li>
+        <li><el-link href="/coach" :underline="false">教練</el-link></li>
+      </ul>
+    </el-drawer>
+    <!-- <div class="sidebar-backdrop" @click="closeSidebarPanel" v-if="isPanelOpen"></div>
     <transition name="slide">
       <div v-if="isPanelOpen" class="sidebar-panel">
         <ul class="sidebar-panel-nav">
@@ -10,19 +22,30 @@
           <li><el-link href="/coach" :underline="false">教練</el-link></li>
         </ul>
       </div>
-    </transition>
+    </transition> -->
   </div>
 </template>
 <script>
 import { store, mutations } from '@/store';
 
 export default {
+  data() {
+    return {
+      drawer: false,
+      direction: 'ltr',
+    };
+  },
   methods: {
-    closeSidebarPanel: mutations.toggleNav,
+    // closeSidebarPanel: mutations.toggleNav,
   },
   computed: {
-    isPanelOpen() {
-      return store.isNavOpen;
+    isPanelOpen: {
+      get() {
+        return store.isNavOpen;
+      },
+      set() {
+        mutations.toggleNav();
+      },
     },
   },
 };

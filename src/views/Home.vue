@@ -81,18 +81,6 @@ export default {
   height: 4em;
   width: 4em;
 }
-.text-center {
-  text-align: center;
-}
-.w-100 {
-  width: 100%;
-}
-.py-2 {
-  padding: 2em 0;
-}
-.font-weight-light {
-  font-weight: 300;
-}
 .el-row {
   margin-bottom: 20px;
   &:last-child {
