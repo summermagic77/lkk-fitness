@@ -2,13 +2,6 @@
   <div>
     <nav class="main-nav">
       <div class="logo" />
-      <el-link href="/" :underline="false">
-        <el-image
-          style="height: 50px;"
-          :src="require('@/assets/lkk-logo.png')"
-          fit="contain"
-        />
-      </el-link>
       <Burger />
     </nav>
     <Sidebar />

@@ -1,9 +1,13 @@
 <template>
   <el-container>
     <el-header class="home-header">
-      <!-- <el-row type="flex" class="row-bg" justify="center">
-        <el-col :span="6"><div class="grid-content bg-purple-light">Header</div></el-col>
-      </el-row> -->
+      <el-link href="/" :underline="false">
+        <el-image
+          style="height: 50px;"
+          :src="require('@/assets/lkk-logo.png')"
+          fit="contain"
+        />
+      </el-link>
     </el-header>
     <el-main>
       <el-row :gutter="20" type="flex" class="row-bg" justify="center">
