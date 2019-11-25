@@ -1,5 +1,6 @@
 <template>
   <div class="outer">
+    <div class="overlap-bg" />
   <!-- <el-container> -->
     <!-- <el-header class="home-header">
       <el-link href="/" :underline="false">
@@ -14,7 +15,7 @@
     <el-link href="/" :underline="false" style="margin-bottom: 50px;">
       <el-image
         style="height: 50px;"
-        :src="require('@/assets/lkk-logo.png')"
+        :src="require('@/assets/lkk-text-white.png')"
         fit="contain"
       />
     </el-link>
@@ -97,11 +98,15 @@ export default {
   background-color: #29526b;
 } */
 .outer {
-  height: 80vh;
+  height: 85vh;
   width: 100vw;
   vertical-align:middle;
   text-align: center;
   display: table-cell;
+}
+.overlap-bg {
+  background-color: #29526b;
+  position: relative;
 }
 .material-design-icon.icon-3x {
   height: 3em;
