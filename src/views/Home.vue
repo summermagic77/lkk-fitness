@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="outer">
   <!-- <el-container> -->
     <!-- <el-header class="home-header">
       <el-link href="/" :underline="false">
@@ -11,7 +11,7 @@
       </el-link>
     </el-header> -->
     <!-- <el-main> -->
-    <el-link href="/" :underline="false" style="margin-bottom: 40px;">
+    <el-link href="/" :underline="false" style="margin-bottom: 50px;">
       <el-image
         style="height: 50px;"
         :src="require('@/assets/lkk-logo.png')"
@@ -23,12 +23,12 @@
       type="flex"
       class="row-bg"
       justify="center"
-      align="bottom"
+      align="middle"
     >
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
         <el-card :body-style="{ padding: '0px' }" shadow="hover">
           <el-link href="/member" class="w-100 py-1" :underline="false">
-            <account-check class="icon-4x" />
+            <account-check class="icon-3x" />
             <h1 class="font-weight-light">
               會員進場
             </h1>
@@ -38,7 +38,7 @@
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
         <el-card :body-style="{ padding: '0px' }" shadow="hover">
           <el-link href="/member" class="w-100 py-1" :underline="false">
-            <account-plus class="icon-4x" />
+            <account-plus class="icon-3x" />
             <h1 class="font-weight-light">
               建立新會員
             </h1>
@@ -50,7 +50,7 @@
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
         <el-card :body-style="{ padding: '0px' }" shadow="hover">
           <el-link href="/employee" class="w-100 py-1" :underline="false">
-            <account-badge-outline class="icon-4x" />
+            <account-badge-outline class="icon-3x" />
             <h1 class="font-weight-light">
               員工打卡
             </h1>
@@ -60,7 +60,7 @@
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
         <el-card :body-style="{ padding: '0px' }" shadow="hover">
           <el-link href="/coach" class="w-100 py-1" :underline="false">
-            <account-multiple-check class="icon-4x" />
+            <account-multiple-check class="icon-3x" />
             <h1 class="font-weight-light">
               教練場租
             </h1>
@@ -96,13 +96,20 @@ export default {
 /* .home-header {
   background-color: #29526b;
 } */
-.material-design-icon.icon-4x {
-  height: 4em;
-  width: 4em;
+.outer {
+  height: 80vh;
+  width: 100vw;
+  vertical-align:middle;
+  text-align: center;
+  display: table-cell;
 }
-.material-design-icon.icon-4x > .material-design-icon__svg {
-  height: 4em;
-  width: 4em;
+.material-design-icon.icon-3x {
+  height: 3em;
+  width: 3em;
+}
+.material-design-icon.icon-3x > .material-design-icon__svg {
+  height: 3em;
+  width: 3em;
 }
 .el-row {
   margin-bottom: 20px;
