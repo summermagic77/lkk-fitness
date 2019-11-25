@@ -33,7 +33,7 @@
         </el-col>
       </el-row>
       <el-row :gutter="20" type="flex" class="row-bg" justify="center">
-        <el-col :span="6">
+        <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6">
           <el-card shadow="hover" class="text-center">
             <el-link href="/employee" class="w-100 py-1" :underline="false">
               <account-badge-outline class="icon-4x" />
@@ -43,7 +43,7 @@
             </el-link>
           </el-card>
         </el-col>
-        <el-col :span="6">
+        <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6">
           <el-card shadow="hover" class="text-center">
             <el-link href="/coach" class="w-100 py-1" :underline="false">
               <account-multiple-check class="icon-4x" />
