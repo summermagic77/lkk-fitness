@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "firebase deploy --debug --token \"$FIREBASE_TOKEN\""
+    "deploy": "firebase deploy --debug --token \"$FIREBASE_TOKEN\"",
+    "build-watch": "vue-cli-service build-watch"
   },
   "dependencies": {
     "@mdi/js": "^4.6.95",
