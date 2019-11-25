@@ -2,7 +2,6 @@
   <div class="sidebar">
     <el-drawer
       title="LKKWellnessCenter"
-      size="20%"
       :visible.sync="isPanelOpen"
       :direction="direction">
       <ul class="sidebar-panel-nav">
