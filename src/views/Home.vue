@@ -32,24 +32,28 @@
           </el-card>
         </el-col>
       </el-row>
-      <!-- <el-row :gutter="20" type="flex" class="row-bg" justify="center">
+      <el-row :gutter="20" type="flex" class="row-bg" justify="center">
         <el-col :span="6">
           <el-card shadow="hover" class="text-center">
-            <h1>
-              <account-badge-outline class="icon-3x" />
-            </h1>
-            員工打卡
+            <el-link href="/employee" class="w-100 py-1" :underline="false">
+              <account-badge-outline class="icon-4x" />
+              <h1 class="font-weight-light">
+                員工打卡
+              </h1>
+            </el-link>
           </el-card>
         </el-col>
         <el-col :span="6">
           <el-card shadow="hover" class="text-center">
-            <h1>
-              <account-multiple-check class="icon-3x" />
-            </h1>
-            教練場租
+            <el-link href="/coach" class="w-100 py-1" :underline="false">
+              <account-multiple-check class="icon-4x" />
+              <h1 class="font-weight-light">
+                教練場租
+              </h1>
+            </el-link>
           </el-card>
         </el-col>
-      </el-row> -->
+      </el-row>
     </el-main>
   </el-container>
 </template>
@@ -59,16 +63,16 @@
 // import HelloWorld from '@/components/HelloWorld.vue';
 import AccountCheck from 'vue-material-design-icons/AccountCheck.vue';
 import AccountPlus from 'vue-material-design-icons/AccountPlus.vue';
-// import AccountBadgeOutline from 'vue-material-design-icons/AccountBadgeOutline.vue';
-// import AccountMultipleCheck from 'vue-material-design-icons/AccountMultipleCheck.vue';
+import AccountBadgeOutline from 'vue-material-design-icons/AccountBadgeOutline.vue';
+import AccountMultipleCheck from 'vue-material-design-icons/AccountMultipleCheck.vue';
 
 export default {
   name: 'home',
   components: {
     AccountCheck,
     AccountPlus,
-    // AccountBadgeOutline,
-    // AccountMultipleCheck,
+    AccountBadgeOutline,
+    AccountMultipleCheck,
   },
 };
 </script>
