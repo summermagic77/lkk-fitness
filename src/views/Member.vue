@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       tableData: [{
-        phone: '0935879382',
+        phone: '0935-879-382',
         name: 'Hsia',
         birthdate: '2016-05-02',
         join_date: '2016-05-02',

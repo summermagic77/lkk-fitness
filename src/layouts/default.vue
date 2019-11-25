@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="main-nav">
-      <div class="logo" />
+      <!-- <div class="logo" /> -->
       <Burger />
     </nav>
     <Sidebar />
@@ -44,13 +44,12 @@ body {
     rgba(225,113,87,1) 48%,
     rgba(249,248,113,1) 100%); */
 }
-.logo {
+/* .logo {
   align-self: center;
   color: #fff;
   font-weight: bold;
   font-family: 'Lato'
-}
-
+} */
 .main-nav {
   display: flex;
   justify-content: space-between;
