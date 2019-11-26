@@ -7,7 +7,9 @@
   >
     <el-col :sm="12" :md="12" :lg="6" :xl="6" class="text-center">
       <div class="fullscreen">
-        <QrcodeStream />
+        <p class="error">{{ error }}</p>
+        <p class="decode-result">Last result: <b>{{ result }}</b></p>
+        <Qrcode-stream @decode="onDecode" @init="onInit" />
       </div>
       <el-radio-group v-model="type">
         <el-radio
@@ -32,14 +34,16 @@
 </template>
 
 <script>
-import { QrcodeStream } from 'vue-qrcode-reader';
+// import { QrcodeStream } from 'vue-qrcode-reader';
 
 export default {
   components: {
-    QrcodeStream,
+    // QrcodeStream,
   },
   data() {
     return {
+      result: '',
+      error: '',
       input: '',
       type: 'phone',
       inputType: {
@@ -76,6 +80,28 @@ export default {
     scanQrCode() {
       if (this.type === 'qrcode') {
         console.dir(13);
+      }
+    },
+    onDecode(result) {
+      this.result = result;
+    },
+    async onInit(promise) {
+      try {
+        await promise;
+      } catch (error) {
+        if (error.name === 'NotAllowedError') {
+          this.error = 'ERROR: you need to grant camera access permisson';
+        } else if (error.name === 'NotFoundError') {
+          this.error = 'ERROR: no camera on this device';
+        } else if (error.name === 'NotSupportedError') {
+          this.error = 'ERROR: secure context required (HTTPS, localhost)';
+        } else if (error.name === 'NotReadableError') {
+          this.error = 'ERROR: is the camera already in use?';
+        } else if (error.name === 'OverconstrainedError') {
+          this.error = 'ERROR: installed cameras are not suitable';
+        } else if (error.name === 'StreamApiNotSupportedError') {
+          this.error = 'ERROR: Stream API is not supported in this browser';
+        }
       }
     },
   },
