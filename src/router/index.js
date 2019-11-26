@@ -2,6 +2,9 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Member from '../views/Member.vue';
+import MemberList from '../views/MemberList.vue';
+import MemberCheckin from '../views/MemberCheckin.vue';
+import MemberCreate from '../views/MemberCreate.vue';
 
 Vue.use(VueRouter);
 
@@ -23,22 +26,26 @@ const routes = [
     path: '/member',
     name: 'member',
     component: Member,
-    meta: { layout: 'abc' },
     children: [
       {
-        path: '/:id',
-        name: 'member_info',
-        component: Member,
+        path: '',
+        name: '會員列表',
+        component: MemberList,
+      },
+      // {
+      //   path: ':id',
+      //   name: 'member_info',
+      //   component: Member,
+      // },
+      {
+        path: 'create',
+        name: '建立新會員',
+        component: MemberCreate,
       },
       {
-        path: '/create',
-        name: 'member_create',
-        component: Member,
-      },
-      {
-        path: '/checkin',
-        name: 'member_checkin',
-        component: Member,
+        path: 'checkin',
+        name: '會員進場',
+        component: MemberCheckin,
       },
     ],
   },
@@ -48,17 +55,17 @@ const routes = [
     component: Member,
     children: [
       {
-        path: '/:id',
+        path: ':id',
         name: 'employee_info',
         component: Member,
       },
       {
-        path: '/create',
+        path: 'create',
         name: 'employee_create',
         component: Member,
       },
       {
-        path: '/checkin',
+        path: 'checkin',
         name: 'employee_checkin',
         component: Member,
       },
@@ -75,12 +82,12 @@ const routes = [
       //   component: Member,
       // },
       {
-        path: '/create',
+        path: 'create',
         name: 'coach_create',
         component: Member,
       },
       {
-        path: '/checkin',
+        path: 'checkin',
         name: 'coach_checkin',
         component: Member,
       },

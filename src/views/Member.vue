@@ -1,10 +1,11 @@
 <template>
   <el-container>
     <el-header>
-      <el-page-header @back="goBack" content="會員列表" />
+      <el-page-header @back="goBack" :content="$route.name" />
     </el-header>
     <el-main>
-      <el-table
+      <router-view></router-view>
+      <!-- <el-table
         :data="tableData"
         stripe
         border
@@ -37,7 +38,7 @@
           prop="join_date"
           label="加入時間">
         </el-table-column>
-      </el-table>
+      </el-table> -->
     </el-main>
   </el-container>
 </template>
