@@ -9,7 +9,7 @@
       <div v-if="type === 'qrcode'" class="fullscreen">
         <p class="error">{{ error }}</p>
         <p class="decode-result">{{ result }}</p>
-        <QrcodeStream @decode="onDecode" @init="onInit" class="mb-2" />
+        <QrcodeStream @decode="onDecode" @init="onInit" class="mb-1" />
       </div>
       <el-radio-group v-model="type">
         <el-radio
@@ -27,8 +27,11 @@
         :placeholder="inputType[type].placeholder"
         :pattern="inputType[type].pattern"
         class="mt-2"
-        suffix-icon="el-icon-search"
-      />
+      >
+        <div slot="suffix">
+          <el-button type="text" icon="el-icon-search" class="mr-1" />
+        </div>
+      </el-input>
     </el-col>
   </el-row>
 </template>
