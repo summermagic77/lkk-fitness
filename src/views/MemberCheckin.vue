@@ -6,7 +6,7 @@
     justify="center"
     align="middle"
   >
-    <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
+    <el-col :span="12" class="text-center">
       <el-radio-group v-model="type">
         <el-radio
           v-for="(item, idx) in searchType"
