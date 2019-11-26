@@ -6,11 +6,15 @@
     align="middle"
   >
     <el-col :sm="12" :md="12" :lg="6" :xl="6" class="text-center">
+      <div class="fullscreen">
+        <QrcodeStream />
+      </div>
       <el-radio-group v-model="type">
         <el-radio
           v-for="(item, idx) in searchType"
           :key="idx"
           :label="item.value"
+          @change="scanQrCode"
         >
           {{ item.label }}
         </el-radio>
@@ -28,7 +32,12 @@
 </template>
 
 <script>
+import { QrcodeStream } from 'vue-qrcode-reader';
+
 export default {
+  components: {
+    QrcodeStream,
+  },
   data() {
     return {
       input: '',
@@ -41,6 +50,10 @@ export default {
         name: {
           type: 'text',
           placeholder: '請輸入會員姓名進行搜尋',
+        },
+        qrcode: {
+          type: 'text',
+          placeholder: '',
         },
       },
       searchType: [
@@ -60,6 +73,11 @@ export default {
     };
   },
   methods: {
+    scanQrCode() {
+      if (this.type === 'qrcode') {
+        console.dir(13);
+      }
+    },
   },
 };
 </script>
