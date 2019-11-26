@@ -9,7 +9,7 @@
       <div class="fullscreen">
         <p class="error">{{ error }}</p>
         <p class="decode-result">Last result: <b>{{ result }}</b></p>
-        <Qrcode-stream @decode="onDecode" @init="onInit" />
+        <QrcodeStream @decode="onDecode" @init="onInit" />
       </div>
       <el-radio-group v-model="type">
         <el-radio
@@ -34,11 +34,11 @@
 </template>
 
 <script>
-// import { QrcodeStream } from 'vue-qrcode-reader';
+import { QrcodeStream } from 'vue-qrcode-reader';
 
 export default {
   components: {
-    // QrcodeStream,
+    QrcodeStream,
   },
   data() {
     return {
