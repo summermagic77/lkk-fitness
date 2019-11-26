@@ -1,12 +1,12 @@
 <template>
   <el-container>
-    <el-header style="background-color: #29526b; height: 50vh">
+    <el-header style="!background-color: #29526b; !height: 50vh">
       <Burger />
     </el-header>
     <el-aside>
       <Sidebar />
     </el-aside>
-    <el-main style="margin-top: -262px;">
+    <el-main style="!margin-top: -262px;">
       <slot />
     </el-main>
   </el-container>

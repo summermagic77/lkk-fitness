@@ -15,7 +15,7 @@
     <el-link href="/" :underline="false" style="margin-bottom: 50px;">
       <el-image
         style="height: 50px;"
-        :src="require('@/assets/lkk-text-white.png')"
+        :src="require('@/assets/lkk-logo.png')"
         fit="contain"
       />
     </el-link>
