@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Member from '../views/Member.vue';
 import MemberList from '../views/MemberList.vue';
-import MemberCheckin from '../views/MemberCheckin.vue';
+import Checkin from '../views/Checkin.vue';
 import MemberCreate from '../views/MemberCreate.vue';
 
 Vue.use(VueRouter);
@@ -42,11 +42,11 @@ const routes = [
         name: '建立新會員',
         component: MemberCreate,
       },
-      {
-        path: 'checkin',
-        name: '會員進場',
-        component: MemberCheckin,
-      },
+      // {
+      //   path: 'checkin',
+      //   name: '會員進場',
+      //   component: MemberCheckin,
+      // },
     ],
   },
   {
@@ -92,6 +92,16 @@ const routes = [
         component: Member,
       },
     ],
+  },
+  {
+    path: '/checkin/:user',
+    name: '進場',
+    component: Checkin,
+  },
+  {
+    path: '/create',
+    name: '建立',
+    component: Member,
   },
 ];
 
