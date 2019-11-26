@@ -6,9 +6,9 @@
     align="middle"
   >
     <el-col :sm="12" :md="12" :lg="6" :xl="6" class="text-center">
-      <div class="fullscreen">
+      <div v-if="type === 'qrcode'" class="fullscreen">
         <p class="error">{{ error }}</p>
-        <p class="decode-result">Last result: <b>{{ result }}</b></p>
+        <p class="decode-result">{{ result }}</p>
         <QrcodeStream @decode="onDecode" @init="onInit" />
       </div>
       <el-radio-group v-model="type">

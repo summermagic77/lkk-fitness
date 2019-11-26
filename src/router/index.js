@@ -24,7 +24,7 @@ const routes = [
   },
   {
     path: '/member',
-    name: 'member',
+    // name: 'member',
     component: Member,
     children: [
       {
