@@ -9,19 +9,19 @@
       <div v-if="type === 'qrcode'" class="fullscreen">
         <p class="error">{{ error }}</p>
         <p class="decode-result">{{ result }}</p>
-        <QrcodeStream @decode="onDecode" @init="onInit" />
+        <QrcodeStream @decode="onDecode" @init="onInit" class="mb-2" />
       </div>
       <el-radio-group v-model="type">
         <el-radio
           v-for="(item, idx) in searchType"
           :key="idx"
           :label="item.value"
-          @change="scanQrCode"
         >
           {{ item.label }}
         </el-radio>
       </el-radio-group>
       <el-input
+        v-if="type !== 'qrcode'"
         v-model="input"
         :type="inputType[type].type"
         :placeholder="inputType[type].placeholder"
@@ -77,11 +77,11 @@ export default {
     };
   },
   methods: {
-    scanQrCode() {
-      if (this.type === 'qrcode') {
-        console.dir(13);
-      }
-    },
+    // scanQrCode() {
+    //   if (this.type === 'qrcode') {
+    //     console.dir(13);
+    //   }
+    // },
     onDecode(result) {
       this.result = result;
     },
