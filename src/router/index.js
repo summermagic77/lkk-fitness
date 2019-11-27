@@ -1,10 +1,14 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
-import Member from '../views/Member.vue';
-import MemberList from '../views/MemberList.vue';
-import Checkin from '../views/Checkin.vue';
-import MemberCreate from '../views/MemberCreate.vue';
+import Home from '@/views/Home.vue';
+import Checkin from '@/components/Checkin.vue';
+
+import Member from '@/views/Member.vue';
+import MemberList from '@/components/member/MemberList.vue';
+import MemberCreate from '@/components/member/MemberCreate.vue';
+
+import Employee from '@/views/Employee.vue';
+import Coach from '@/views/Coach.vue';
 
 Vue.use(VueRouter);
 
@@ -42,23 +46,24 @@ const routes = [
         name: '建立新會員',
         component: MemberCreate,
       },
-      // {
-      //   path: 'checkin',
-      //   name: '會員進場',
-      //   component: MemberCheckin,
-      // },
+      {
+        path: 'checkin',
+        name: '會員進場',
+        meta: { type: 'member', typeLabel: '會員' },
+        component: Checkin,
+      },
     ],
   },
   {
     path: '/employee',
     name: 'employee',
-    component: Member,
+    component: Employee,
     children: [
-      {
-        path: ':id',
-        name: 'employee_info',
-        component: Member,
-      },
+      // {
+      //   path: ':id',
+      //   name: 'employee_info',
+      //   component: Member,
+      // },
       {
         path: 'create',
         name: 'employee_create',
@@ -66,15 +71,16 @@ const routes = [
       },
       {
         path: 'checkin',
-        name: 'employee_checkin',
-        component: Member,
+        name: '員工打卡',
+        meta: { type: 'employee', typeLabel: '員工' },
+        component: Checkin,
       },
     ],
   },
   {
     path: '/coach',
     name: 'coach',
-    component: Member,
+    component: Coach,
     children: [
       // {
       //   path: '/:id',
@@ -88,21 +94,22 @@ const routes = [
       },
       {
         path: 'checkin',
-        name: 'coach_checkin',
-        component: Member,
+        name: '場租教練進場',
+        meta: { type: 'coach', typeLabel: '場租教練' },
+        component: Checkin,
       },
     ],
   },
-  {
-    path: '/checkin/:user',
-    name: '進場',
-    component: Checkin,
-  },
-  {
-    path: '/create',
-    name: '建立',
-    component: Member,
-  },
+  // {
+  //   path: '/checkin/:user',
+  //   name: '進場',
+  //   component: Checkin,
+  // },
+  // {
+  //   path: '/create',
+  //   name: '建立',
+  //   component: Member,
+  // },
 ];
 
 const router = new VueRouter({

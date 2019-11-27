@@ -1,5 +1,11 @@
+.text-black-50 {
+  color: rgba(0,0,0,.5);
+}
 .text-center {
   text-align: center;
+}
+.w-80 {
+  width: 80%;
 }
 .w-100 {
   width: 100%;
@@ -10,8 +16,14 @@
 .font-weight-light {
   font-weight: 300;
 }
+.font-weight-bold {
+  font-weight: 700;
+}
 .mt-2 {
   margin-top: 2em;
+}
+.mb-0 {
+  margin-bottom: 0em;
 }
 .mb-1 {
   margin-bottom: 1em;
