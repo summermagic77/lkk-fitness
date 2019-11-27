@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue';
 import Checkin from '@/components/Checkin.vue';
 
 import Member from '@/views/Member.vue';
+import MemberCheckin from '@/components/member/MemberCheckin.vue';
 import MemberList from '@/components/member/MemberList.vue';
 import MemberCreate from '@/components/member/MemberCreate.vue';
 
@@ -48,9 +49,15 @@ const routes = [
       },
       {
         path: 'checkin',
-        name: '會員進場',
+        name: '搜尋會員',
         meta: { type: 'member', typeLabel: '會員' },
         component: Checkin,
+      },
+      {
+        path: 'checkin/:phone',
+        name: '會員進場',
+        meta: { type: 'member', typeLabel: '會員' },
+        component: MemberCheckin,
       },
     ],
   },
