@@ -47,16 +47,13 @@
       <el-card
         v-for="(item, idx) in tableData"
         :key="idx"
-        :body-style="{ padding: '5px' }"
-        class="d-flex"
+        :body-style="{ padding: '5px', display: 'flex' }"
         shadow="always"
       >
-        <span>
+        <p>
           {{ item.name }}
-        </span>
-        <span class="ml-atuo">
-          <el-button type="text" size="small">編輯</el-button>
-        </span>
+        </p>
+        <el-button type="text" size="small" class="ml-auto">編輯</el-button>
       </el-card>
     </div>
   </div>
