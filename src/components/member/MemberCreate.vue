@@ -29,9 +29,18 @@
           </el-form-item>
           <el-form-item prop="sex">
             <el-radio-group v-model="ruleForm.sex" class="w-100 d-flex">
-              <el-radio border label="男" class="w-43" />
-              <el-radio border label="女" class="w-43" />
+              <el-radio border label="男" class="radio-half" />
+              <el-radio border label="女" class="float-right radio-half" />
             </el-radio-group>
+          </el-form-item>
+          <el-form-item prop="birthdate">
+            <el-date-picker
+              v-model="ruleForm.birthdate"
+              type="date"
+              placeholder="選擇生日"
+              class="w-100"
+              :picker-options="pickerOptions"
+            />
           </el-form-item>
           <el-form-item prop="phone">
             <el-input v-model="ruleForm.phone" placeholder="手機號碼" />
@@ -43,8 +52,8 @@
         <div v-else>
           <el-form-item label="會員等級" prop="level">
             <el-radio-group v-model="ruleForm.level" class="w-100 d-flex">
-              <el-radio border label="計次" class="w-43" />
-              <el-radio border label="月費" class="w-43" />
+              <el-radio border label="計次" class="radio-half" />
+              <el-radio border label="月費" class="float-right radio-half" />
             </el-radio-group>
           </el-form-item>
           <el-form-item label="會員點數" prop="point">
@@ -71,7 +80,7 @@
             type="primary"
             plain
             class="w-100"
-            @click="activeStep++"
+            @click="firstStep('ruleForm')"
           >
             下一步
           </el-button>
@@ -100,6 +109,7 @@ export default {
         phone: '0987654321',
         email: 'chiquitta.com@gmail.com',
         // point: 0,
+        birthdate: new Date(),
         join_date: '',
       },
       rules: {
@@ -119,13 +129,38 @@ export default {
         point: [
           { required: true, message: '請輸入點數', trigger: 'change' },
         ],
-        join_date: [
-          { required: true, message: '請選擇加入日期', trigger: 'change' },
+        birthdate: [
+          {
+            type: 'date',
+            required: true,
+            message: '請選擇生日',
+            trigger: 'blur',
+          },
         ],
+        join_date: [
+          {
+            type: 'date',
+            required: true,
+            message: '請選擇加入日期',
+            trigger: 'blur',
+          },
+        ],
+      },
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
       },
     };
   },
   methods: {
+    firstStep(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.activeStep += 1;
+        }
+      });
+    },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         console.dir(valid);

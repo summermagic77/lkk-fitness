@@ -27,7 +27,7 @@
         :type="inputType[type].type"
         :placeholder="inputType[type].placeholder"
         :pattern="inputType[type].pattern"
-        class="mt-2"
+        class="mt-2 input-lg"
       >
         <div slot="suffix">
           <el-button type="text" icon="el-icon-search" class="mr-1" />
@@ -75,11 +75,11 @@ export default {
       return {
         phone: {
           type: 'text',
-          placeholder: `請輸入${this.userTypeLabel}手機號碼進行搜尋`,
+          placeholder: `請輸入${this.userTypeLabel}手機號碼搜尋`,
         },
         name: {
           type: 'text',
-          placeholder: `請輸入${this.userTypeLabel}姓名進行搜尋`,
+          placeholder: `請輸入${this.userTypeLabel}姓名搜尋`,
         },
         qrcode: {
           type: 'text',

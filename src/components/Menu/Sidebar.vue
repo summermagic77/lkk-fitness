@@ -7,7 +7,7 @@
       :direction="direction">
       <ul class="sidebar-panel-nav">
         <li><el-link href="/" :underline="false">首頁</el-link></li>
-        <li><el-link href="/member" :underline="false">會員列表</el-link></li>
+        <li><el-link href="/member" :underline="false">會員</el-link></li>
         <li><el-link href="/employee" :underline="false">員工</el-link></li>
         <li><el-link href="/coach" :underline="false">教練</el-link></li>
       </ul>
