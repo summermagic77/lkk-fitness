@@ -93,7 +93,7 @@
 export default {
   data() {
     return {
-      activeStep: 2,
+      activeStep: 1,
       ruleForm: {
         name: 'Chiquitta',
         sex: '女',
