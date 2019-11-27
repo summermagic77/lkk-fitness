@@ -29,8 +29,8 @@
           </el-form-item>
           <el-form-item prop="sex">
             <el-radio-group v-model="ruleForm.sex" class="w-100 d-flex">
-              <el-radio border label="男" class="w-45" />
-              <el-radio border label="女" class="w-45" />
+              <el-radio border label="男" class="w-43" />
+              <el-radio border label="女" class="w-43" />
             </el-radio-group>
           </el-form-item>
           <el-form-item prop="phone">
@@ -43,8 +43,8 @@
         <div v-else>
           <el-form-item label="會員等級" prop="level">
             <el-radio-group v-model="ruleForm.level" class="w-100 d-flex">
-              <el-radio border label="計次" class="w-45" />
-              <el-radio border label="月費" class="w-45" />
+              <el-radio border label="計次" class="w-43" />
+              <el-radio border label="月費" class="w-43" />
             </el-radio-group>
           </el-form-item>
           <el-form-item label="會員點數" prop="point">
