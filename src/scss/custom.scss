@@ -4,11 +4,14 @@
 .text-center {
   text-align: center;
 }
+.float-right {
+  float: right;
+}
 .w-80 {
   width: 80%;
 }
 .w-100 {
-  width: 100%;
+  width: 100% !important;
 }
 .py-1 {
   padding: 1em 0;
