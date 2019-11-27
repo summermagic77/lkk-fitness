@@ -44,7 +44,7 @@ const routes = [
       // },
       {
         path: 'create',
-        name: '會員',
+        name: '建立會員',
         component: MemberCreate,
       },
       {
@@ -63,7 +63,7 @@ const routes = [
   },
   {
     path: '/employee',
-    name: 'employee',
+    name: '員工',
     component: Employee,
     children: [
       // {
@@ -73,7 +73,7 @@ const routes = [
       // },
       {
         path: 'create',
-        name: 'employee_create',
+        name: '建立員工',
         component: Member,
       },
       {
@@ -86,7 +86,7 @@ const routes = [
   },
   {
     path: '/coach',
-    name: 'coach',
+    name: '場租教練',
     component: Coach,
     children: [
       // {
@@ -96,7 +96,7 @@ const routes = [
       // },
       {
         path: 'create',
-        name: 'coach_create',
+        name: '建立場租教練',
         component: Member,
       },
       {
