@@ -22,7 +22,7 @@
         </el-radio>
       </el-radio-group>
       <el-input
-        v-if="type !== 'qrcode'"
+        v-show="type !== 'qrcode'"
         v-model="input"
         :type="inputType[type].type"
         :placeholder="inputType[type].placeholder"
@@ -30,7 +30,7 @@
         class="mt-2 input-lg"
       >
         <div slot="suffix">
-          <el-button type="text" icon="el-icon-search" class="mr-1" />
+          <el-button type="text" icon="el-icon-search" class="mr-1" @click="searchMember" />
         </div>
       </el-input>
     </el-col>
@@ -49,7 +49,7 @@ export default {
     return {
       result: '',
       error: '',
-      input: '',
+      input: '0987654321',
       type: 'phone',
       searchType: [
         {
@@ -89,6 +89,9 @@ export default {
     },
   },
   methods: {
+    searchMember() {
+      this.$router.push({ path: `/member/checkin/${this.input}` });
+    },
     onDecode(result) {
       this.result = result;
     },
