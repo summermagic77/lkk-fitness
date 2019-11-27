@@ -28,7 +28,7 @@
             <el-input v-model="ruleForm.name" placeholder="姓名" />
           </el-form-item>
           <el-form-item prop="sex">
-            <el-radio-group v-model="ruleForm.sex" class="w-100 d-flex">
+            <el-radio-group v-model="ruleForm.sex" class="w-100">
               <el-radio border label="男" class="radio-half" />
               <el-radio border label="女" class="float-right radio-half" />
             </el-radio-group>
@@ -51,7 +51,7 @@
         </div>
         <div v-else>
           <el-form-item label="會員等級" prop="level">
-            <el-radio-group v-model="ruleForm.level" class="w-100 d-flex">
+            <el-radio-group v-model="ruleForm.level" class="w-100">
               <el-radio border label="計次" class="radio-half" />
               <el-radio border label="月費" class="float-right radio-half" />
             </el-radio-group>
