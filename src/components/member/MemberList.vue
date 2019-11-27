@@ -43,26 +43,45 @@
         </template>
       </el-table-column>
     </el-table>
-    <div v-infinite-scroll="load" style="overflow:auto">
-      <el-card
-        v-for="(item, idx) in tableData"
-        :key="idx"
-        :body-style="{ padding: '5px', display: 'flex' }"
-        shadow="always"
-      >
-        <p>
-          {{ item.name }}
-        </p>
-        <el-button type="text" size="small" class="ml-auto">編輯</el-button>
-      </el-card>
+    <div v-else>
+      <!-- <div class="text-right">
+        <el-button type="text">
+          過濾
+        </el-button>
+      </div> -->
+      <el-input
+        v-model="search"
+        placeholder="請輸入姓名或電話"
+        suffix-icon="el-icon-search"
+        class="mb-1"
+      />
+      <div v-infinite-scroll="load" style="overflow:auto">
+        <el-card
+          v-for="(item, idx) in tableData"
+          :key="idx"
+          :body-style="{ padding: '5px', display: 'flex' }"
+          shadow="always"
+        >
+          <p>
+            {{ item.name }}
+          </p>
+          <el-button type="text" size="small" class="ml-auto">編輯</el-button>
+        </el-card>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+// import FilterOutline from 'vue-material-design-icons/FilterOutline.vue';
+
 export default {
+  components: {
+    // FilterOutline,
+  },
   data() {
     return {
+      search: '',
       tableData: [{
         phone: '0935-879-382',
         name: 'Hsia',
