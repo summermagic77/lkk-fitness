@@ -1,8 +1,8 @@
 <template>
   <el-container>
-    <el-header>
+    <!-- <el-header>
       <el-page-header @back="goBack" :content="$route.name" />
-    </el-header>
+    </el-header> -->
     <el-main>
       <router-view></router-view>
     </el-main>
