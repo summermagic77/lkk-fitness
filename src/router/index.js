@@ -43,7 +43,7 @@ const routes = [
       // },
       {
         path: 'create',
-        name: '建立新會員',
+        name: '會員',
         component: MemberCreate,
       },
       {

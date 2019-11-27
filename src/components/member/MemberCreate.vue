@@ -6,16 +6,17 @@
     align="middle"
   >
     <el-col :sm="12" :md="12" :lg="8" :xl="8">
-      <h1 class="mb-1">
-        Getting Started
+      <h1 class="mb-0">
+        建立新會員
       </h1>
-      <!-- <p class="text-black-50 mb-2">
-        Please fill in the fields below in order to proceed to next step.
-      </p> -->
+      <p class="text-black-50 mb-1">
+        填寫完整會員資料
+      </p>
       <el-form
         :model="ruleForm"
         :rules="rules"
         label-width="80px"
+        status-icon
         ref="ruleForm"
       >
         <el-form-item label="姓名" prop="name">
