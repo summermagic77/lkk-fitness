@@ -1,7 +1,28 @@
 <template>
   <el-container>
-    <el-header style="!background-color: #29526b; height: 50px;">
-      <Burger />
+    <el-header>
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <el-page-header
+            v-if="$route.path !== '/'"
+            :content="$route.name"
+            class="mt-1"
+            @back="goBack"
+           />
+        </el-col>
+        <el-col :span="$route.path !== '/' ? 12 : 24">
+          <Burger class="float-right" />
+        </el-col>
+      </el-row>
+      <!-- <el-page-header v-if="$route.path !== '/'" @back="goBack" :content="$route.name" /> -->
+      <!-- <el-link href="/" :underline="false">
+        <el-image
+          style="height: 40px;"
+          :src="require('@/assets/lkk-logo.png')"
+          fit="contain"
+        />
+      </el-link> -->
+      <!-- <Burger class="float-right" /> -->
     </el-header>
     <el-aside>
       <Sidebar />
@@ -28,6 +49,11 @@ export default {
     };
   },
   computed: {
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
   },
 };
 </script>

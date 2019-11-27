@@ -1,10 +1,16 @@
 <template>
   <div class="sidebar">
     <el-drawer
-      title="練健康"
       :size="$device.mobile ? '50%' : '25%'"
       :visible.sync="isPanelOpen"
       :direction="direction">
+      <div slot="title">
+        <el-image
+          style="height: 40px;"
+          :src="require('@/assets/lkk-logo.png')"
+          fit="contain"
+        />
+      </div>
       <ul class="sidebar-panel-nav">
         <li><el-link href="/" :underline="false">首頁</el-link></li>
         <li><el-link href="/member" :underline="false">會員</el-link></li>
