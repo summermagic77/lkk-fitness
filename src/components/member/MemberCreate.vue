@@ -15,23 +15,22 @@
       <el-form
         :model="ruleForm"
         :rules="rules"
-        label-width="80px"
         status-icon
         ref="ruleForm"
       >
-        <el-form-item label="姓名" prop="name">
+        <el-form-item prop="name">
           <el-input v-model="ruleForm.name" placeholder="姓名" />
         </el-form-item>
-        <el-form-item lable="性別" prop="sex">
+        <el-form-item prop="sex">
           <el-radio-group v-model="ruleForm.sex">
             <el-radio border label="男" />
             <el-radio border label="女" />
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="手機號碼" prop="phone">
+        <el-form-item prop="phone">
           <el-input v-model="ruleForm.phone" placeholder="手機號碼" />
         </el-form-item>
-        <el-form-item label="Email" prop="email">
+        <el-form-item prop="email">
           <el-input v-model="ruleForm.email" placeholder="Email" />
         </el-form-item>
         <el-form-item label="點數" prop="point">
