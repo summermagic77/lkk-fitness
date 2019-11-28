@@ -6,7 +6,7 @@
       :direction="direction">
       <div slot="title">
         <el-image
-          style="height: 40px;"
+          style="height: 30px;"
           :src="require('@/assets/lkk-logo.png')"
           fit="contain"
         />

@@ -2,11 +2,11 @@
   <el-container>
     <el-header>
       <el-row :gutter="20">
-        <el-col :span="12">
+        <el-col :span="12" class="mt-1">
           <el-page-header
             v-if="$route.path !== '/'"
             :content="$route.name"
-            class="mt-1"
+            class=""
             @back="goBack"
            />
         </el-col>
