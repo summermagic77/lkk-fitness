@@ -2,7 +2,7 @@
   <el-container>
     <el-header>
       <el-row type="flex" class="row-bg" justify="space-between">
-        <el-col :span="$route.path !== '/' ? 6 : 18" class="mt-1">
+        <el-col :span="!$device.mobile && $route.path !== '/' ? 6 : 18" class="mt-1">
           <el-page-header
             v-if="$route.path !== '/'"
             :content="$route.name"
