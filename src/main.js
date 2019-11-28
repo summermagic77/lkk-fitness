@@ -8,8 +8,8 @@ import './registerServiceWorker';
 import router from './router';
 
 import Default from './layouts/default.vue';
-
 import 'element-ui/lib/theme-chalk/index.css';
+import './theme/index.css';
 import './scss/custom.scss';
 import 'vue-material-design-icons/styles.css';
 

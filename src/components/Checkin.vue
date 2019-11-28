@@ -7,8 +7,11 @@
   >
     <el-col :sm="12" :md="12" :lg="6" :xl="6" class="text-center">
       <div v-if="type === 'qrcode'" class="fullscreen">
-        <p class="error">{{ error }}</p>
-        <p class="decode-result">{{ result }}</p>
+        <el-alert
+          :title="error"
+          type="error"
+        />
+        <!-- <p class="decode-result">{{ result }}</p> -->
         <QrcodeStream @decode="onDecode" @init="onInit" class="mb-1" />
       </div>
       <el-radio-group v-model="type">
@@ -94,6 +97,7 @@ export default {
     },
     onDecode(result) {
       this.result = result;
+      console.dir(result);
     },
     async onInit(promise) {
       try {

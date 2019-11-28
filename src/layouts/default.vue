@@ -1,8 +1,8 @@
 <template>
   <el-container>
     <el-header>
-      <el-row :gutter="20">
-        <el-col :span="12" class="mt-1">
+      <el-row type="flex" class="row-bg" justify="space-between">
+        <el-col :span="$route.path !== '/' ? 6 : 18" class="mt-1">
           <el-page-header
             v-if="$route.path !== '/'"
             :content="$route.name"
@@ -10,7 +10,14 @@
             @back="goBack"
            />
         </el-col>
-        <el-col :span="$route.path !== '/' ? 12 : 24">
+        <el-col v-if="!$device.mobile && $route.path !== '/'" :span="6" class="mt-1">
+          <el-image
+            style="height: 30px;"
+            :src="require('@/assets/lkk-logo.png')"
+            fit="contain"
+          />
+        </el-col>
+        <el-col :span="$route.path !== '/' ? 6 : 24">
           <Burger class="float-right" />
         </el-col>
       </el-row>
