@@ -11,11 +11,13 @@
            />
         </el-col>
         <el-col v-if="!$device.mobile && $route.path !== '/'" :span="6" class="mt-1">
-          <el-image
-            style="height: 30px;"
-            :src="require('@/assets/lkk-logo.png')"
-            fit="contain"
-          />
+          <el-link href="/" :underline="false">
+            <el-image
+              style="height: 30px;"
+              :src="require('@/assets/lkk-logo.png')"
+              fit="contain"
+            />
+          </el-link>
         </el-col>
         <el-col :span="$route.path !== '/' ? 6 : 24">
           <Burger class="float-right" />
