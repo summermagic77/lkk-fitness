@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container class="vh-100" style="!background-color: #29526b;">
     <el-header>
       <el-row type="flex" class="row-bg" justify="space-between">
         <el-col :span="!$device.mobile && $route.path !== '/' ? 6 : 18" class="mt-1">
@@ -8,7 +8,7 @@
             :content="$route.name"
             class=""
             @back="goBack"
-           />
+          />
         </el-col>
         <el-col v-if="!$device.mobile && $route.path !== '/'" :span="6" class="mt-1">
           <el-link href="/" :underline="false">
@@ -23,15 +23,6 @@
           <Burger class="float-right" />
         </el-col>
       </el-row>
-      <!-- <el-page-header v-if="$route.path !== '/'" @back="goBack" :content="$route.name" /> -->
-      <!-- <el-link href="/" :underline="false">
-        <el-image
-          style="height: 40px;"
-          :src="require('@/assets/lkk-logo.png')"
-          fit="contain"
-        />
-      </el-link> -->
-      <!-- <Burger class="float-right" /> -->
     </el-header>
     <el-aside>
       <Sidebar />
@@ -69,12 +60,14 @@ export default {
 <style>
 html {
   height: 100%;
+  width: 100%;
   overflow:hidden;
 }
 body {
   border: 0; margin: 0; padding: 0;
   /* font-family: 'Lato'; */
   height: 100%;
+  width: 100%;
   /* background: rgb(101,31,87);
   background:
     linear-gradient(45deg,

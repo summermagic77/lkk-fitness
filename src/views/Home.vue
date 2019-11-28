@@ -1,5 +1,5 @@
 <template>
-  <div class="outer">
+  <div>
     <div class="overlap-bg" />
   <!-- <el-container> -->
     <!-- <el-header class="home-header">
@@ -22,7 +22,7 @@
     <el-row
       :gutter="20"
       type="flex"
-      class="row-bg"
+      class="row-bg h-100"
       justify="center"
       align="middle"
     >
@@ -97,17 +97,10 @@ export default {
 /* .home-header {
   background-color: #29526b;
 } */
-.outer {
-  height: 85vh;
-  width: 100vw;
-  vertical-align:middle;
-  text-align: center;
-  display: table-cell;
-}
-.overlap-bg {
+/* .overlap-bg {
   background-color: #29526b;
   position: relative;
-}
+} */
 .material-design-icon.icon-3x {
   height: 3em;
   width: 3em;

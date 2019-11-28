@@ -1,7 +1,7 @@
 <template>
   <el-row
     :type="$device.mobile ? '' : 'flex'"
-    class="row-bg"
+    class="row-bg h-100"
     justify="center"
     align="middle"
   >
