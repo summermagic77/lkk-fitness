@@ -35,7 +35,7 @@
                 :key="idx"
                 border
                 :label="item"
-                class="w-27"
+                class="w-26"
               />
               <!-- <el-radio border label="女" class="float-right radio-half" /> -->
             </el-radio-group>
