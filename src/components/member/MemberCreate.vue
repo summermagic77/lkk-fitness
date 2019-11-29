@@ -118,7 +118,7 @@ import apiSelections from '@/api/selections';
 export default {
   data() {
     return {
-      activeStep: 2,
+      activeStep: 1,
       selections: {},
       ruleForm: {
         name: 'Chiquitta',
