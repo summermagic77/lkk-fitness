@@ -2,7 +2,9 @@
   <div>
     <el-table
       v-if="!$device.mobile"
+      v-loading="loading"
       :data="tableData"
+      empty-text="暫無數據"
       stripe
       class="w-100">
       <el-table-column
@@ -84,6 +86,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       search: '',
       tableData: [],
       // tableData: [{
@@ -110,6 +113,7 @@ export default {
     async getTableData() {
       const { data } = await apiMember.getAll();
       this.tableData = data.data;
+      this.loading = false;
     },
     formatterDate(row, { property }) {
       return this.$moment(row[property]).format('YYYY-MM-DD');

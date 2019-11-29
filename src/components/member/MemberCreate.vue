@@ -17,6 +17,7 @@
         填寫完整會員資料
       </p> -->
       <el-form
+        v-loading="loading"
         :model="ruleForm"
         :rules="rules"
         status-icon
@@ -27,7 +28,7 @@
           <el-form-item prop="name">
             <el-input v-model="ruleForm.name" placeholder="姓名" />
           </el-form-item>
-          <el-form-item prop="sex">
+          <el-form-item prop="sex" class="text-center">
             <el-radio-group v-model="ruleForm.sex" class="w-100">
               <el-radio
                 v-for="(item, idx) in sex"
@@ -118,6 +119,7 @@ import apiSelections from '@/api/selections';
 export default {
   data() {
     return {
+      loading: true,
       activeStep: 1,
       selections: {},
       ruleForm: {
@@ -206,6 +208,7 @@ export default {
   async created() {
     const { data } = await apiSelections.get();
     this.selections = data.data;
+    this.loading = false;
     // const { sexMap } = data.data;
   },
 };
