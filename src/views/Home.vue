@@ -1,17 +1,6 @@
 <template>
   <div class="text-center">
     <div class="overlap-bg" />
-  <!-- <el-container> -->
-    <!-- <el-header class="home-header">
-      <el-link href="/" :underline="false">
-        <el-image
-          style="height: 50px;"
-          :src="require('@/assets/lkk-logo.png')"
-          fit="contain"
-        />
-      </el-link>
-    </el-header> -->
-    <!-- <el-main> -->
     <el-link href="/" :underline="false"  class="mb-2">
       <el-image
         style="height: 200px;"
@@ -96,8 +85,8 @@ export default {
 <style scoped="scss">
 /* .home-header {
   background-color: #29526b;
-} */
-/* .overlap-bg {
+}
+.overlap-bg {
   background-color: #29526b;
   position: relative;
 } */

@@ -1,6 +1,10 @@
 <template>
-  <el-container class="vh-100" style="!background-color: #29526b;">
-    <el-header>
+  <el-container class="vh-100">
+    <el-header
+      :class="{
+        'home-header': $route.path === '/'
+      }"
+    >
       <el-row type="flex" class="row-bg" justify="space-between">
         <el-col :span="!$device.mobile && $route.path !== '/' ? 6 : 18" class="mt-1">
           <el-page-header
@@ -27,7 +31,11 @@
     <el-aside>
       <Sidebar />
     </el-aside>
-    <el-main style="!margin-top: -262px;">
+    <el-main
+      :class="{
+        'home-main': $route.path === '/'
+      }"
+    >
       <slot />
     </el-main>
   </el-container>
@@ -85,5 +93,12 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 0.8rem;
+}
+.home-header {
+  background-color: #29526b;
+  height: 320px !important;
+}
+.home-main {
+  margin-top: -292px;
 }
 </style>

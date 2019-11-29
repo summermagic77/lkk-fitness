@@ -1,12 +1,12 @@
 <template>
   <el-row
-    :type="$device.mobile ? '' : 'flex'"
+    type="flex"
     class="row-bg h-100"
     justify="center"
     align="middle"
   >
     <el-col :sm="12" :md="12" :lg="8" :xl="8">
-      <el-steps :active="activeStep" align-center class="mb-2">
+      <el-steps :active="activeStep" align-center class="mb-1">
         <el-step title="基本資料" description="填寫會員資料" />
         <el-step title="入會資訊" description="填寫入會資訊" />
       </el-steps>
@@ -35,6 +35,7 @@
                 :key="idx"
                 border
                 :label="item"
+                class="w-25"
               />
               <!-- <el-radio border label="女" class="float-right radio-half" /> -->
             </el-radio-group>
