@@ -17,9 +17,9 @@
         <!-- <p class="decode-result">{{ result }}</p> -->
         <QrcodeStream @decode="onDecode" @init="onInit" class="mb-1" />
       </div>
-      <h1>
+      <!-- <h1>
         <account-check class="icon-3x" />
-      </h1>
+      </h1> -->
       <el-radio-group v-model="type">
         <el-radio
           v-for="(item, idx) in searchType"
@@ -48,13 +48,13 @@
 
 <script>
 import { QrcodeStream } from 'vue-qrcode-reader';
-import AccountCheck from 'vue-material-design-icons/AccountCheck.vue';
+// import AccountCheck from 'vue-material-design-icons/AccountCheck.vue';
 
 export default {
   name: 'checkin',
   components: {
     QrcodeStream,
-    AccountCheck,
+    // AccountCheck,
   },
   data() {
     return {
