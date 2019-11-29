@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-center">
     <div class="overlap-bg" />
   <!-- <el-container> -->
     <!-- <el-header class="home-header">
@@ -12,10 +12,10 @@
       </el-link>
     </el-header> -->
     <!-- <el-main> -->
-    <el-link href="/" :underline="false" style="margin-bottom: 50px;">
+    <el-link href="/" :underline="false"  class="mb-1">
       <el-image
-        style="height: 50px;"
-        :src="require('@/assets/lkk-logo.png')"
+        style="height: 200px;"
+        :src="require('@/assets/lkk-color.png')"
         fit="contain"
       />
     </el-link>
