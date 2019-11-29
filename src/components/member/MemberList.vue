@@ -6,32 +6,34 @@
       stripe
       class="w-100">
       <el-table-column
-        prop="name"
+        prop="memberName"
         label="姓名">
       </el-table-column>
       <el-table-column
-        prop="phone"
+        prop="memberPhone"
         label="電話">
       </el-table-column>
       <el-table-column
-        prop="sex"
+        prop="memberSex"
         label="性別">
       </el-table-column>
       <el-table-column
-        prop="level"
+        prop="memberType"
         label="等級">
       </el-table-column>
       <el-table-column
-        prop="point"
+        prop="memberPoint"
         label="點數">
       </el-table-column>
       <el-table-column
-        prop="birthdate"
-        label="生日">
+        prop="memberBirthDate"
+        label="生日"
+        :formatter="formatterDate">
       </el-table-column>
       <el-table-column
-        prop="join_date"
-        label="加入時間">
+        prop="memberJoinDate"
+        label="加入時間"
+        :formatter="formatterDate">
       </el-table-column>
       <el-table-column
         fixed="right"
@@ -63,7 +65,7 @@
           shadow="always"
         >
           <p>
-            {{ item.name }}
+            {{ item.memberName }}
           </p>
           <el-button type="text" size="small" class="ml-auto">編輯</el-button>
         </el-card>
@@ -74,6 +76,7 @@
 
 <script>
 // import FilterOutline from 'vue-material-design-icons/FilterOutline.vue';
+import apiMember from '@/api/member';
 
 export default {
   components: {
@@ -82,15 +85,16 @@ export default {
   data() {
     return {
       search: '',
-      tableData: [{
-        phone: '0935-879-382',
-        name: 'Hsia',
-        birthdate: '2016-05-02',
-        join_date: '2016-05-02',
-        sex: 'male',
-        level: '1',
-        point: 1000,
-      }],
+      tableData: [],
+      // tableData: [{
+      //   phone: '0935-879-382',
+      //   name: 'Hsia',
+      //   birthdate: '2016-05-02',
+      //   join_date: '2016-05-02',
+      //   sex: 'male',
+      //   level: '1',
+      //   point: 1000,
+      // }],
     };
   },
   methods: {
@@ -103,6 +107,16 @@ export default {
     handleClick(row) {
       console.log(row);
     },
+    async getTableData() {
+      const { data } = await apiMember.getAll();
+      this.tableData = data.data;
+    },
+    formatterDate(row, { property }) {
+      return this.$moment(row[property]).format('YYYY-MM-DD');
+    },
+  },
+  created() {
+    this.getTableData();
   },
 };
 </script>

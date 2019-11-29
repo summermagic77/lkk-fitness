@@ -18,6 +18,7 @@ Vue.config.productionTip = false;
 Vue.use(ElementUI);
 Vue.use(VueQrcodeReader);
 Vue.use(device);
+Vue.use(require('vue-moment'));
 
 Vue.component('default-layout', Default);
 

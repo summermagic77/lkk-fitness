@@ -29,8 +29,13 @@
           </el-form-item>
           <el-form-item prop="sex">
             <el-radio-group v-model="ruleForm.sex" class="w-100">
-              <el-radio border label="男" class="radio-half" />
-              <el-radio border label="女" class="float-right radio-half" />
+              <el-radio
+                v-for="(item, idx) in sex"
+                :key="idx"
+                border
+                :label="item"
+              />
+              <!-- <el-radio border label="女" class="float-right radio-half" /> -->
             </el-radio-group>
           </el-form-item>
           <el-form-item prop="birthdate">
@@ -50,10 +55,19 @@
           </el-form-item>
         </div>
         <div v-else>
-          <el-form-item label="會員等級" prop="level">
-            <el-radio-group v-model="ruleForm.level" class="w-100">
-              <el-radio border label="計次" class="radio-half" />
-              <el-radio border label="月費" class="float-right radio-half" />
+          <el-form-item label="會員類型" prop="memberType">
+            <el-radio-group v-model="ruleForm.memberType" class="w-100">
+              <el-radio
+                v-for="(item, idx) in memberType"
+                :key="idx"
+                border
+                :label="item"
+                :class="{
+                  'float-right': idx === 1,
+                  'radio-half': true,
+                }"
+              />
+              <!-- <el-radio border label="月費" class="float-right radio-half" /> -->
             </el-radio-group>
           </el-form-item>
           <el-form-item label="會員點數" prop="point">
@@ -99,15 +113,19 @@
 </template>
 
 <script>
+import apiSelections from '@/api/selections';
+
 export default {
   data() {
     return {
-      activeStep: 1,
+      activeStep: 2,
+      selections: {},
       ruleForm: {
         name: 'Chiquitta',
-        sex: '女',
+        sex: '男性',
         phone: '0987654321',
         email: 'chiquitta.com@gmail.com',
+        memberType: '一般會員',
         // point: 0,
         birthdate: new Date(),
         join_date: '',
@@ -153,6 +171,18 @@ export default {
       },
     };
   },
+  computed: {
+    sex() {
+      return this.selections.sexMap;
+    },
+    memberType() {
+      const { memberTypeMap = {} } = this.selections;
+      return [
+        memberTypeMap[Object.keys(memberTypeMap)[0]],
+        memberTypeMap[Object.keys(memberTypeMap)[1]],
+      ];
+    },
+  },
   methods: {
     firstStep(formName) {
       this.$refs[formName].validate((valid) => {
@@ -172,6 +202,11 @@ export default {
         // }
       });
     },
+  },
+  async created() {
+    const { data } = await apiSelections.get();
+    this.selections = data.data;
+    // const { sexMap } = data.data;
   },
 };
 </script>
