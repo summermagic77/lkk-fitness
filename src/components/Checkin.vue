@@ -42,6 +42,11 @@
           <el-button type="text" icon="el-icon-search" class="mr-1" @click="searchMember" />
         </div>
       </el-input>
+      <div class="mt-2">
+        <el-link href="/member/create" type="info">建立會員</el-link>・
+        <el-link href="/employee/create" type="info">建立員工</el-link>・
+        <el-link href="/coach/create" type="info">建立場租教練</el-link>
+      </div>
     </el-col>
   </el-row>
 </template>

@@ -35,7 +35,7 @@
                 :key="idx"
                 border
                 :label="item"
-                class="w-25"
+                class="w-27"
               />
               <!-- <el-radio border label="女" class="float-right radio-half" /> -->
             </el-radio-group>
@@ -146,6 +146,9 @@ export default {
         email: [
           { required: true, message: '請輸入Email', trigger: 'blur' },
           { type: 'email', message: '請輸入正確的Email', trigger: ['blur', 'change'] },
+        ],
+        memberType: [
+          { required: true, message: '請選擇類型', trigger: 'change' },
         ],
         point: [
           { required: true, message: '請輸入點數', trigger: 'change' },
