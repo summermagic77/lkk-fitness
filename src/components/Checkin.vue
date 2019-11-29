@@ -1,7 +1,10 @@
 <template>
   <el-row
-    :type="$device.mobile ? '' : 'flex'"
-    class="row-bg h-100"
+    :type="'flex'"
+    :class="{
+      'row-bg': true,
+      'h-100': true
+    }"
     justify="center"
     align="middle"
   >
@@ -14,6 +17,9 @@
         <!-- <p class="decode-result">{{ result }}</p> -->
         <QrcodeStream @decode="onDecode" @init="onInit" class="mb-1" />
       </div>
+      <h1>
+        <account-check class="icon-3x" />
+      </h1>
       <el-radio-group v-model="type">
         <el-radio
           v-for="(item, idx) in searchType"
@@ -42,11 +48,13 @@
 
 <script>
 import { QrcodeStream } from 'vue-qrcode-reader';
+import AccountCheck from 'vue-material-design-icons/AccountCheck.vue';
 
 export default {
   name: 'checkin',
   components: {
     QrcodeStream,
+    AccountCheck,
   },
   data() {
     return {
@@ -121,3 +129,5 @@ export default {
   },
 };
 </script>
+<style scoped>
+</style>

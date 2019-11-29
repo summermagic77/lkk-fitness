@@ -12,7 +12,7 @@
       </el-link>
     </el-header> -->
     <!-- <el-main> -->
-    <el-link href="/" :underline="false"  class="mb-1">
+    <el-link href="/" :underline="false"  class="mb-2">
       <el-image
         style="height: 200px;"
         :src="require('@/assets/lkk-color.png')"
@@ -101,14 +101,6 @@ export default {
   background-color: #29526b;
   position: relative;
 } */
-.material-design-icon.icon-3x {
-  height: 3em;
-  width: 3em;
-}
-.material-design-icon.icon-3x > .material-design-icon__svg {
-  height: 3em;
-  width: 3em;
-}
 .el-row {
   margin-bottom: 20px;
   &:last-child {
