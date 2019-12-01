@@ -1,5 +1,8 @@
 <template>
   <div>
+    <el-button class="float-right mb-2">
+      建立新會員
+    </el-button>
     <el-table
       v-if="!$device.mobile"
       v-loading="loading"
@@ -111,7 +114,8 @@ export default {
       console.log(row);
     },
     async getTableData() {
-      const { data } = await apiMember.getAll();
+      const { data } = await apiMember.getAll({ memberType: 3 });
+      console.dir(data.data);
       this.tableData = data.data;
       this.loading = false;
     },

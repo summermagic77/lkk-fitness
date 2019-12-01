@@ -96,9 +96,11 @@ body {
 }
 .home-header {
   background-color: #29526b;
-  height: 320px !important;
+  height: 55% !important;
+  /* height: 450px !important; */
+  /* top: 50% !important; */
 }
 .home-main {
-  margin-top: -292px;
+  margin-top: -352px;
 }
 </style>

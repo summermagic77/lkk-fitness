@@ -1,9 +1,9 @@
 import axios from './axiosInit';
 
-const uri = '/member/';
+const uri = '/member';
 
 export default {
-  getAll() {
-    return axios.get(`${uri}/getAll`);
+  getAll(memberType) {
+    return axios.get(`${uri}/getAll`, { params: memberType });
   },
 };

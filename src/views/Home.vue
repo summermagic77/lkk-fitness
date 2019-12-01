@@ -3,7 +3,7 @@
     <div class="overlap-bg" />
     <el-link href="/" :underline="false"  class="mb-2">
       <el-image
-        style="height: 200px;"
+        style="height: 180px;"
         :src="require('@/assets/lkk-color.png')"
         fit="contain"
       />
@@ -11,14 +11,15 @@
     <el-row
       :gutter="20"
       type="flex"
-      class="row-bg h-100"
+      class="row-bg h-100 mt-2"
       justify="center"
       align="middle"
     >
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
         <el-card :body-style="{ padding: '0px' }" shadow="hover">
           <el-link href="/member/checkin" class="w-100 py-1" :underline="false">
-            <account-check class="icon-3x" />
+            <!-- <account-check class="icon-3x" /> -->
+            <i class="la la-user-check fs-3" />
             <h1 class="font-weight-light">
               會員進場
             </h1>
@@ -28,7 +29,7 @@
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
         <el-card :body-style="{ padding: '0px' }" shadow="hover">
           <el-link href="/member/create" class="w-100 py-1" :underline="false">
-            <account-plus class="icon-3x" />
+            <i class="la la-user-plus fs-3" />
             <h1 class="font-weight-light">
               建立新會員
             </h1>
@@ -40,7 +41,8 @@
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
         <el-card :body-style="{ padding: '0px' }" shadow="hover">
           <el-link href="/employee/checkin" class="w-100 py-1" :underline="false">
-            <account-badge-outline class="icon-3x" />
+            <!-- <account-badge-outline class="icon-3x" /> -->
+            <i class="la la-id-card fs-3"/>
             <h1 class="font-weight-light">
               員工打卡
             </h1>
@@ -50,7 +52,8 @@
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
         <el-card :body-style="{ padding: '0px' }" shadow="hover">
           <el-link href="/coach/checkin" class="w-100 py-1" :underline="false">
-            <account-multiple-check class="icon-3x" />
+            <!-- <account-multiple-check class="icon-3x" /> -->
+            <i class="la la-user-friends fs-3" />
             <h1 class="font-weight-light">
               教練場租
             </h1>
@@ -66,18 +69,18 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
-import AccountCheck from 'vue-material-design-icons/AccountCheck.vue';
-import AccountPlus from 'vue-material-design-icons/AccountPlus.vue';
-import AccountBadgeOutline from 'vue-material-design-icons/AccountBadgeOutline.vue';
-import AccountMultipleCheck from 'vue-material-design-icons/AccountMultipleCheck.vue';
+// import AccountCheck from 'vue-material-design-icons/AccountCheck.vue';
+// import AccountPlus from 'vue-material-design-icons/AccountPlus.vue';
+// import AccountBadgeOutline from 'vue-material-design-icons/AccountBadgeOutline.vue';
+// import AccountMultipleCheck from 'vue-material-design-icons/AccountMultipleCheck.vue';
 
 export default {
   name: 'home',
   components: {
-    AccountCheck,
-    AccountPlus,
-    AccountBadgeOutline,
-    AccountMultipleCheck,
+    // AccountCheck,
+    // AccountPlus,
+    // AccountBadgeOutline,
+    // AccountMultipleCheck,
   },
 };
 </script>
