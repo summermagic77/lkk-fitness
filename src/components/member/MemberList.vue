@@ -1,8 +1,8 @@
 <template>
   <div>
-    <el-button class="float-right mb-2">
+    <el-link href="/member/create" class="float-right mb-2">
       建立新會員
-    </el-button>
+    </el-link>
     <el-table
       v-if="!$device.mobile"
       v-loading="loading"
@@ -92,15 +92,6 @@ export default {
       loading: true,
       search: '',
       tableData: [],
-      // tableData: [{
-      //   phone: '0935-879-382',
-      //   name: 'Hsia',
-      //   birthdate: '2016-05-02',
-      //   join_date: '2016-05-02',
-      //   sex: 'male',
-      //   level: '1',
-      //   point: 1000,
-      // }],
     };
   },
   methods: {

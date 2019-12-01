@@ -9,6 +9,7 @@ import MemberList from '@/components/member/MemberList.vue';
 import MemberCreate from '@/components/member/MemberCreate.vue';
 
 import Employee from '@/views/Employee.vue';
+import EmployeeCreate from '@/components/employee/EmployeeCreate.vue';
 import Coach from '@/views/Coach.vue';
 
 Vue.use(VueRouter);
@@ -74,7 +75,7 @@ const routes = [
       {
         path: 'create',
         name: '建立員工',
-        component: Member,
+        component: EmployeeCreate,
       },
       {
         path: 'checkin',
