@@ -6,16 +6,11 @@
     align="middle"
   >
     <el-col :sm="12" :md="12" :lg="8" :xl="8">
-      <!-- <el-steps :active="activeStep" align-center class="mb-1">
-        <el-step title="基本資料" description="填寫會員資料" />
-        <el-step title="入會資訊" description="填寫入會資訊" />
-      </el-steps> -->
-      <!-- <h1 class="mb-0">
-        建立新會員
-      </h1>
-      <p class="text-black-50 mb-1">
-        填寫完整會員資料
-      </p> -->
+      <el-steps :active="activeStep" align-center class="mb-1">
+        <el-step title="基本資料" description="員工資料" />
+        <el-step title="聯絡方式" description="員工聯絡方式" />
+        <el-step title="人事資料" description="" />
+      </el-steps>
       <el-form
         v-loading="loading"
         :model="ruleForm"
@@ -24,7 +19,7 @@
         ref="ruleForm"
         :label-position="activeStep === 2 ? 'top' : 'left'"
       >
-        <div v-if="activeStep === 1">
+        <div v-if="activeStep === 0">
           <el-form-item prop="name">
             <el-input v-model="ruleForm.name" placeholder="姓名" />
           </el-form-item>
@@ -50,11 +45,16 @@
             <el-date-picker
               v-model="ruleForm.birthdate"
               type="date"
-              placeholder="選擇生日"
+              placeholder="出生日期"
               class="w-100"
               :editable="false"
               :picker-options="pickerOptions"
             />
+          </el-form-item>
+        </div>
+        <div v-else-if="activeStep === 1">
+          <el-form-item prop="tel">
+            <el-input v-model="ruleForm.tel" placeholder="電話號碼" />
           </el-form-item>
           <el-form-item prop="phone">
             <el-input v-model="ruleForm.phone" placeholder="手機號碼" />
@@ -70,34 +70,22 @@
           </el-form-item>
         </div>
         <div v-else>
-          <el-form-item label="會員類型" prop="memberType">
-            <el-radio-group v-model="ruleForm.memberType" class="w-100">
-              <el-radio
-                v-for="(item, idx) in memberType"
-                :key="idx"
-                border
+          <el-form-item prop="memberType">
+            <el-select v-model="ruleForm.memberType" placeholder="員工類型" class="w-100">
+              <el-option
+                v-for="item in memberType"
+                :key="item.value"
                 :label="item"
-                :class="{
-                  'float-right': idx === 1,
-                  'radio-half': true,
-                }"
-              />
-              <!-- <el-radio border label="月費" class="float-right radio-half" /> -->
-            </el-radio-group>
+                :value="item">
+              </el-option>
+            </el-select>
           </el-form-item>
-          <el-form-item label="會員點數" prop="point">
-            <el-input-number
-              v-model="ruleForm.point"
-              :step="100"
-              placeholder="會員點數"
-              class="w-100"
-            />
-          </el-form-item>
-          <el-form-item label="加入日期" prop="join_date">
+          <el-form-item prop="join_date">
             <el-date-picker
               v-model="ruleForm.join_date"
               type="date"
-              placeholder="選擇加入日期"
+              placeholder="到職日期"
+              :editable="false"
               class="w-100"
             />
           </el-form-item>
@@ -105,7 +93,7 @@
         <el-form-item>
           <!-- <div v-if="activeStep === 1"> -->
           <el-button
-            v-if="activeStep === 1"
+            v-if="activeStep === 0"
             type="primary"
             plain
             class="w-100"
@@ -114,10 +102,21 @@
             下一步
           </el-button>
           <!-- </div> -->
+          <div v-else-if="activeStep === 1">
+            <el-button @click="activeStep--">上一步</el-button>
+            <el-button
+              type="primary"
+              plain
+              class="float-right"
+              @click="firstStep('ruleForm')"
+            >
+              下一步
+            </el-button>
+          </div>
           <div v-else>
             <el-button @click="activeStep--">上一步</el-button>
             <el-button type="primary" @click="submitForm('ruleForm')" class="float-right">
-              建立會員資料
+              建立員工資料
             </el-button>
           </div>
           <!-- <el-button type="success" icon="el-icon-check" circle /> -->
@@ -134,14 +133,17 @@ export default {
   data() {
     return {
       loading: true,
-      activeStep: 1,
+      activeStep: 2,
       selections: {},
       ruleForm: {
-        name: 'Chiquitta',
-        sex: '男性',
+        name: '林小姐',
+        engName: 'Chiquitta',
+        sex: '女性',
+        idNumber: 'A123456789',
+        tel: '0229220123',
         phone: '0987654321',
         email: 'chiquitta.com@gmail.com',
-        memberType: '一般會員',
+        // memberType: '編制人員',
         // point: 0,
         birthdate: new Date(),
         join_date: '',
@@ -152,6 +154,9 @@ export default {
         ],
         engName: [
           { required: true, message: '請輸入姓名', trigger: 'blur' },
+        ],
+        tel: [
+          { required: true, message: '請輸入手機', trigger: 'blur' },
         ],
         phone: [
           { required: true, message: '請輸入手機', trigger: 'blur' },
@@ -164,7 +169,12 @@ export default {
           { type: 'email', message: '請輸入正確的Email', trigger: ['blur', 'change'] },
         ],
         memberType: [
-          { required: true, message: '請選擇類型', trigger: 'change' },
+          {
+            type: 'array',
+            required: true,
+            message: '請選擇類型',
+            trigger: 'change',
+          },
         ],
         point: [
           { required: true, message: '請輸入點數', trigger: 'change' },
@@ -200,8 +210,9 @@ export default {
     memberType() {
       const { memberTypeMap = {} } = this.selections;
       return [
-        memberTypeMap[Object.keys(memberTypeMap)[0]],
-        memberTypeMap[Object.keys(memberTypeMap)[1]],
+        memberTypeMap[Object.keys(memberTypeMap)[4]],
+        memberTypeMap[Object.keys(memberTypeMap)[5]],
+        memberTypeMap[Object.keys(memberTypeMap)[6]],
       ];
     },
   },
