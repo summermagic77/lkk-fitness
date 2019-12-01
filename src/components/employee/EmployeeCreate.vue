@@ -52,6 +52,7 @@
               type="date"
               placeholder="選擇生日"
               class="w-100"
+              :editable="false"
               :picker-options="pickerOptions"
             />
           </el-form-item>
