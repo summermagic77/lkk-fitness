@@ -170,7 +170,6 @@ export default {
         ],
         memberType: [
           {
-            type: 'array',
             required: true,
             message: '請選擇類型',
             trigger: 'change',
