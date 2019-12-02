@@ -52,6 +52,9 @@
           <el-form-item prop="memberPhone">
             <el-input v-model="ruleForm.memberPhone" placeholder="手機號碼" />
           </el-form-item>
+          <el-form-item prop="memberPhone">
+            <el-input v-model="ruleForm.memberPhone" placeholder="手機號碼" />
+          </el-form-item>
           <el-form-item prop="memberMail">
             <el-input v-model="ruleForm.memberMail" placeholder="Email" />
           </el-form-item>
@@ -94,21 +97,21 @@
               </el-form-item>
             </el-col> -->
             <el-col :span="12">
-              <el-form-item label="教練課" prop="memberLesson">
+              <el-form-item label="私人課程" prop="memberLesson">
                 <el-input-number
                   v-model="ruleForm.memberLesson"
                   :step="1"
-                  placeholder="教練課堂"
+                  placeholder="私人課程"
                   class="w-100"
                 />
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="物理治療次數" prop="memberTreat">
+              <el-form-item label="治療課" prop="memberTreat">
                 <el-input-number
                   v-model="ruleForm.memberTreat"
                   :step="1"
-                  placeholder="物理治療次數"
+                  placeholder="治療課"
                   class="w-100"
                 />
               </el-form-item>
@@ -126,11 +129,11 @@
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="生效日期" prop="memberEffectDate">
+              <el-form-item label="月費到期日" prop="memberEffectDate">
                 <el-date-picker
                   v-model="ruleForm.memberEffectDate"
                   type="date"
-                  placeholder="選擇生效日期"
+                  placeholder="月費到期日"
                   class="w-100"
                 />
               </el-form-item>
@@ -169,7 +172,7 @@ export default {
   data() {
     return {
       loading: true,
-      activeStep: 1,
+      activeStep: 0,
       selections: {},
       ruleForm: {
         memberName: 'Chiquitta',
