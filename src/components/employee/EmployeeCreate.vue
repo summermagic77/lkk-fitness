@@ -133,7 +133,7 @@ export default {
   data() {
     return {
       loading: true,
-      activeStep: 2,
+      activeStep: 0,
       selections: {},
       ruleForm: {
         name: '林小姐',
