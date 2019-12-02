@@ -74,8 +74,16 @@
               </el-row>
             </el-radio-group>
           </el-form-item>
+          <el-form-item label="會員點數" prop="memberPoint">
+            <el-input-number
+              v-model="ruleForm.memberPoint"
+              :step="100"
+              placeholder="會員點數"
+              class="w-100"
+            />
+          </el-form-item>
           <el-row :gutter="10">
-            <el-col :span="10">
+            <!-- <el-col :span="10">
               <el-form-item label="會員點數" prop="memberPoint">
                 <el-input-number
                   v-model="ruleForm.memberPoint"
@@ -84,8 +92,8 @@
                   class="w-100"
                 />
               </el-form-item>
-            </el-col>
-            <el-col :span="7">
+            </el-col> -->
+            <el-col :span="12">
               <el-form-item label="教練課" prop="memberLesson">
                 <el-input-number
                   v-model="ruleForm.memberLesson"
@@ -95,7 +103,7 @@
                 />
               </el-form-item>
             </el-col>
-            <el-col :span="7">
+            <el-col :span="12">
               <el-form-item label="物理治療次數" prop="memberTreat">
                 <el-input-number
                   v-model="ruleForm.memberTreat"
