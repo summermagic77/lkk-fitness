@@ -75,28 +75,6 @@
             </el-radio-group>
           </el-form-item>
           <el-row :gutter="10">
-            <el-col :span="12">
-              <el-form-item label="加入日期" prop="memberJoinDate">
-                <el-date-picker
-                  v-model="ruleForm.memberJoinDate"
-                  type="date"
-                  placeholder="選擇加入日期"
-                  class="w-100"
-                />
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item label="生效日期" prop="memberEffectDate">
-                <el-date-picker
-                  v-model="ruleForm.memberEffectDate"
-                  type="date"
-                  placeholder="選擇生效日期"
-                  class="w-100"
-                />
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row :gutter="10">
             <el-col :span="10">
               <el-form-item label="會員點數" prop="memberPoint">
                 <el-input-number
@@ -128,8 +106,30 @@
               </el-form-item>
             </el-col>
           </el-row>
+          <el-row :gutter="10">
+            <el-col :span="12">
+              <el-form-item label="加入日期" prop="memberJoinDate">
+                <el-date-picker
+                  v-model="ruleForm.memberJoinDate"
+                  type="date"
+                  placeholder="選擇加入日期"
+                  class="w-100"
+                />
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="生效日期" prop="memberEffectDate">
+                <el-date-picker
+                  v-model="ruleForm.memberEffectDate"
+                  type="date"
+                  placeholder="選擇生效日期"
+                  class="w-100"
+                />
+              </el-form-item>
+            </el-col>
+          </el-row>
         </div>
-        <el-form-item>
+        <el-form-item class="mt-2">
           <!-- <div v-if="activeStep === 1"> -->
           <el-button
             v-if="activeStep === 0"
