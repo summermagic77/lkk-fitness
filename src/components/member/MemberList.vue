@@ -3,53 +3,69 @@
     <el-link href="/member/create" class="float-right mb-2">
       建立新會員
     </el-link>
-    <el-table
-      v-if="!$device.mobile"
-      v-loading="loading"
-      :data="tableData"
-      empty-text="暫無數據"
-      stripe
-      class="w-100">
-      <el-table-column
-        prop="memberName"
-        label="姓名">
-      </el-table-column>
-      <el-table-column
-        prop="memberPhone"
-        label="電話">
-      </el-table-column>
-      <el-table-column
-        prop="memberSex"
-        label="性別">
-      </el-table-column>
-      <el-table-column
-        prop="memberType"
-        label="等級">
-      </el-table-column>
-      <el-table-column
-        prop="memberPoint"
-        label="點數">
-      </el-table-column>
-      <el-table-column
-        prop="memberBirthDate"
-        label="生日"
-        :formatter="formatterDate">
-      </el-table-column>
-      <el-table-column
-        prop="memberJoinDate"
-        label="加入時間"
-        :formatter="formatterDate">
-      </el-table-column>
-      <el-table-column
-        fixed="right"
-        label="操作"
-        width="100">
-        <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-          <el-button type="text" size="small">編輯</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    <div v-if="!$device.mobile">
+      <el-table
+        v-loading="loading"
+        :data="tableData"
+        empty-text="暫無數據"
+        stripe
+        border
+        class="w-100">
+        <el-table-column
+          prop="memberName"
+          label="姓名">
+        </el-table-column>
+        <el-table-column
+          prop="memberPhone"
+          label="電話">
+        </el-table-column>
+        <el-table-column
+          prop="memberSex"
+          label="性別"
+          :formatter="formatterSex">
+        </el-table-column>
+        <el-table-column
+          prop="memberType"
+          label="等級">
+        </el-table-column>
+        <el-table-column
+          prop="memberPoint"
+          label="點數">
+        </el-table-column>
+        <el-table-column
+          prop="memberBirthDate"
+          label="生日"
+          :formatter="formatterDate">
+        </el-table-column>
+        <el-table-column
+          prop="memberJoinDate"
+          label="加入時間"
+          :formatter="formatterDate">
+        </el-table-column>
+        <el-table-column
+          prop="memberCheckDate"
+          label="最近打卡時間"
+          :formatter="formatterDate">
+        </el-table-column>
+        <el-table-column
+          fixed="right"
+          label="操作"
+          width="100">
+          <template slot-scope="scope">
+            <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+            <el-button type="text" size="small">編輯</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="text-center block">
+        <el-pagination
+          background
+          class="mt-2"
+          layout="total, prev, pager, next"
+          :total="total">
+        </el-pagination>
+      </div>
+    </div>
     <div v-else>
       <!-- <div class="text-right">
         <el-button type="text">
@@ -82,6 +98,7 @@
 <script>
 // import FilterOutline from 'vue-material-design-icons/FilterOutline.vue';
 import apiMember from '@/api/member';
+import apiSelections from '@/api/selections';
 
 export default {
   components: {
@@ -92,7 +109,16 @@ export default {
       loading: true,
       search: '',
       tableData: [],
+      selections: {},
     };
+  },
+  computed: {
+    sex() {
+      return this.selections.sexMap || {};
+    },
+    total() {
+      return this.tableData.length;
+    },
   },
   methods: {
     goBack() {
@@ -105,17 +131,22 @@ export default {
       console.log(row);
     },
     async getTableData() {
-      const { data } = await apiMember.getAll({ memberType: 3 });
-      console.dir(data.data);
+      const { data } = await apiMember.getByType('1+2');
       this.tableData = data.data;
       this.loading = false;
+    },
+    formatterSex(row, { property }) {
+      // console.dir(property)
+      return this.sex[row[property]];
     },
     formatterDate(row, { property }) {
       return this.$moment(row[property]).format('YYYY-MM-DD');
     },
   },
-  created() {
+  async created() {
     this.getTableData();
+    const { data } = await apiSelections.get();
+    this.selections = data.data;
   },
 };
 </script>

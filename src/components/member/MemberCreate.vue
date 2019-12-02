@@ -10,39 +10,38 @@
         <el-step title="基本資料" description="填寫會員資料" />
         <el-step title="入會資訊" description="填寫入會資訊" />
       </el-steps>
-      <!-- <h1 class="mb-0">
-        建立新會員
-      </h1>
-      <p class="text-black-50 mb-1">
-        填寫完整會員資料
-      </p> -->
       <el-form
         v-loading="loading"
         :model="ruleForm"
         :rules="rules"
         status-icon
         ref="ruleForm"
-        :label-position="activeStep === 2 ? 'top' : 'left'"
+        :label-position="activeStep === 1 ? 'top' : 'left'"
       >
-        <div v-if="activeStep === 1">
-          <el-form-item prop="name">
-            <el-input v-model="ruleForm.name" placeholder="姓名" />
+        <div v-if="activeStep === 0">
+          <el-form-item prop="memberName">
+            <el-input v-model="ruleForm.memberName" placeholder="姓名" />
           </el-form-item>
-          <el-form-item prop="sex" class="text-center">
-            <el-radio-group v-model="ruleForm.sex" class="w-100">
-              <el-radio
-                v-for="(item, idx) in sex"
-                :key="idx"
-                border
-                :label="item"
-                class="w-25"
-              />
-              <!-- <el-radio border label="女" class="float-right radio-half" /> -->
+          <el-form-item prop="memberSex">
+            <el-radio-group v-model="ruleForm.memberSex" class="w-100">
+              <el-row :gutter="10">
+                <el-col
+                  v-for="(item, idx) in sex"
+                  :key="idx"
+                  :span="8"
+                >
+                  <el-radio
+                    border
+                    class="w-100"
+                    :label="item"
+                  />
+                </el-col>
+              </el-row>
             </el-radio-group>
           </el-form-item>
-          <el-form-item prop="birthdate">
+          <el-form-item prop="memberBirthDate">
             <el-date-picker
-              v-model="ruleForm.birthdate"
+              v-model="ruleForm.memberBirthDate"
               type="date"
               placeholder="選擇生日"
               class="w-100"
@@ -50,50 +49,90 @@
               :picker-options="pickerOptions"
             />
           </el-form-item>
-          <el-form-item prop="phone">
-            <el-input v-model="ruleForm.phone" placeholder="手機號碼" />
+          <el-form-item prop="memberPhone">
+            <el-input v-model="ruleForm.memberPhone" placeholder="手機號碼" />
           </el-form-item>
-          <el-form-item prop="email">
-            <el-input v-model="ruleForm.email" placeholder="Email" />
+          <el-form-item prop="memberMail">
+            <el-input v-model="ruleForm.memberMail" placeholder="Email" />
           </el-form-item>
         </div>
         <div v-else>
           <el-form-item label="會員類型" prop="memberType">
             <el-radio-group v-model="ruleForm.memberType" class="w-100">
-              <el-radio
-                v-for="(item, idx) in memberType"
-                :key="idx"
-                border
-                :label="item"
-                :class="{
-                  'float-right': idx === 1,
-                  'radio-half': true,
-                }"
-              />
-              <!-- <el-radio border label="月費" class="float-right radio-half" /> -->
+              <el-row :gutter="10">
+                <el-col
+                  v-for="(item, idx) in memberType"
+                  :key="idx"
+                  :span="12"
+                >
+                  <el-radio
+                    border
+                    class="w-100"
+                    :label="item"
+                  />
+                </el-col>
+              </el-row>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="會員點數" prop="point">
-            <el-input-number
-              v-model="ruleForm.point"
-              :step="100"
-              placeholder="會員點數"
-              class="w-100"
-            />
-          </el-form-item>
-          <el-form-item label="加入日期" prop="join_date">
-            <el-date-picker
-              v-model="ruleForm.join_date"
-              type="date"
-              placeholder="選擇加入日期"
-              class="w-100"
-            />
-          </el-form-item>
+          <el-row :gutter="10">
+            <el-col :span="12">
+              <el-form-item label="加入日期" prop="memberJoinDate">
+                <el-date-picker
+                  v-model="ruleForm.memberJoinDate"
+                  type="date"
+                  placeholder="選擇加入日期"
+                  class="w-100"
+                />
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="生效日期" prop="memberEffectDate">
+                <el-date-picker
+                  v-model="ruleForm.memberEffectDate"
+                  type="date"
+                  placeholder="選擇生效日期"
+                  class="w-100"
+                />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="10">
+            <el-col :span="10">
+              <el-form-item label="會員點數" prop="memberPoint">
+                <el-input-number
+                  v-model="ruleForm.memberPoint"
+                  :step="100"
+                  placeholder="會員點數"
+                  class="w-100"
+                />
+              </el-form-item>
+            </el-col>
+            <el-col :span="7">
+              <el-form-item label="教練課" prop="memberLesson">
+                <el-input-number
+                  v-model="ruleForm.memberLesson"
+                  :step="1"
+                  placeholder="教練課堂"
+                  class="w-100"
+                />
+              </el-form-item>
+            </el-col>
+            <el-col :span="7">
+              <el-form-item label="物理治療次數" prop="memberTreat">
+                <el-input-number
+                  v-model="ruleForm.memberTreat"
+                  :step="1"
+                  placeholder="物理治療次數"
+                  class="w-100"
+                />
+              </el-form-item>
+            </el-col>
+          </el-row>
         </div>
         <el-form-item>
           <!-- <div v-if="activeStep === 1"> -->
           <el-button
-            v-if="activeStep === 1"
+            v-if="activeStep === 0"
             type="primary"
             plain
             class="w-100"
@@ -125,36 +164,45 @@ export default {
       activeStep: 1,
       selections: {},
       ruleForm: {
-        name: 'Chiquitta',
-        sex: '男性',
-        phone: '0987654321',
-        email: 'chiquitta.com@gmail.com',
+        memberName: 'Chiquitta',
+        memberSex: '男性',
+        memberPhone: '0987654321',
+        memberMail: 'chiquitta.com@gmail.com',
         memberType: '一般會員',
-        // point: 0,
-        birthdate: new Date(),
-        join_date: '',
+        memberPoint: 0,
+        memberLesson: 0,
+        memberTreat: 0,
+        memberBirthDate: new Date(),
+        memberJoinDate: '',
+        memberEffectDate: '',
       },
       rules: {
-        name: [
+        memberName: [
           { required: true, message: '請輸入姓名', trigger: 'blur' },
         ],
-        phone: [
+        memberPhone: [
           { required: true, message: '請輸入手機', trigger: 'blur' },
         ],
-        sex: [
+        memberSex: [
           { required: true, message: '請選擇性別', trigger: 'change' },
         ],
-        email: [
+        memberMail: [
           { required: true, message: '請輸入Email', trigger: 'blur' },
           { type: 'email', message: '請輸入正確的Email', trigger: ['blur', 'change'] },
         ],
         memberType: [
           { required: true, message: '請選擇類型', trigger: 'change' },
         ],
-        point: [
+        memberPoint: [
           { required: true, message: '請輸入點數', trigger: 'change' },
         ],
-        birthdate: [
+        memberLesson: [
+          { required: true, message: '請輸入點數', trigger: 'change' },
+        ],
+        memberTreat: [
+          { required: true, message: '請輸入點數', trigger: 'change' },
+        ],
+        memberBirthDate: [
           {
             type: 'date',
             required: true,
@@ -162,11 +210,19 @@ export default {
             trigger: 'blur',
           },
         ],
-        join_date: [
+        memberJoinDate: [
           {
             type: 'date',
             required: true,
             message: '請選擇加入日期',
+            trigger: 'blur',
+          },
+        ],
+        memberEffectDate: [
+          {
+            type: 'date',
+            required: true,
+            message: '請選擇生效日期',
             trigger: 'blur',
           },
         ],

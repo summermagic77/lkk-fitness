@@ -8,7 +8,7 @@
     <el-col :sm="12" :md="12" :lg="8" :xl="8">
       <el-steps :active="activeStep" align-center class="mb-1">
         <el-step title="基本資料" description="員工資料" />
-        <el-step title="聯絡方式" description="員工聯絡方式" />
+        <!-- <el-step title="聯絡方式" description="員工聯絡方式" /> -->
         <el-step title="人事資料" description="" />
       </el-steps>
       <el-form
@@ -23,9 +23,9 @@
           <el-form-item prop="name">
             <el-input v-model="ruleForm.name" placeholder="姓名" />
           </el-form-item>
-          <el-form-item prop="engName">
+          <!-- <el-form-item prop="engName">
             <el-input v-model="ruleForm.engName" placeholder="英文名字" />
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item prop="sex">
             <el-radio-group v-model="ruleForm.sex" class="w-100">
               <el-radio
@@ -38,9 +38,9 @@
               <!-- <el-radio border label="女" class="float-right radio-half" /> -->
             </el-radio-group>
           </el-form-item>
-          <el-form-item prop="idNumber">
+          <!-- <el-form-item prop="idNumber">
             <el-input v-model="ruleForm.idNumber" placeholder="身分證號" />
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item prop="birthdate">
             <el-date-picker
               v-model="ruleForm.birthdate"
@@ -51,24 +51,22 @@
               :picker-options="pickerOptions"
             />
           </el-form-item>
-        </div>
-        <div v-else-if="activeStep === 1">
-          <el-form-item prop="tel">
-            <el-input v-model="ruleForm.tel" placeholder="電話號碼" />
-          </el-form-item>
           <el-form-item prop="phone">
             <el-input v-model="ruleForm.phone" placeholder="手機號碼" />
           </el-form-item>
           <el-form-item prop="email">
             <el-input v-model="ruleForm.email" placeholder="Email" />
           </el-form-item>
-          <el-form-item prop="household">
+        </div>
+          <!-- <el-form-item prop="tel">
+            <el-input v-model="ruleForm.tel" placeholder="電話號碼" />
+          </el-form-item> -->
+          <!-- <el-form-item prop="household">
             <el-input v-model="ruleForm.household" placeholder="戶籍地址" />
           </el-form-item>
           <el-form-item prop="address">
             <el-input v-model="ruleForm.address" placeholder="通訊地址" />
-          </el-form-item>
-        </div>
+          </el-form-item> -->
         <div v-else>
           <el-form-item prop="memberType">
             <el-select v-model="ruleForm.memberType" placeholder="員工類型" class="w-100">
@@ -102,7 +100,7 @@
             下一步
           </el-button>
           <!-- </div> -->
-          <div v-else-if="activeStep === 1">
+          <!-- <div v-else-if="activeStep === 1">
             <el-button @click="activeStep--">上一步</el-button>
             <el-button
               type="primary"
@@ -112,7 +110,7 @@
             >
               下一步
             </el-button>
-          </div>
+          </div> -->
           <div v-else>
             <el-button @click="activeStep--">上一步</el-button>
             <el-button type="primary" @click="submitForm('ruleForm')" class="float-right">
@@ -136,13 +134,13 @@ export default {
       activeStep: 0,
       selections: {},
       ruleForm: {
-        name: '林小姐',
-        engName: 'Chiquitta',
-        sex: '女性',
-        idNumber: 'A123456789',
-        tel: '0229220123',
-        phone: '0987654321',
-        email: 'chiquitta.com@gmail.com',
+        memberName: '林小姐',
+        // engName: 'Chiquitta',
+        memberSex: '女性',
+        // idNumber: 'A123456789',
+        // tel: '0229220123',
+        memberPhone: '0987654321',
+        memberMail: 'chiquitta.com@gmail.com',
         // memberType: '編制人員',
         // point: 0,
         birthdate: new Date(),
@@ -152,12 +150,12 @@ export default {
         name: [
           { required: true, message: '請輸入姓名', trigger: 'blur' },
         ],
-        engName: [
-          { required: true, message: '請輸入姓名', trigger: 'blur' },
-        ],
-        tel: [
-          { required: true, message: '請輸入手機', trigger: 'blur' },
-        ],
+        // engName: [
+        //   { required: true, message: '請輸入姓名', trigger: 'blur' },
+        // ],
+        // tel: [
+        //   { required: true, message: '請輸入手機', trigger: 'blur' },
+        // ],
         phone: [
           { required: true, message: '請輸入手機', trigger: 'blur' },
         ],
@@ -175,9 +173,9 @@ export default {
             trigger: 'change',
           },
         ],
-        point: [
-          { required: true, message: '請輸入點數', trigger: 'change' },
-        ],
+        // point: [
+        //   { required: true, message: '請輸入點數', trigger: 'change' },
+        // ],
         birthdate: [
           {
             type: 'date',
