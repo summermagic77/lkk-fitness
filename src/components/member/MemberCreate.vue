@@ -52,8 +52,9 @@
           <el-form-item prop="memberPhone">
             <el-input v-model="ruleForm.memberPhone" placeholder="手機號碼" />
           </el-form-item>
-          <el-form-item prop="memberPhone">
-            <el-input v-model="ruleForm.memberPhone" placeholder="手機號碼" />
+          <el-form-item prop="memberLineUrl">
+            <!-- <el-input v-model="ruleForm.memberLineUrl" placeholder="LINE qrCode" /> -->
+            <!-- <QrcodeStream @decode="onDecode" @init="onInit" class="mb-1" /> -->
           </el-form-item>
           <el-form-item prop="memberMail">
             <el-input v-model="ruleForm.memberMail" placeholder="Email" />
@@ -167,8 +168,10 @@
 
 <script>
 import apiSelections from '@/api/selections';
+import mixinQRcodeReader from '@/mixins/qrCodeReader.vue';
 
 export default {
+  mixins: [mixinQRcodeReader],
   data() {
     return {
       loading: true,
