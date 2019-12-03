@@ -246,7 +246,12 @@ export default {
           { required: true, message: '請輸入姓名', trigger: 'blur' },
         ],
         memberPhone: [
-          { required: true, message: '請輸入手機', trigger: 'blur' },
+          {
+            type: 'tel',
+            required: true,
+            message: '請輸入手機',
+            trigger: 'blur',
+          },
         ],
         memberSex: [
           { required: true, message: '請選擇性別', trigger: 'change' },
