@@ -227,12 +227,12 @@ export default {
       scanQRcode: false,
       selections: {},
       ruleForm: {
-        memberName: 'Chiquitta',
+        memberName: '',
         memberSex: '男性',
-        memberPhone: '0987654321',
+        memberPhone: '',
         memberLineId: '',
         memberLineUrl: '',
-        memberMail: 'chiquitta.com@gmail.com',
+        memberMail: '',
         memberType: '一般會員',
         memberPoint: 0,
         memberLesson: 0,
@@ -250,6 +250,9 @@ export default {
         ],
         memberSex: [
           { required: true, message: '請選擇性別', trigger: 'change' },
+        ],
+        memberLineId: [
+          { required: true, message: '請輸入LINE ID', trigger: 'blur' },
         ],
         memberMail: [
           { required: true, message: '請輸入Email', trigger: 'blur' },
