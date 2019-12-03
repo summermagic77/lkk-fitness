@@ -1,8 +1,7 @@
 <template>
   <el-container
     :class="{
-      'vh-100': true,
-      'bg-lkk': $route.path === '/'
+      'vh-100': true
     }"
   >
     <el-header
@@ -102,11 +101,11 @@ body {
 .bg-lkk {
   background-color: #29526b;
 }
-/* .home-header {
+.home-header {
   background-color: #29526b;
   height: 55% !important;
 }
 .home-main {
   margin-top: -352px;
-} */
+}
 </style>
