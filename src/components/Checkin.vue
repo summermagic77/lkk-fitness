@@ -9,12 +9,13 @@
     align="middle"
     v-loading.fullscreen.lock="fullscreenLoading"
   >
-    <el-col v-if="!member.memberPhone" :sm="12" :md="12" :lg="6" :xl="6" class="text-center">
+    <el-col v-if="member !== {}" :sm="12" :md="12" :lg="6" :xl="6" class="text-center">
       <div v-if="checkInType === 'LineUrl'" class="fullscreen">
-        <el-alert
+        <!-- <el-alert
+          v-show="error"
           :title="error"
           type="error"
-        />
+        /> -->
         <QrcodeStream @decode="onDecode" @init="onInit" class="mb-1" />
       </div>
       <el-radio-group v-model="checkInType">
@@ -39,6 +40,13 @@
           <el-button type="text" icon="el-icon-search" class="mr-1" @click="searchMember" />
         </div>
       </el-input>
+      <el-alert
+        v-show="error"
+        :title="error"
+        type="error"
+        center
+        class="mt-1"
+      />
       <div class="mt-4">
         <el-link href="/member/create" type="info">建立會員</el-link>・
         <el-link href="/employee/create" type="info">建立員工</el-link>・
@@ -92,6 +100,7 @@ export default {
   data() {
     return {
       loading: false,
+      error: null,
       fullscreenLoading: false,
       selections: {},
       input: '0912345678',
@@ -151,8 +160,12 @@ export default {
   methods: {
     async searchMember() {
       this.fullscreenLoading = true;
-      const { data } = await apiMember.getByKey(this.checkInType.toLowerCase(), { [`member${this.checkInType}`]: this.input });
-      this.member = data.data;
+      const { data = null } = await apiMember.getByKey(this.checkInType.toLowerCase(), { [`member${this.checkInType}`]: this.input });
+      if (data.data === null) {
+        this.error = `查無此${this.userTypeLabel}，請確認資訊是否正確。`;
+      } else {
+        this.member = data.data;
+      }
       this.fullscreenLoading = false;
       // this.$router.push({ path: `/member/checkin/${this.input}` });
     },
