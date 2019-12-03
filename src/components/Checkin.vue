@@ -7,6 +7,7 @@
     }"
     justify="center"
     align="middle"
+    v-loading.fullscreen.lock="fullscreenLoading"
   >
     <el-col v-if="!member.memberPhone" :sm="12" :md="12" :lg="6" :xl="6" class="text-center">
       <div v-if="checkInType === 'LineUrl'" class="fullscreen">
@@ -91,6 +92,7 @@ export default {
   data() {
     return {
       loading: false,
+      fullscreenLoading: false,
       selections: {},
       input: '0912345678',
       checkInType: 'Phone',
@@ -148,8 +150,10 @@ export default {
   },
   methods: {
     async searchMember() {
+      this.fullscreenLoading = true;
       const { data } = await apiMember.getByKey(this.checkInType.toLowerCase(), { [`member${this.checkInType}`]: this.input });
       this.member = data.data;
+      this.fullscreenLoading = false;
       // this.$router.push({ path: `/member/checkin/${this.input}` });
     },
     submitForm(formName) {
