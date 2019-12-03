@@ -9,7 +9,15 @@ export default {
     return {
       result: '',
       error: '',
+      fullscreen: true,
     };
+  },
+  watch: {
+    fullscreen(enterFullscreen) {
+      console.dir(enterFullscreen);
+      if (enterFullscreen) this.requestFullscreen();
+      else this.exitFullscreen();
+    },
   },
   methods: {
     onDecode(result) {
@@ -35,6 +43,45 @@ export default {
         }
       }
     },
+    onFullscreenChange() {
+      // This becomes important when the user doesn't use the button to exit
+      // fullscreen but hits ESC on desktop, pushes a physical back button on
+      // mobile etc.
+      console.dir(123);
+      this.fullscreen = document.fullscreenElement !== null;
+    },
+    requestFullscreen() {
+      console.dir(333);
+      const elem = this.$refs.wrapper;
+
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { /* Firefox */
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        elem.msRequestFullscreen();
+      }
+    },
+    exitFullscreen() {
+      console.dir(555);
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) { /* Firefox */
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { /* IE/Edge */
+        document.msExitFullscreen();
+      }
+    },
+    logErrors(promise) {
+      promise.catch(console.error);
+    },
   },
 };
 </script>
+
+<style scoped>
+</style>

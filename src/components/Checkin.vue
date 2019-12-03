@@ -52,15 +52,15 @@
 </template>
 
 <script>
-import { QrcodeStream } from 'vue-qrcode-reader';
+import mixinQRcodeReader from '@/mixins/qrCodeReader.vue';
 // import AccountCheck from 'vue-material-design-icons/AccountCheck.vue';
 
 export default {
   name: 'checkin',
   components: {
-    QrcodeStream,
     // AccountCheck,
   },
+  mixins: [mixinQRcodeReader],
   data() {
     return {
       result: '',

@@ -39,23 +39,67 @@
               </el-row>
             </el-radio-group>
           </el-form-item>
-          <el-form-item prop="memberBirthDate">
-            <el-date-picker
-              v-model="ruleForm.memberBirthDate"
-              type="date"
-              placeholder="選擇生日"
-              class="w-100"
-              :editable="false"
-              :picker-options="pickerOptions"
-            />
-          </el-form-item>
-          <el-form-item prop="memberPhone">
-            <el-input v-model="ruleForm.memberPhone" placeholder="手機號碼" />
-          </el-form-item>
-          <el-form-item prop="memberLineUrl">
-            <!-- <el-input v-model="ruleForm.memberLineUrl" placeholder="LINE qrCode" /> -->
-            <!-- <QrcodeStream @decode="onDecode" @init="onInit" class="mb-1" /> -->
-          </el-form-item>
+          <el-row :gutter="10">
+            <el-col :span="12">
+              <el-form-item prop="memberBirthDate">
+                <el-date-picker
+                  v-model="ruleForm.memberBirthDate"
+                  type="date"
+                  placeholder="選擇生日"
+                  class="w-100"
+                  :editable="false"
+                  :picker-options="pickerOptions"
+                />
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item prop="memberPhone">
+                <el-input v-model="ruleForm.memberPhone" placeholder="手機號碼" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="10">
+            <el-col :span="12">
+              <el-form-item prop="memberLineId">
+                <el-input v-model="ruleForm.memberLineId" placeholder="LINE ID" />
+                <!-- <QrcodeStream @decode="onDecode" @init="onInit" class="mb-1" /> -->
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item prop="memberLineUrl" class="mb-0">
+                <i
+                  :class="{
+                    'la': true,
+                    'la-qrcode': true,
+                    'fs-3': true,
+                    'text-info': !ruleForm.memberLineUrl,
+                    'text-success': ruleForm.memberLineUrl
+                  }"
+                  @click="scanQRcode = true"
+                />
+                <el-input
+                  v-model="ruleForm.memberLineUrl"
+                  placeholder="LINE qrCode"
+                  style="display: none;"
+                />
+                <!-- <i v-if="ruleForm.memberLineUrl" class="el-icon-circle-check" />
+                <i v-else class="el-icon-circle-close text-danger" /> -->
+                <div
+                  v-if="scanQRcode"
+                  :class="{ 'fullscreen': fullscreen }"
+                  ref="wrapper"
+                  @fullscreenchange="onFullscreenChange"
+                >
+                  <QrcodeStream @init="logErrors" class="mb-1">
+                    <i
+                      @click="fullscreen = !fullscreen; scanQRcode = false;"
+                      class="el-icon-close text-white ml-1 mt-1 fs-2"
+                    />
+                  </QrcodeStream>
+                </div>
+              </el-form-item>
+            </el-col>
+          </el-row>
           <el-form-item prop="memberMail">
             <el-input v-model="ruleForm.memberMail" placeholder="Email" />
           </el-form-item>
@@ -176,11 +220,14 @@ export default {
     return {
       loading: true,
       activeStep: 0,
+      scanQRcode: false,
       selections: {},
       ruleForm: {
         memberName: 'Chiquitta',
         memberSex: '男性',
         memberPhone: '0987654321',
+        memberLineId: '',
+        memberLineUrl: '',
         memberMail: 'chiquitta.com@gmail.com',
         memberType: '一般會員',
         memberPoint: 0,
