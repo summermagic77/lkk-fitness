@@ -97,7 +97,7 @@
                   >
                     <i
                       @click="fullscreen = !fullscreen; scanQRcode = false;"
-                      class="el-icon-close text-white ml-1 mt-1 fs-2"
+                      class="las la-compress-arrows-alt text-white ml-1 mt-1 fs-2"
                     />
                   </QrcodeStream>
                 </div>
