@@ -5,24 +5,32 @@ export default {
   components: {
     QrcodeStream,
   },
+  // props: {
+  //   result: {
+  //     type: String,
+  //     required: true,
+  //   },
+  // },
   data() {
     return {
-      result: '',
+      // result: '',
       error: '',
-      fullscreen: true,
+      fullscreen: false,
     };
   },
   watch: {
     fullscreen(enterFullscreen) {
       console.dir(enterFullscreen);
-      if (enterFullscreen) this.requestFullscreen();
-      else this.exitFullscreen();
+      // if (enterFullscreen) this.requestFullscreen();
+      // if (!enterFullscreen) this.exitFullscreen();
     },
   },
   methods: {
     onDecode(result) {
-      this.result = result;
-      console.dir(result);
+      this.ruleForm.memberLineUrl = result;
+      // this.$emit('update:result', result);
+      this.fullscreen = false;
+      this.scanQRcode = false;
     },
     async onInit(promise) {
       try {
@@ -47,11 +55,9 @@ export default {
       // This becomes important when the user doesn't use the button to exit
       // fullscreen but hits ESC on desktop, pushes a physical back button on
       // mobile etc.
-      console.dir(123);
       this.fullscreen = document.fullscreenElement !== null;
     },
     requestFullscreen() {
-      console.dir(333);
       const elem = this.$refs.wrapper;
 
       if (elem.requestFullscreen) {
@@ -65,7 +71,6 @@ export default {
       }
     },
     exitFullscreen() {
-      console.dir(555);
       if (document.exitFullscreen) {
         document.exitFullscreen();
       } else if (document.mozCancelFullScreen) { /* Firefox */

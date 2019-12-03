@@ -75,7 +75,7 @@
                     'text-info': !ruleForm.memberLineUrl,
                     'text-success': ruleForm.memberLineUrl
                   }"
-                  @click="scanQRcode = true"
+                  @click="scanQRcode = true; fullscreen = true;"
                 />
                 <el-input
                   v-model="ruleForm.memberLineUrl"
@@ -90,7 +90,11 @@
                   ref="wrapper"
                   @fullscreenchange="onFullscreenChange"
                 >
-                  <QrcodeStream @init="logErrors" class="mb-1">
+                  <QrcodeStream
+                    @decode="onDecode"
+                    @init="logErrors"
+                    class="mb-1"
+                  >
                     <i
                       @click="fullscreen = !fullscreen; scanQRcode = false;"
                       class="el-icon-close text-white ml-1 mt-1 fs-2"
