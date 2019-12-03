@@ -237,7 +237,7 @@ export default {
         memberPoint: 0,
         memberLesson: 0,
         memberTreat: 0,
-        memberBirthDate: new Date(),
+        memberBirthDate: '',
         memberJoinDate: '',
         memberEffectDate: '',
       },
