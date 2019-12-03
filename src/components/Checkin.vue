@@ -8,18 +8,14 @@
     justify="center"
     align="middle"
   >
-    <el-col :sm="12" :md="12" :lg="6" :xl="6" class="text-center">
+    <el-col v-if="!member.memberPhone" :sm="12" :md="12" :lg="6" :xl="6" class="text-center">
       <div v-if="checkInType === 'LineUrl'" class="fullscreen">
         <el-alert
           :title="error"
           type="error"
         />
-        <!-- <p class="decode-result">{{ result }}</p> -->
         <QrcodeStream @decode="onDecode" @init="onInit" class="mb-1" />
       </div>
-      <!-- <h1>
-        <account-check class="icon-3x" />
-      </h1> -->
       <el-radio-group v-model="checkInType">
         <el-radio
           v-for="(item, idx) in searchType"
@@ -42,52 +38,93 @@
           <el-button type="text" icon="el-icon-search" class="mr-1" @click="searchMember" />
         </div>
       </el-input>
-      <div class="mt-2">
+      <div class="mt-4">
         <el-link href="/member/create" type="info">建立會員</el-link>・
         <el-link href="/employee/create" type="info">建立員工</el-link>・
         <el-link href="/coach/create" type="info">建立場租教練</el-link>
       </div>
+    </el-col>
+    <el-col v-else :sm="12" :md="12" :lg="6" :xl="6">
+      <h1 class="fs-2 font-weight-light">
+          歡迎，{{ memberName }}
+      </h1>
+      <el-form
+        v-loading="loading"
+        :model="ruleForm"
+        :rules="rules"
+        status-icon
+        ref="ruleForm"
+        label-position="left"
+      >
+        <el-form-item label="入場類型" prop="checkType">
+          <el-select v-model="ruleForm.checkType" placeholder="請選擇入場類型" class="w-100">
+            <el-option
+              v-for="(item, idx) in checkinTypeMap"
+              :key="idx"
+              :label="item"
+              :value="item">
+            </el-option>
+          </el-select>
+        </el-form-item>
+          <el-button
+            type="primary"
+            class="w-100"
+            @click="submitForm('ruleForm')"
+          >
+            進場 <i class="la la-sign-in-alt" />
+          </el-button>
+      </el-form>
     </el-col>
   </el-row>
 </template>
 
 <script>
 import apiMember from '@/api/member';
+import apiSelections from '@/api/selections';
 import mixinQRcodeReader from '@/mixins/qrCodeReader.vue';
-// import AccountCheck from 'vue-material-design-icons/AccountCheck.vue';
 
 export default {
   name: 'checkin',
   components: {
-    // AccountCheck,
   },
   mixins: [mixinQRcodeReader],
   data() {
     return {
+      loading: false,
+      selections: {},
       input: '0912345678',
       checkInType: 'Phone',
       searchType: [
         {
           label: '手機',
           value: 'Phone',
-          // key: 'memberPhone',
         },
         {
           label: 'LINE ID',
           value: 'LineId',
-          // key: 'memberLineId',
         },
         {
           label: 'QR Code',
           value: 'LineUrl',
-          // key: 'memberLineUrl',
         },
       ],
+      member: {},
+      ruleForm: {
+        checkType: '',
+      },
+      rules: {
+        checkType: [
+          { required: true, message: '請輸入姓名', trigger: 'blur' },
+        ],
+      },
     };
   },
   computed: {
     userTypeLabel() {
       return this.$route.meta.typeLabel;
+    },
+    checkinTypeMap() {
+      return this.selections.checkinTypeMap;
     },
     inputType() {
       return {
@@ -105,13 +142,31 @@ export default {
         },
       };
     },
+    memberName() {
+      return this.member.memberName;
+    },
   },
   methods: {
     async searchMember() {
       const { data } = await apiMember.getByKey(this.checkInType.toLowerCase(), { [`member${this.checkInType}`]: this.input });
-      console.dir(data);
+      this.member = data.data;
       // this.$router.push({ path: `/member/checkin/${this.input}` });
     },
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        console.dir(valid);
+        // if (valid) {
+        //   console.dir('submit!');
+        // } else {
+        //   console.log('error submit!!');
+        //   return false;
+        // }
+      });
+    },
+  },
+  async created() {
+    const { data } = await apiSelections.get();
+    this.selections = data.data;
   },
 };
 </script>

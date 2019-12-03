@@ -6,13 +6,8 @@ export default {
   getAll() {
     return axios.get(`${uri}/getAll`);
   },
-  getByKey(type, params) {
-    return axios.get(`${uri}/getByKey/${type}`, { params });
-    // return axios({
-    //   method: 'post',
-    //   url: `${uri}/getByKey/${type}`,
-    //   data,
-    // });
+  getByKey(type, data) {
+    return axios.post(`${uri}/getByKey/${type}`, data);
   },
   getByType(memberType) {
     return axios.get(`${uri}/getByType/${memberType}`);
