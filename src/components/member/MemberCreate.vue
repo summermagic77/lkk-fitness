@@ -59,13 +59,13 @@
             </el-col>
           </el-row>
           <el-row :gutter="10">
-            <el-col :span="12">
+            <el-col :span="21">
               <el-form-item prop="memberLineId">
                 <el-input v-model="ruleForm.memberLineId" placeholder="LINE ID" />
                 <!-- <QrcodeStream @decode="onDecode" @init="onInit" class="mb-1" /> -->
               </el-form-item>
             </el-col>
-            <el-col :span="12">
+            <el-col :span="2">
               <el-form-item prop="memberLineUrl" class="mb-0">
                 <i
                   :class="{
