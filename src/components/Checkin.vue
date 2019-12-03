@@ -9,7 +9,14 @@
     align="middle"
     v-loading.fullscreen.lock="fullscreenLoading"
   >
-    <el-col v-if="member !== {}" :sm="12" :md="12" :lg="6" :xl="6" class="text-center">
+    <el-col
+      v-if="Object.keys(member).length === 0"
+      :sm="12"
+      :md="12"
+      :lg="6"
+      :xl="6"
+      class="text-center"
+    >
       <div v-if="checkInType === 'LineUrl'" class="fullscreen">
         <!-- <el-alert
           v-show="error"
