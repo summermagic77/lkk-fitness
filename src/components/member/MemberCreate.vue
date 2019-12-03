@@ -247,7 +247,7 @@ export default {
         ],
         memberPhone: [
           {
-            type: 'tel',
+            // type: 'tel',
             required: true,
             message: '請輸入手機',
             trigger: 'blur',
