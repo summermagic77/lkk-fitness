@@ -1,6 +1,6 @@
 import axios from './axiosInit';
 
-const uri = '/parameter/getSelection/';
+const uri = '/parameter/getSelection';
 
 export default {
   get() {

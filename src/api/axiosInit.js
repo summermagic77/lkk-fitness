@@ -11,4 +11,5 @@ export default axios.create({
   httpsAgent: new https.Agent({
     rejectUnauthorized: false,
   }),
+  data: { name: 'test' },
 });

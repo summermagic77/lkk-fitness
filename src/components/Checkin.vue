@@ -1,6 +1,6 @@
 <template>
   <el-row
-    :type="'flex'"
+    type="flex"
     :class="{
       'row-bg': true,
       'h-100': true
@@ -9,7 +9,7 @@
     align="middle"
   >
     <el-col :sm="12" :md="12" :lg="6" :xl="6" class="text-center">
-      <div v-if="type === 'qrcode'" class="fullscreen">
+      <div v-if="checkInType === 'LineUrl'" class="fullscreen">
         <el-alert
           :title="error"
           type="error"
@@ -20,7 +20,7 @@
       <!-- <h1>
         <account-check class="icon-3x" />
       </h1> -->
-      <el-radio-group v-model="type">
+      <el-radio-group v-model="checkInType">
         <el-radio
           v-for="(item, idx) in searchType"
           :key="idx"
@@ -31,11 +31,11 @@
         </el-radio>
       </el-radio-group>
       <el-input
-        v-show="type !== 'qrcode'"
+        v-show="checkInType !== 'LineUrl'"
         v-model="input"
-        :type="inputType[type].type"
-        :placeholder="inputType[type].placeholder"
-        :pattern="inputType[type].pattern"
+        :type="inputType[checkInType].type"
+        :placeholder="inputType[checkInType].placeholder"
+        :pattern="inputType[checkInType].pattern"
         class="mt-2 input-lg"
       >
         <div slot="suffix">
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import apiMember from '@/api/member';
 import mixinQRcodeReader from '@/mixins/qrCodeReader.vue';
 // import AccountCheck from 'vue-material-design-icons/AccountCheck.vue';
 
@@ -63,22 +64,23 @@ export default {
   mixins: [mixinQRcodeReader],
   data() {
     return {
-      result: '',
-      error: '',
-      input: '0987654321',
-      type: 'phone',
+      input: '0912345678',
+      checkInType: 'Phone',
       searchType: [
         {
           label: '手機',
-          value: 'phone',
+          value: 'Phone',
+          // key: 'memberPhone',
         },
         {
-          label: '姓名',
-          value: 'name',
+          label: 'LINE ID',
+          value: 'LineId',
+          // key: 'memberLineId',
         },
         {
           label: 'QR Code',
-          value: 'qrcode',
+          value: 'LineUrl',
+          // key: 'memberLineUrl',
         },
       ],
     };
@@ -89,15 +91,15 @@ export default {
     },
     inputType() {
       return {
-        phone: {
+        Phone: {
           type: 'text',
           placeholder: `請輸入${this.userTypeLabel}手機號碼搜尋`,
         },
-        name: {
+        LineId: {
           type: 'text',
-          placeholder: `請輸入${this.userTypeLabel}姓名搜尋`,
+          placeholder: `請輸入${this.userTypeLabel}LINE ID搜尋`,
         },
-        qrcode: {
+        LineUrl: {
           type: 'text',
           placeholder: '',
         },
@@ -105,31 +107,10 @@ export default {
     },
   },
   methods: {
-    searchMember() {
-      this.$router.push({ path: `/member/checkin/${this.input}` });
-    },
-    onDecode(result) {
-      this.result = result;
-      console.dir(result);
-    },
-    async onInit(promise) {
-      try {
-        await promise;
-      } catch (error) {
-        if (error.name === 'NotAllowedError') {
-          this.error = 'ERROR: you need to grant camera access permisson';
-        } else if (error.name === 'NotFoundError') {
-          this.error = 'ERROR: no camera on this device';
-        } else if (error.name === 'NotSupportedError') {
-          this.error = 'ERROR: secure context required (HTTPS, localhost)';
-        } else if (error.name === 'NotReadableError') {
-          this.error = 'ERROR: is the camera already in use?';
-        } else if (error.name === 'OverconstrainedError') {
-          this.error = 'ERROR: installed cameras are not suitable';
-        } else if (error.name === 'StreamApiNotSupportedError') {
-          this.error = 'ERROR: Stream API is not supported in this browser';
-        }
-      }
+    async searchMember() {
+      const { data } = await apiMember.getByKey(this.checkInType.toLowerCase(), { [`member${this.checkInType}`]: this.input });
+      console.dir(data);
+      // this.$router.push({ path: `/member/checkin/${this.input}` });
     },
   },
 };
