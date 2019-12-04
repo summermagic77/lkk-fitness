@@ -116,7 +116,7 @@
         <el-form-item label="入場類型" prop="checkType">
           <el-select v-model="ruleForm.checkType" placeholder="請選擇入場類型" class="w-100">
             <el-option
-              v-for="(item, idx) in checkinTypeMap"
+              v-for="(item, idx) in checkinTypeOptions"
               :key="idx"
               :label="item"
               :value="item">
@@ -170,7 +170,7 @@ export default {
       ],
       member: {},
       ruleForm: {
-        checkInput: '',
+        checkInput: '0912345678',
         checkType: '',
         memberLineUrl: '',
       },
@@ -191,8 +191,27 @@ export default {
     searchTypeLabel() {
       return this.checkInType !== 'LineUrl' ? this.searchType.find(({ value }) => value === this.checkInType).label : '';
     },
-    checkinTypeMap() {
-      return this.selections.checkinTypeMap;
+    checkinTypeOptions() {
+      const { checkinTypeMap = {} } = this.selections;
+      // let optionsArray = [1, 2, 3, 4, 5];
+      // if (this.$meta.type === 'employee') {
+      //   optionsArray = [9];
+      // } else if (this.$meta.type === 'coach') {
+      //   optionsArray = [7, 8];
+      // }
+      // return optionsArray.map(el => (
+      //   {
+      //     value: el,
+      //     label: checkinTypeMap[Object.keys(checkinTypeMap)[el]],
+      //   }
+      // ));
+      return checkinTypeMap;
+    },
+    groupClassTypeMap() {
+      return this.selections.groupClassTypeMap;
+    },
+    coachMap() {
+      return this.selections.coachMap;
     },
     memberName() {
       return this.member.memberName;
