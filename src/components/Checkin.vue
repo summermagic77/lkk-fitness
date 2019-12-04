@@ -154,7 +154,7 @@ export default {
         },
         {
           label: 'LINE',
-          value: 'Line',
+          value: 'LineId',
         },
         // {
         //   label: 'QR Code',
