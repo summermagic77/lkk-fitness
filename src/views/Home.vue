@@ -42,7 +42,7 @@
           <el-link href="/member/checkin" class="w-100 py-1" :underline="false">
             <!-- <account-check class="icon-3x" /> -->
             <i class="la la-user-check text-brand fs-3" />
-            <p class="font-weight-light">
+            <p class="font-weight-normal">
               會員進場
             </p>
           </el-link>
