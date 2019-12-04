@@ -74,7 +74,7 @@
             class="mt-2 input-lg"
             :disabled="checkInType === 'LineUrl'"
           >
-            <div slot="suffix">
+            <div v-show="checkInType === 'LineId'" slot="suffix">
               <el-button
                 type="text"
                 icon="el-icon-full-screen"
