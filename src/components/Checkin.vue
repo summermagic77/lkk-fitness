@@ -219,7 +219,6 @@ export default {
         this.error = data.message;
       } else {
         this.member = data.data;
-        console.dir(this.member);
       }
       this.fullscreenLoading = false;
       // this.$router.push({ path: `/member/checkin/${this.input}` });

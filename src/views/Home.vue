@@ -15,14 +15,36 @@
       justify="center"
       align="middle"
     >
+      <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+        <el-card shadow="always">
+          場內資訊
+        </el-card>
+        <!-- <el-badge :value="2" class="item mr-2" type="primary">
+          <el-button>會員</el-button>
+        </el-badge>
+        <el-badge :value="5" class="item mr-2" type="primary">
+          <el-button>員工</el-button>
+        </el-badge>
+        <el-badge :value="2" class="item" type="primary">
+          <el-button>教練</el-button>
+        </el-badge> -->
+      </el-col>
+    </el-row>
+    <el-row
+      :gutter="20"
+      type="flex"
+      class="row-bg h-100 mt-2"
+      justify="center"
+      align="middle"
+    >
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
         <el-card :body-style="{ padding: '0px' }" shadow="hover">
           <el-link href="/member/checkin" class="w-100 py-1" :underline="false">
             <!-- <account-check class="icon-3x" /> -->
             <i class="la la-user-check text-brand fs-3" />
-            <h1 class="font-weight-light">
+            <p class="font-weight-light">
               會員進場
-            </h1>
+            </p>
           </el-link>
         </el-card>
       </el-col>
@@ -43,9 +65,9 @@
           <el-link href="/employee/checkin" class="w-100 py-1" :underline="false">
             <!-- <account-badge-outline class="icon-3x" /> -->
             <i class="la la-id-card text-brand fs-3"/>
-            <h1 class="font-weight-light">
+            <p class="font-weight-normal">
               員工打卡
-            </h1>
+            </p>
           </el-link>
         </el-card>
       </el-col>
@@ -54,9 +76,9 @@
           <el-link href="/coach/checkin" class="w-100 py-1" :underline="false">
             <!-- <account-multiple-check class="icon-3x" /> -->
             <i class="la la-user-friends text-brand fs-3" />
-            <h1 class="font-weight-light">
+            <p class="font-weight-normal">
               教練場租
-            </h1>
+            </p>
           </el-link>
         </el-card>
       </el-col>
