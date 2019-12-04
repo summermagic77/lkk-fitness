@@ -36,6 +36,13 @@
         </QrcodeStream>
       </div>
       <div class="text-center">
+        <el-image
+          v-if="$device.mobile"
+          style="height: 50px;"
+          :src="require('@/assets/lkk-logo.png')"
+          fit="contain"
+          class="mb-2"
+        />
         <el-radio-group v-model="checkInType" class="w-100">
           <el-row :gutter="10">
             <el-col
