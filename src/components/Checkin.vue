@@ -36,15 +36,22 @@
         </QrcodeStream>
       </div>
       <div class="text-center">
-        <el-radio-group v-model="checkInType">
-          <el-radio
-            v-for="(item, idx) in searchType"
-            :key="idx"
-            :label="item.value"
-            class="font-weight-bold"
-          >
-            {{ item.label }}
-          </el-radio>
+        <el-radio-group v-model="checkInType" class="w-100">
+          <el-row :gutter="10">
+            <el-col
+              v-for="(item, idx) in searchType"
+              :key="idx"
+              :span="12"
+            >
+              <el-radio
+                :label="item.value"
+                class="font-weight-bold w-100"
+                border
+              >
+                {{ item.label }}
+              </el-radio>
+            </el-col>
+          </el-row>
         </el-radio-group>
       </div>
       <el-form
