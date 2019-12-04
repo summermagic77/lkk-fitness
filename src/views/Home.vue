@@ -1,13 +1,13 @@
 <template>
   <div class="text-center">
     <div class="overlap-bg" />
-    <el-link href="/" :underline="false"  class="mb-2">
-      <el-image
-        style="height: 180px;"
-        :src="require('@/assets/lkk-color.png')"
-        fit="contain"
-      />
-    </el-link>
+    <!-- <el-link href="/" :underline="false"  class="mb-2"> -->
+    <el-image
+      style="height: 160px;"
+      :src="require('@/assets/lkk-color.png')"
+      fit="contain"
+    />
+    <!-- </el-link> -->
     <el-row
       :gutter="20"
       type="flex"
