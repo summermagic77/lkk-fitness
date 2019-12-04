@@ -28,6 +28,13 @@
 .d-flex {
   display: flex;
 }
+.fixed-bottom {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+}
 .float-right {
   float: right !important;
 }
@@ -42,6 +49,9 @@
 }
 .font-weight-light {
   font-weight: 300;
+}
+.font-weight-normal {
+  font-weight: 400;
 }
 .font-weight-bold {
   font-weight: 700;
@@ -97,6 +107,12 @@
   font-size: 1rem;
   line-height: 1.5;
   height: calc(1.5em + 1rem + 2px);
+}
+.text-brand {
+  color: #29526b;
+}
+.text-info {
+  color: #909399;
 }
 .text-info {
   color: #909399;

@@ -18,17 +18,16 @@ export default {
       fullscreen: false,
     };
   },
-  watch: {
-    fullscreen(enterFullscreen) {
-      console.dir(enterFullscreen);
-      // if (enterFullscreen) this.requestFullscreen();
-      // if (!enterFullscreen) this.exitFullscreen();
-    },
-  },
+  // watch: {
+  //   fullscreen(enterFullscreen) {
+  //     console.dir(enterFullscreen);
+  //     // if (enterFullscreen) this.requestFullscreen();
+  //     // if (!enterFullscreen) this.exitFullscreen();
+  //   },
+  // },
   methods: {
     onDecode(result) {
       this.ruleForm.memberLineUrl = result;
-      // this.$emit('update:result', result);
       this.fullscreen = false;
       this.scanQRcode = false;
     },

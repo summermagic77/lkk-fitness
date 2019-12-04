@@ -15,46 +15,73 @@
       :md="12"
       :lg="6"
       :xl="6"
-      class="text-center"
     >
-      <div v-if="checkInType === 'LineUrl'" class="fullscreen">
-        <!-- <el-alert
-          v-show="error"
-          :title="error"
-          type="error"
-        /> -->
-        <QrcodeStream @decode="onDecode" @init="onInit" class="mb-1" />
-      </div>
-      <el-radio-group v-model="checkInType">
-        <el-radio
-          v-for="(item, idx) in searchType"
-          :key="idx"
-          :label="item.value"
-          class="font-weight-bold"
-        >
-          {{ item.label }}
-        </el-radio>
-      </el-radio-group>
-      <el-input
-        v-show="checkInType !== 'LineUrl'"
-        v-model="input"
-        :type="inputType[checkInType].type"
-        :placeholder="inputType[checkInType].placeholder"
-        :pattern="inputType[checkInType].pattern"
-        class="mt-2 input-lg"
+      <!-- <div v-if="fullscreen" class="fullscreen">
+        <QrcodeStream @decode="onDecode" @init="onInit" class="mb-1" /> -->
+      <div
+        v-if="fullscreen"
+        :class="{ 'fullscreen': fullscreen }"
+        ref="wrapper"
+        @fullscreenchange="onFullscreenChange"
       >
-        <div slot="suffix">
-          <el-button type="text" icon="el-icon-search" class="mr-1" @click="searchMember" />
-        </div>
-      </el-input>
+        <QrcodeStream
+          @decode="onDecode"
+          @init="logErrors"
+          class="mb-1"
+        >
+          <i
+            @click="closeFullScreenScanner"
+            class="las la-compress-arrows-alt text-white ml-1 mt-1 fs-2"
+          />
+        </QrcodeStream>
+      </div>
+      <div class="text-center">
+        <el-radio-group v-model="checkInType">
+          <el-radio
+            v-for="(item, idx) in searchType"
+            :key="idx"
+            :label="item.value"
+            class="font-weight-bold"
+          >
+            {{ item.label }}
+          </el-radio>
+        </el-radio-group>
+      </div>
+      <el-form
+        v-loading="loading"
+        :model="ruleForm"
+        :rules="rules"
+        ref="searchMemberForm"
+      >
+        <el-form-item prop="checkInput">
+          <el-input
+            v-model="ruleForm.checkInput"
+            :placeholder="`請輸入${userTypeLabel}${searchTypeLabel}搜尋`"
+            class="mt-2 input-lg"
+            :disabled="checkInType === 'LineUrl'"
+          >
+            <div slot="suffix">
+              <el-button
+                type="text"
+                icon="el-icon-full-screen"
+                class="mr-1"
+                @click="openFullScreenScanner"
+              />
+            </div>
+          </el-input>
+        </el-form-item>
+      </el-form>
       <el-alert
         v-show="error"
         :title="error"
         type="error"
         center
-        class="mt-1"
+        class="mb-1"
       />
-      <div class="mt-4">
+      <el-button type="primary" plain class="w-100" @click="submitForm('searchMemberForm')">
+        搜尋{{ userTypeLabel }}
+      </el-button>
+      <div class="mt-4 text-center">
         <el-link href="/member/create" type="info">建立會員</el-link>・
         <el-link href="/employee/create" type="info">建立員工</el-link>・
         <el-link href="/coach/create" type="info">建立場租教練</el-link>
@@ -109,8 +136,9 @@ export default {
       loading: false,
       error: null,
       fullscreenLoading: false,
+      scanQRcode: false,
       selections: {},
-      input: '0912345678',
+      // checkInput: '0912345678',
       checkInType: 'Phone',
       searchType: [
         {
@@ -118,19 +146,24 @@ export default {
           value: 'Phone',
         },
         {
-          label: 'LINE ID',
-          value: 'LineId',
+          label: 'LINE',
+          value: 'Line',
         },
-        {
-          label: 'QR Code',
-          value: 'LineUrl',
-        },
+        // {
+        //   label: 'QR Code',
+        //   value: 'LineUrl',
+        // },
       ],
       member: {},
       ruleForm: {
+        checkInput: '',
         checkType: '',
+        memberLineUrl: '',
       },
       rules: {
+        checkInput: [
+          { required: true, message: '請輸入登入資訊', trigger: 'blur' },
+        ],
         checkType: [
           { required: true, message: '請輸入姓名', trigger: 'blur' },
         ],
@@ -141,35 +174,43 @@ export default {
     userTypeLabel() {
       return this.$route.meta.typeLabel;
     },
+    searchTypeLabel() {
+      return this.checkInType !== 'LineUrl' ? this.searchType.find(({ value }) => value === this.checkInType).label : '';
+    },
     checkinTypeMap() {
       return this.selections.checkinTypeMap;
-    },
-    inputType() {
-      return {
-        Phone: {
-          type: 'text',
-          placeholder: `請輸入${this.userTypeLabel}手機號碼搜尋`,
-        },
-        LineId: {
-          type: 'text',
-          placeholder: `請輸入${this.userTypeLabel}LINE ID搜尋`,
-        },
-        LineUrl: {
-          type: 'text',
-          placeholder: '',
-        },
-      };
     },
     memberName() {
       return this.member.memberName;
     },
   },
   methods: {
+    closeFullScreenScanner() {
+      this.fullscreen = false;
+      this.checkInType = 'Phone';
+    },
+    openFullScreenScanner() {
+      this.fullscreen = true;
+      this.checkInType = 'LineUrl';
+    },
+    onDecode(result) {
+      console.dir(result);
+      this.ruleForm.memberLineUrl = 'http://test.line.url2';
+      this.fullscreen = false;
+      this.searchMember();
+    },
     async searchMember() {
       this.fullscreenLoading = true;
-      const { data = null } = await apiMember.getByKey(this.checkInType.toLowerCase(), { [`member${this.checkInType}`]: this.input });
+      if (this.checkInType === 'LineUrl') {
+        this.ruleForm.checkInput = this.ruleForm.memberLineUrl;
+      }
+      const { data = null } = await apiMember.getByKey(
+        this.checkInType.toLowerCase(),
+        { [`member${this.checkInType}`]: this.ruleForm.checkInput },
+      );
       if (data.data === null) {
-        this.error = `查無此${this.userTypeLabel}，請確認資訊是否正確。`;
+        // this.error = `查無此${this.userTypeLabel}，請確認資訊是否正確。`;
+        this.error = data.message;
       } else {
         this.member = data.data;
       }
@@ -178,13 +219,11 @@ export default {
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
-        console.dir(valid);
-        // if (valid) {
-        //   console.dir('submit!');
-        // } else {
-        //   console.log('error submit!!');
-        //   return false;
-        // }
+        if (valid) {
+          if (formName === 'searchMemberForm') {
+            this.searchMember();
+          }
+        }
       });
     },
   },

@@ -42,6 +42,9 @@
     >
       <slot />
     </el-main>
+    <!-- <el-footer v-if="$device.mobile">
+      <i class="la la-home"></i>
+    </el-footer> -->
   </el-container>
 </template>
 
@@ -101,11 +104,11 @@ body {
 .bg-lkk {
   background-color: #29526b;
 }
-.home-header {
+/* .home-header {
   background-color: #29526b;
   height: 55% !important;
 }
 .home-main {
   margin-top: -352px;
-}
+} */
 </style>

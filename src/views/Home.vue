@@ -19,7 +19,7 @@
         <el-card :body-style="{ padding: '0px' }" shadow="hover">
           <el-link href="/member/checkin" class="w-100 py-1" :underline="false">
             <!-- <account-check class="icon-3x" /> -->
-            <i class="la la-user-check fs-3" />
+            <i class="la la-user-check text-brand fs-3" />
             <h1 class="font-weight-light">
               會員進場
             </h1>
@@ -29,10 +29,10 @@
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
         <el-card :body-style="{ padding: '0px' }" shadow="hover">
           <el-link href="/member/create" class="w-100 py-1" :underline="false">
-            <i class="la la-user-plus fs-3" />
-            <h1 class="font-weight-light">
+            <i class="la la-user-plus text-brand fs-3" />
+            <p class="font-weight-normal">
               建立新會員
-            </h1>
+            </p>
           </el-link>
         </el-card>
       </el-col>
@@ -42,7 +42,7 @@
         <el-card :body-style="{ padding: '0px' }" shadow="hover">
           <el-link href="/employee/checkin" class="w-100 py-1" :underline="false">
             <!-- <account-badge-outline class="icon-3x" /> -->
-            <i class="la la-id-card fs-3"/>
+            <i class="la la-id-card text-brand fs-3"/>
             <h1 class="font-weight-light">
               員工打卡
             </h1>
@@ -53,7 +53,7 @@
         <el-card :body-style="{ padding: '0px' }" shadow="hover">
           <el-link href="/coach/checkin" class="w-100 py-1" :underline="false">
             <!-- <account-multiple-check class="icon-3x" /> -->
-            <i class="la la-user-friends fs-3" />
+            <i class="la la-user-friends text-brand fs-3" />
             <h1 class="font-weight-light">
               教練場租
             </h1>
