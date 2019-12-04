@@ -11,7 +11,7 @@
     <el-row
       :gutter="20"
       type="flex"
-      class="row-bg h-100 mt-2"
+      class="row-bg h-100"
       justify="center"
       align="middle"
     >

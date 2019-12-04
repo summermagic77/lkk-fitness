@@ -41,7 +41,7 @@
           style="height: 50px;"
           :src="require('@/assets/lkk-logo.png')"
           fit="contain"
-          class="mb-2"
+          class="mb-4"
         />
         <el-radio-group v-model="checkInType" class="w-100">
           <el-row :gutter="10">
