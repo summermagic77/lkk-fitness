@@ -153,15 +153,15 @@ export default {
       scanQRcode: false,
       selections: {},
       // checkInput: '0912345678',
-      checkInType: 'Phone',
+      checkInType: 'LineId',
       searchType: [
-        {
-          label: '手機',
-          value: 'Phone',
-        },
         {
           label: 'LINE',
           value: 'LineId',
+        },
+        {
+          label: '手機',
+          value: 'Phone',
         },
         // {
         //   label: 'QR Code',

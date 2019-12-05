@@ -8,7 +8,7 @@
       fit="contain"
     />
     <!-- </el-link> -->
-    <el-row
+    <!-- <el-row
       :gutter="20"
       type="flex"
       class="row-bg h-100 mt-2"
@@ -19,7 +19,7 @@
         <el-card shadow="always">
           場內資訊
         </el-card>
-        <!-- <el-badge :value="2" class="item mr-2" type="primary">
+        <el-badge :value="2" class="item mr-2" type="primary">
           <el-button>會員</el-button>
         </el-badge>
         <el-badge :value="5" class="item mr-2" type="primary">
@@ -27,9 +27,9 @@
         </el-badge>
         <el-badge :value="2" class="item" type="primary">
           <el-button>教練</el-button>
-        </el-badge> -->
+        </el-badge>
       </el-col>
-    </el-row>
+    </el-row> -->
     <el-row
       :gutter="20"
       type="flex"
@@ -38,47 +38,71 @@
       align="middle"
     >
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
-        <el-card :body-style="{ padding: '0px' }" shadow="hover">
+        <el-card :body-style="{ padding: '0px' }" shadow="always">
           <el-link href="/member/checkin" class="w-100 py-1" :underline="false">
             <!-- <account-check class="icon-3x" /> -->
-            <i class="la la-user-check text-brand fs-3" />
-            <p class="font-weight-normal">
-              會員進場
-            </p>
+            <i class="las la-sign-in-alt text-brand fs-3" />
+            <h1 class="font-weight-light">
+              入場
+            </h1>
           </el-link>
         </el-card>
       </el-col>
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
-        <el-card :body-style="{ padding: '0px' }" shadow="hover">
+        <el-card :body-style="{ padding: '0px' }" shadow="always">
           <el-link href="/member/create" class="w-100 py-1" :underline="false">
-            <i class="la la-user-plus text-brand fs-3" />
-            <p class="font-weight-normal">
-              建立新會員
-            </p>
+            <i class="las la-door-open text-brand fs-3" />
+            <h1 class="font-weight-light">
+              離場
+            </h1>
           </el-link>
         </el-card>
       </el-col>
     </el-row>
     <el-row :gutter="20" type="flex" class="row-bg" justify="center">
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
-        <el-card :body-style="{ padding: '0px' }" shadow="hover">
+        <el-card :body-style="{ padding: '0px' }" shadow="always">
           <el-link href="/employee/checkin" class="w-100 py-1" :underline="false">
             <!-- <account-badge-outline class="icon-3x" /> -->
-            <i class="la la-id-card text-brand fs-3"/>
-            <p class="font-weight-normal">
-              員工打卡
-            </p>
+            <i class="la la-shopping-bag text-brand fs-3"/>
+            <h1 class="font-weight-light">
+              消費
+            </h1>
           </el-link>
         </el-card>
       </el-col>
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
-        <el-card :body-style="{ padding: '0px' }" shadow="hover">
+        <el-card :body-style="{ padding: '0px' }" shadow="always">
           <el-link href="/coach/checkin" class="w-100 py-1" :underline="false">
             <!-- <account-multiple-check class="icon-3x" /> -->
-            <i class="la la-user-friends text-brand fs-3" />
-            <p class="font-weight-normal">
-              教練場租
-            </p>
+            <i class="las la-search text-brand fs-3" />
+            <h1 class="font-weight-light">
+              查詢
+            </h1>
+          </el-link>
+        </el-card>
+      </el-col>
+    </el-row>
+    <el-row :gutter="20" type="flex" class="row-bg" justify="center">
+      <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
+        <el-card :body-style="{ padding: '0px' }" shadow="always">
+          <el-link href="/employee/checkin" class="w-100 py-1" :underline="false">
+            <!-- <account-badge-outline class="icon-3x" /> -->
+            <i class="las la-user-plus text-brand fs-3"/>
+            <h1 class="font-weight-light">
+              加入
+            </h1>
+          </el-link>
+        </el-card>
+      </el-col>
+      <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
+        <el-card :body-style="{ padding: '0px' }" shadow="always">
+          <el-link href="/coach/checkin" class="w-100 py-1" :underline="false">
+            <!-- <account-multiple-check class="icon-3x" /> -->
+            <i class="lar la-clipboard text-brand fs-3" />
+            <h1 class="font-weight-light">
+              紀錄
+            </h1>
           </el-link>
         </el-card>
       </el-col>
