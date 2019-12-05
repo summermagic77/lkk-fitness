@@ -226,18 +226,14 @@ export default {
           label: checkinTypeMap[Object.keys(checkinTypeMap)[el - 1]],
         }
       ));
+      // return Object.entries(checkinTypeMap).map(e => ({ label: e[1], value: e[0] }));
     },
     groupClassTypeMap() {
       return this.selections.groupClassTypeMap;
     },
     groupClassTypeOptions() {
       const { groupClassTypeMap = {} } = this.selections;
-      return [1, 2, 3, 4].map(el => (
-        {
-          value: el,
-          label: groupClassTypeMap[Object.keys(groupClassTypeMap)[el - 1]],
-        }
-      ));
+      return Object.entries(groupClassTypeMap).map(e => ({ label: e[1], value: e[0] }));
     },
     coachMap() {
       return this.selections.coachMap;
