@@ -64,8 +64,9 @@
         <el-card :body-style="{ padding: '0px' }" shadow="always">
           <el-link href="/employee/checkin" class="w-100 py-1" :underline="false">
             <!-- <account-badge-outline class="icon-3x" /> -->
-            <i class="la la-shopping-bag text-brand fs-3"/>
+            <!-- <i class="la la-shopping-bag text-brand fs-3"/> -->
             <h1 class="font-weight-light">
+              <i class="la la-shopping-bag text-brand fs-1"/>
               消費
             </h1>
           </el-link>
@@ -75,8 +76,9 @@
         <el-card :body-style="{ padding: '0px' }" shadow="always">
           <el-link href="/coach/checkin" class="w-100 py-1" :underline="false">
             <!-- <account-multiple-check class="icon-3x" /> -->
-            <i class="las la-search text-brand fs-3" />
+            <!-- <i class="las la-search text-brand fs-3" /> -->
             <h1 class="font-weight-light">
+              <i class="las la-search text-brand fs-1" />
               查詢
             </h1>
           </el-link>
@@ -88,8 +90,9 @@
         <el-card :body-style="{ padding: '0px' }" shadow="always">
           <el-link href="/employee/checkin" class="w-100 py-1" :underline="false">
             <!-- <account-badge-outline class="icon-3x" /> -->
-            <i class="las la-user-plus text-brand fs-3"/>
+            <!-- <i class="las la-user-plus text-brand fs-3"/> -->
             <h1 class="font-weight-light">
+              <i class="las la-user-plus text-brand fs-1"/>
               加入
             </h1>
           </el-link>
@@ -99,8 +102,8 @@
         <el-card :body-style="{ padding: '0px' }" shadow="always">
           <el-link href="/coach/checkin" class="w-100 py-1" :underline="false">
             <!-- <account-multiple-check class="icon-3x" /> -->
-            <i class="lar la-clipboard text-brand fs-3" />
             <h1 class="font-weight-light">
+              <i class="lar la-clipboard text-brand fs-1" />
               紀錄
             </h1>
           </el-link>
