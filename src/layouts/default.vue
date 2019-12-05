@@ -109,6 +109,6 @@ body {
   height: 50% !important;
 }
 .home-main {
-  margin-top: -298px;
+  margin-top: -288px;
 }
 </style>
