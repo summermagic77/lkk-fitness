@@ -67,9 +67,9 @@
         :rules="rules"
         ref="searchMemberForm"
       >
-        <el-form-item prop="checkInput">
+        <el-form-item prop="checkinMember">
           <el-input
-            v-model="ruleForm.checkInput"
+            v-model="ruleForm.checkinMember"
             :placeholder="`請輸入${userTypeLabel}${searchTypeLabel}搜尋`"
             class="mt-2 input-lg"
             :disabled="checkInType === 'LineUrl'"
@@ -85,13 +85,13 @@
           </el-input>
         </el-form-item>
       </el-form>
-      <el-alert
-        v-show="error"
+      <!-- <el-alert
+        v-if="error"
         :title="error"
         type="error"
         center
         class="mb-1"
-      />
+      /> -->
       <el-button type="primary" plain class="w-100" @click="submitForm('searchMemberForm')">
         搜尋{{ userTypeLabel }}
       </el-button>
@@ -106,43 +106,66 @@
           歡迎，{{ memberName }}
       </h2>
       <p class="text-black-50">
-        ({{ checkinTypeMap[memberType] }})
+        ({{ memberTypeMap[memberType] }})
       </p>
       <el-form
         v-loading="loading"
         :model="ruleForm"
         :rules="rules"
-        status-icon
         ref="ruleForm"
-        label-position="left"
       >
-        <el-form-item label="入場類型" prop="checkType">
-          <el-select v-model="ruleForm.checkType" placeholder="請選擇入場類型" class="w-100">
+        <el-form-item label="入場類型" prop="checkinType">
+          <el-select v-model="ruleForm.checkinType" placeholder="請選擇入場類型" class="w-100">
             <el-option
               v-for="(item, idx) in checkinTypeOptions"
               :key="idx"
               :label="item.label"
-              :value="item.value">
-            </el-option>
+              :value="item.value"
+            />
           </el-select>
         </el-form-item>
-        <el-form-item v-if="ruleForm.checkType === 4" label="課程" prop="checkinGroupClass">
+        <el-form-item v-if="ruleForm.checkinType === 4" label="課程" prop="checkinGroupClass">
           <el-select v-model="ruleForm.checkinGroupClass" placeholder="請選擇課程" class="w-100">
             <el-option
               v-for="(item, idx) in groupClassTypeOptions"
               :key="idx"
               :label="item.label"
-              :value="item.value">
-            </el-option>
+              :value="item.value"
+            />
           </el-select>
         </el-form-item>
-          <el-button
-            type="primary"
-            class="w-100"
-            @click="submitForm('ruleForm')"
-          >
-            進場 <i class="la la-sign-in-alt" />
-          </el-button>
+        <el-form-item
+          v-if="[3, 5, 6].includes(ruleForm.checkinType)"
+          label="教練"
+          prop="checkinCoach"
+        >
+          <el-select v-model="ruleForm.checkinCoach" placeholder="請選擇教練" class="w-100">
+            <el-option
+              v-for="(item, idx) in coachOptions"
+              :key="idx"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item v-if="[3, 4].includes(memberType)" prop="checkinCost">
+          <el-input v-model="ruleForm.checkinCost" placeholder="請輸入金額" />
+        </el-form-item>
+        <!-- <el-alert
+          v-if="error"
+          :title="error"
+          type="error"
+          center
+          class="mb-1"
+        /> -->
+        <el-button
+          :loading="fullscreenLoading"
+          type="primary"
+          class="w-100"
+          @click="submitForm('ruleForm')"
+        >
+          進場 <i class="la la-sign-in-alt" />
+        </el-button>
       </el-form>
     </el-col>
   </el-row>
@@ -150,6 +173,7 @@
 
 <script>
 import apiMember from '@/api/member';
+import apiCheckin from '@/api/checkin';
 import apiSelections from '@/api/selections';
 import mixinQRcodeReader from '@/mixins/qrCodeReader.vue';
 
@@ -182,21 +206,29 @@ export default {
         // },
       ],
       member: {},
+      checkin: {},
       ruleForm: {
-        checkInput: '0912345678',
-        checkType: '',
-        memberLineUrl: '',
+        checkinMember: '0912345678',
+        checkinType: null,
         checkinGroupClass: null,
+        checkinCoach: null,
+        checkinCost: null,
       },
       rules: {
-        checkInput: [
+        checkinMember: [
           { required: true, message: '請輸入登入資訊', trigger: 'blur' },
         ],
-        checkType: [
+        checkinType: [
           { required: true, message: '請選擇入場類型', trigger: 'change' },
         ],
         checkinGroupClass: [
           { required: true, message: '請選擇課程', trigger: 'change' },
+        ],
+        checkinCoach: [
+          { required: true, message: '請選教練', trigger: 'change' },
+        ],
+        checkinCost: [
+          { required: true, message: '請輸入金額', trigger: 'blur' },
         ],
       },
     };
@@ -208,13 +240,13 @@ export default {
     searchTypeLabel() {
       return this.checkInType !== 'LineUrl' ? this.searchType.find(({ value }) => value === this.checkInType).label : '';
     },
-    checkinTypeMap() {
-      const { checkinTypeMap = {} } = this.selections;
-      return checkinTypeMap;
+    memberTypeMap() {
+      const { memberTypeMap = {} } = this.selections;
+      return memberTypeMap;
     },
     checkinTypeOptions() {
       const { checkinTypeMap = {} } = this.selections;
-      let optionsArray = [1, 2, 3, 4, 5];
+      let optionsArray = [1, 2, 3, 4, 5, 6];
       if ([5, 6, 7].includes(this.memberType)) {
         optionsArray = [9];
       } else if ([3, 4].includes(this.memberType)) {
@@ -238,6 +270,10 @@ export default {
     coachMap() {
       return this.selections.coachMap;
     },
+    coachOptions() {
+      const { coachMap = {} } = this.selections;
+      return Object.entries(coachMap).map(e => ({ label: e[1], value: e[0] }));
+    },
     memberName() {
       return this.member.memberName;
     },
@@ -255,34 +291,56 @@ export default {
       this.checkInType = 'LineUrl';
     },
     onDecode(result) {
-      this.ruleForm.memberLineUrl = result;
+      this.ruleForm.checkinMember = result;
       this.fullscreen = false;
       this.searchMember();
     },
     async searchMember() {
       this.fullscreenLoading = true;
-      if (this.checkInType === 'LineUrl') {
-        this.ruleForm.checkInput = this.ruleForm.memberLineUrl;
-      }
       const { data = null } = await apiMember.getByKey(
         this.checkInType.toLowerCase(),
-        { [`member${this.checkInType}`]: this.ruleForm.checkInput },
+        { [`member${this.checkInType}`]: this.ruleForm.checkinMember },
       );
       if (data.data === null) {
         // this.error = `查無此${this.userTypeLabel}，請確認資訊是否正確。`;
-        this.error = data.message;
+        // this.error = data.message;
+        this.$message({
+          showClose: true,
+          message: data.message,
+          type: 'error',
+        });
       } else {
         this.member = data.data;
       }
       this.fullscreenLoading = false;
-      console.dir(this.member);
       // this.$router.push({ path: `/member/checkin/${this.input}` });
+    },
+    async saveCheckin() {
+      this.fullscreenLoading = true;
+      const { data, code } = await apiCheckin.saveCheckin(this.ruleForm);
+      if (code !== 0) {
+        this.$message({
+          showClose: true,
+          message: data.message,
+          type: 'error',
+        });
+      } else {
+        this.checkin = data.data;
+      }
+      this.fullscreenLoading = false;
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           if (formName === 'searchMemberForm') {
             this.searchMember();
+          } else {
+            Object.keys(this.ruleForm).forEach((key) => {
+              if (this.ruleForm[key] === null) {
+                delete this.ruleForm[key];
+              }
+            });
+            this.saveCheckin();
           }
         }
       });
