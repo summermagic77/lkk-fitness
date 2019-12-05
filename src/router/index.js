@@ -4,7 +4,7 @@ import Home from '@/views/Home.vue';
 import Checkin from '@/components/Checkin.vue';
 
 import Member from '@/views/Member.vue';
-import MemberCheckin from '@/components/member/MemberCheckin.vue';
+// import MemberCheckin from '@/components/member/MemberCheckin.vue';
 import MemberList from '@/components/member/MemberList.vue';
 import MemberCreate from '@/components/member/MemberCreate.vue';
 
@@ -54,12 +54,12 @@ const routes = [
         meta: { type: 'member', typeLabel: '會員' },
         component: Checkin,
       },
-      {
-        path: 'checkin/:phone',
-        name: '會員進場',
-        meta: { type: 'member', typeLabel: '會員' },
-        component: MemberCheckin,
-      },
+      // {
+      //   path: 'checkin/:phone',
+      //   name: '會員進場',
+      //   meta: { type: 'member', typeLabel: '會員' },
+      //   component: MemberCheckin,
+      // },
     ],
   },
   {
@@ -77,12 +77,12 @@ const routes = [
         name: '建立員工',
         component: EmployeeCreate,
       },
-      {
-        path: 'checkin',
-        name: '員工打卡',
-        meta: { type: 'employee', typeLabel: '員工' },
-        component: Checkin,
-      },
+      // {
+      //   path: 'checkin',
+      //   name: '員工打卡',
+      //   meta: { type: 'employee', typeLabel: '員工' },
+      //   component: Checkin,
+      // },
     ],
   },
   {
@@ -100,12 +100,12 @@ const routes = [
         name: '建立場租教練',
         component: Member,
       },
-      {
-        path: 'checkin',
-        name: '場租教練進場',
-        meta: { type: 'coach', typeLabel: '場租教練' },
-        component: Checkin,
-      },
+      // {
+      //   path: 'checkin',
+      //   name: '場租教練進場',
+      //   meta: { type: 'coach', typeLabel: '場租教練' },
+      //   component: Checkin,
+      // },
     ],
   },
   {

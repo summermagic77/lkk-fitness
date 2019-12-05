@@ -102,9 +102,12 @@
       </div>
     </el-col>
     <el-col v-else :sm="12" :md="12" :lg="6" :xl="6">
-      <h1 class="fs-2 font-weight-light">
+      <h2 class="font-weight-light">
           歡迎，{{ memberName }}
-      </h1>
+      </h2>
+      <p class="text-black-50">
+        ({{ checkinTypeMap[memberType] }})
+      </p>
       <el-form
         v-loading="loading"
         :model="ruleForm"
@@ -118,8 +121,18 @@
             <el-option
               v-for="(item, idx) in checkinTypeOptions"
               :key="idx"
-              :label="item"
-              :value="item">
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item v-if="ruleForm.checkType === 4" label="課程" prop="checkinGroupClass">
+          <el-select v-model="ruleForm.checkinGroupClass" placeholder="請選擇課程" class="w-100">
+            <el-option
+              v-for="(item, idx) in groupClassTypeOptions"
+              :key="idx"
+              :label="item.label"
+              :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
@@ -153,7 +166,7 @@ export default {
       scanQRcode: false,
       selections: {},
       // checkInput: '0912345678',
-      checkInType: 'LineId',
+      checkInType: 'Phone',
       searchType: [
         {
           label: 'LINE',
@@ -173,13 +186,17 @@ export default {
         checkInput: '0912345678',
         checkType: '',
         memberLineUrl: '',
+        checkinGroupClass: null,
       },
       rules: {
         checkInput: [
           { required: true, message: '請輸入登入資訊', trigger: 'blur' },
         ],
         checkType: [
-          { required: true, message: '請輸入姓名', trigger: 'blur' },
+          { required: true, message: '請選擇入場類型', trigger: 'change' },
+        ],
+        checkinGroupClass: [
+          { required: true, message: '請選擇課程', trigger: 'change' },
         ],
       },
     };
@@ -191,30 +208,45 @@ export default {
     searchTypeLabel() {
       return this.checkInType !== 'LineUrl' ? this.searchType.find(({ value }) => value === this.checkInType).label : '';
     },
+    checkinTypeMap() {
+      const { checkinTypeMap = {} } = this.selections;
+      return checkinTypeMap;
+    },
     checkinTypeOptions() {
       const { checkinTypeMap = {} } = this.selections;
-      // let optionsArray = [1, 2, 3, 4, 5];
-      // if (this.$meta.type === 'employee') {
-      //   optionsArray = [9];
-      // } else if (this.$meta.type === 'coach') {
-      //   optionsArray = [7, 8];
-      // }
-      // return optionsArray.map(el => (
-      //   {
-      //     value: el,
-      //     label: checkinTypeMap[Object.keys(checkinTypeMap)[el]],
-      //   }
-      // ));
-      return checkinTypeMap;
+      let optionsArray = [1, 2, 3, 4, 5];
+      if ([5, 6, 7].includes(this.memberType)) {
+        optionsArray = [9];
+      } else if ([3, 4].includes(this.memberType)) {
+        optionsArray = [7, 8];
+      }
+      return optionsArray.map(el => (
+        {
+          value: el,
+          label: checkinTypeMap[Object.keys(checkinTypeMap)[el - 1]],
+        }
+      ));
     },
     groupClassTypeMap() {
       return this.selections.groupClassTypeMap;
+    },
+    groupClassTypeOptions() {
+      const { groupClassTypeMap = {} } = this.selections;
+      return [1, 2, 3, 4].map(el => (
+        {
+          value: el,
+          label: groupClassTypeMap[Object.keys(groupClassTypeMap)[el - 1]],
+        }
+      ));
     },
     coachMap() {
       return this.selections.coachMap;
     },
     memberName() {
       return this.member.memberName;
+    },
+    memberType() {
+      return this.member.memberType;
     },
   },
   methods: {
@@ -247,6 +279,7 @@ export default {
         this.member = data.data;
       }
       this.fullscreenLoading = false;
+      console.dir(this.member);
       // this.$router.push({ path: `/member/checkin/${this.input}` });
     },
     submitForm(formName) {
