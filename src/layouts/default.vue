@@ -106,7 +106,7 @@ body {
 }
 .home-header {
   background-color: #29526b;
-  height: 50% !important;
+  height: 55% !important;
 }
 .home-main {
   margin-top: -288px;
