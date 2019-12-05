@@ -39,7 +39,7 @@
     >
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
         <el-card :body-style="{ padding: '0px' }" shadow="always">
-          <el-link href="/member/checkin" class="w-100 py-1" :underline="false">
+          <el-link href="/checkin" class="w-100 py-1" :underline="false">
             <!-- <account-check class="icon-3x" /> -->
             <i class="las la-sign-in-alt text-brand fs-3" />
             <h1 class="font-weight-light">
@@ -50,7 +50,7 @@
       </el-col>
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
         <el-card :body-style="{ padding: '0px' }" shadow="always">
-          <el-link href="/member/create" class="w-100 py-1" :underline="false">
+          <el-link href="/checkout" class="w-100 py-1" :underline="false">
             <i class="las la-door-open text-brand fs-3" />
             <h1 class="font-weight-light">
               離場
@@ -62,7 +62,7 @@
     <el-row :gutter="20" type="flex" class="row-bg" justify="center">
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
         <el-card :body-style="{ padding: '0px' }" shadow="always">
-          <el-link href="/employee/checkin" class="w-100 py-1" :underline="false">
+          <el-link href="/consume" class="w-100 py-1" :underline="false">
             <!-- <account-badge-outline class="icon-3x" /> -->
             <!-- <i class="la la-shopping-bag text-brand fs-3"/> -->
             <h1 class="font-weight-light">
@@ -74,7 +74,7 @@
       </el-col>
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
         <el-card :body-style="{ padding: '0px' }" shadow="always">
-          <el-link href="/coach/checkin" class="w-100 py-1" :underline="false">
+          <el-link href="/search" class="w-100 py-1" :underline="false">
             <!-- <account-multiple-check class="icon-3x" /> -->
             <!-- <i class="las la-search text-brand fs-3" /> -->
             <h1 class="font-weight-light">
@@ -88,7 +88,7 @@
     <el-row :gutter="20" type="flex" class="row-bg" justify="center">
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
         <el-card :body-style="{ padding: '0px' }" shadow="always">
-          <el-link href="/employee/checkin" class="w-100 py-1" :underline="false">
+          <el-link href="/create" class="w-100 py-1" :underline="false">
             <!-- <account-badge-outline class="icon-3x" /> -->
             <!-- <i class="las la-user-plus text-brand fs-3"/> -->
             <h1 class="font-weight-light">
@@ -100,7 +100,7 @@
       </el-col>
       <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6" class="text-center">
         <el-card :body-style="{ padding: '0px' }" shadow="always">
-          <el-link href="/coach/checkin" class="w-100 py-1" :underline="false">
+          <el-link href="/record" class="w-100 py-1" :underline="false">
             <!-- <account-multiple-check class="icon-3x" /> -->
             <h1 class="font-weight-light">
               <i class="lar la-clipboard text-brand fs-1" />

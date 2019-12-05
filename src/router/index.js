@@ -108,11 +108,36 @@ const routes = [
       },
     ],
   },
-  // {
-  //   path: '/checkin/:user',
-  //   name: '進場',
-  //   component: Checkin,
-  // },
+  {
+    path: '/checkin',
+    name: '進場',
+    component: Checkin,
+  },
+  {
+    path: '/checkout',
+    name: '離場',
+    component: Checkin,
+  },
+  {
+    path: '/consume',
+    name: '消費',
+    component: Checkin,
+  },
+  {
+    path: '/search',
+    name: '查詢',
+    component: Checkin,
+  },
+  {
+    path: '/create',
+    name: '加入',
+    component: Checkin,
+  },
+  {
+    path: '/record',
+    name: '紀錄',
+    component: Checkin,
+  },
   // {
   //   path: '/create',
   //   name: '建立',
