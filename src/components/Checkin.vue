@@ -155,18 +155,18 @@
       </el-form>
     </el-col>
     <el-col v-else :sm="12" :md="12" :lg="6" :xl="6">
-      <h1>{{ memberName }}</h1>
+      <h1>{{ memberName }}，歡迎入場</h1>
       <p class="text-black-50 font-weight-bold">
         {{ checkinTypeMap[checkin.checkinType] }}
       </p>
-      <p class="my-0">
+      <p class="">
         使用
         <span class="font-weight-bold fs-2">
           {{ checkin.checkinCost }}
         </span>
         點/堂
       </p>
-      <p class="font-weight-bold my-0">
+      <p class="font-weight-bold">
         {{ checkin.checkinTime | moment('YYYY-MM-DD, HH:mm A') }}
       </p>
     </el-col>
