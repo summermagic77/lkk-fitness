@@ -7,9 +7,9 @@
   >
     <el-col :sm="12" :md="12" :lg="8" :xl="8">
       <el-steps :active="activeStep" align-center class="mb-1">
-        <el-step title="建立類型" description="選擇欲建立類型" />
-        <el-step title="基本資料" description="填寫會員資料" />
-        <el-step title="詳細資訊" description="填寫詳細資訊" />
+        <el-step title="建立類型" description="" />
+        <el-step title="基本資料" description="" />
+        <el-step title="詳細資訊" description="" />
       </el-steps>
       <el-form
         v-loading="loading"
@@ -186,24 +186,24 @@ export default {
   data() {
     return {
       loading: true,
-      activeStep: 2,
+      activeStep: 0,
       scanQRcode: false,
       selections: {},
       errors: {
         memberLineUrl: null,
       },
       ruleForm: {
-        memberName: 'Chiquitta',
+        memberName: '',
         memberSex: '男性',
-        memberPhone: '0987678765',
-        memberLineId: 'ddds',
-        memberLineUrl: 'http',
-        memberMail: 'chiquitta.com@gmail.com',
+        memberPhone: '',
+        memberLineId: '',
+        memberLineUrl: '',
+        memberMail: '',
         memberType: '一般會員',
         memberPoint: 0,
         memberLesson: 0,
         memberTreat: 0,
-        memberBirthDate: new Date(),
+        memberBirthDate: '',
         memberJoinDate: new Date(),
         memberEffectDate: '',
       },
