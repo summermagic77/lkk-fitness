@@ -6,7 +6,7 @@ export default {
   saveCheckin(data) {
     return axios.post(`${uri}/saveCheckin`, data);
   },
-  saveCheckout(params) {
-    return axios.post(`${uri}/saveCheckout`, { params });
+  saveCheckout(data) {
+    return axios.post(`${uri}/saveCheckout`, data);
   },
 };

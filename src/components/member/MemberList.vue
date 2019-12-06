@@ -30,7 +30,8 @@
         </el-table-column>
         <el-table-column
           prop="memberPoint"
-          label="點數">
+          label="點數"
+          :formatter="formatterPrice">
         </el-table-column>
         <el-table-column
           prop="memberBirthDate"
@@ -131,7 +132,7 @@ export default {
       console.log(row);
     },
     async getTableData() {
-      const { data } = await apiMember.getByType('1+2');
+      const { data } = await apiMember.getByType('1+2+3+4+5+6+7+8+9');
       this.tableData = data.data;
       this.loading = false;
     },
@@ -141,6 +142,9 @@ export default {
     },
     formatterDate(row, { property }) {
       return this.$moment(row[property]).format('YYYY-MM-DD');
+    },
+    formatterPrice(row, { property }) {
+      return row[property].toLocaleString();
     },
   },
   async created() {

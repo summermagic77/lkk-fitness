@@ -197,7 +197,7 @@ export default {
         memberSex: '男性',
         memberPhone: '0987098765',
         memberLineId: 'test',
-        memberLineUrl: 'http',
+        memberLineUrl: '',
         memberMail: 'chiquitta.com@gmail.com',
         memberType: '一般會員',
         memberPoint: 0,

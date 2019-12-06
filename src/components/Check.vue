@@ -68,7 +68,7 @@
         <el-form-item prop="checkinMember">
           <el-input
             v-model="ruleForm.checkinMember"
-            :placeholder="`請輸入${userTypeLabel}${searchTypeLabel}搜尋`"
+            :placeholder="`請輸入${searchTypeLabel}搜尋`"
             class="mt-2 input-lg"
             :disabled="checkInType === 'LineUrl'"
           >
@@ -84,17 +84,23 @@
         </el-form-item>
       </el-form>
       <el-button type="primary" plain class="w-100" @click="submitForm('searchMemberForm')">
-        搜尋{{ userTypeLabel }}
+        搜尋
       </el-button>
       <div class="mt-4 text-center">
-        <el-link href="/member/create" type="info">建立會員</el-link>
-        <el-divider direction="vertical"></el-divider>
+        <el-link href="/create" type="info">建立新成員</el-link>
+        <!-- <el-divider direction="vertical"></el-divider>
         <el-link href="/employee/create" type="info">建立員工</el-link>
         <el-divider direction="vertical"></el-divider>
-        <el-link href="/coach/create" type="info">建立場租教練</el-link>
+        <el-link href="/coach/create" type="info">建立教練</el-link> -->
       </div>
     </el-col>
-    <el-col v-else-if="Object.keys(checkin).length === 0" :sm="12" :md="12" :lg="6" :xl="6">
+    <el-col
+      v-else-if="Object.keys(check).length === 0 && checkin"
+      :sm="12"
+      :md="12"
+      :lg="6"
+      :xl="6"
+    >
       <h2 class="font-weight-light">
           歡迎，{{ memberName }}
       </h2>
@@ -155,19 +161,20 @@
       </el-form>
     </el-col>
     <el-col v-else :sm="12" :md="12" :lg="6" :xl="6">
-      <h1>{{ memberName }}，歡迎入場</h1>
+      <h1>{{ memberName }}，{{ userTypeLabel }}</h1>
       <p class="text-black-50 font-weight-bold">
-        {{ checkinTypeMap[checkin.checkinType] }}
+        {{ checkinTypeMap[check.checkinType] || memberTypeMap[memberType]  }}
       </p>
-      <p class="">
+      <p v-if="checkin">
         使用
         <span class="font-weight-bold fs-2">
-          {{ checkin.checkinCost }}
+          {{ check.checkinCost }}
         </span>
         點/堂
       </p>
       <p class="font-weight-bold">
-        {{ checkin.checkinTime | moment('YYYY-MM-DD, HH:mm A') }}
+        <!-- {{ check.checkinTime | moment('YYYY-MM-DD, HH:mm A') }} -->
+        {{ checkTime }}
       </p>
     </el-col>
   </el-row>
@@ -191,7 +198,6 @@ export default {
       fullscreenLoading: false,
       scanQRcode: false,
       selections: {},
-      // checkInput: '0912345678',
       checkInType: 'Phone',
       searchType: [
         {
@@ -202,13 +208,10 @@ export default {
           label: '手機',
           value: 'Phone',
         },
-        // {
-        //   label: 'QR Code',
-        //   value: 'LineUrl',
-        // },
       ],
       member: {},
-      checkin: {},
+      check: {},
+      // checkout: {},
       ruleForm: {
         checkinMember: '0912345678',
         checkinType: null,
@@ -237,7 +240,16 @@ export default {
   },
   computed: {
     userTypeLabel() {
-      return this.$route.meta.typeLabel;
+      return this.$route.name;
+    },
+    checkin() {
+      return this.$route.meta.type === 'checkin';
+    },
+    checkout() {
+      return this.$route.meta.type === 'checkout';
+    },
+    checkTime() {
+      return this.$moment(this.check[`${this.$route.meta.type}Time`]).format('YYYY-MM-DD, HH:mm A');
     },
     searchTypeLabel() {
       return this.checkInType !== 'LineUrl' ? this.searchType.find(({ value }) => value === this.checkInType).label : '';
@@ -307,7 +319,6 @@ export default {
       );
       if (data.data === null) {
         // this.error = `查無此${this.userTypeLabel}，請確認資訊是否正確。`;
-        // this.error = data.message;
         this.$message({
           showClose: true,
           message: data.message,
@@ -330,7 +341,24 @@ export default {
           type: 'error',
         });
       } else {
-        this.checkin = data.data;
+        this.check = data.data;
+      }
+      this.fullscreenLoading = false;
+    },
+    async saveCheckout() {
+      this.fullscreenLoading = true;
+      const { data } = await apiCheckin.saveCheckout({
+        checkinMember: this.ruleForm.checkinMember,
+      });
+      const { code } = data;
+      if (code !== 0) {
+        this.$message({
+          showClose: true,
+          message: data.message,
+          type: 'error',
+        });
+      } else {
+        this.check = data.data;
       }
       this.fullscreenLoading = false;
     },
@@ -345,7 +373,11 @@ export default {
                 delete this.ruleForm[key];
               }
             });
-            this.saveCheckin();
+            if (this.checkin) {
+              this.saveCheckin();
+            } else {
+              this.saveCheckout();
+            }
           }
         }
       });
