@@ -3,7 +3,7 @@
     type="flex"
     :class="{
       'row-bg': true,
-      'h-100': true
+      'h-100': true,
     }"
     justify="center"
     align="middle"

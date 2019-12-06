@@ -1,7 +1,7 @@
 <template>
   <el-row
     type="flex"
-    class="row-bg h-100"
+    class="row-bg h-100 bg-light"
     justify="center"
     align="middle"
   >
