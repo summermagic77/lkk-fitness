@@ -15,9 +15,7 @@
       :md="12"
       :lg="6"
       :xl="6"
-    >
-      <!-- <div v-if="fullscreen" class="fullscreen">
-        <QrcodeStream @decode="onDecode" @init="onInit" class="mb-1" /> -->
+      >
       <div
         v-if="fullscreen"
         :class="{ 'fullscreen': fullscreen }"
@@ -85,23 +83,18 @@
           </el-input>
         </el-form-item>
       </el-form>
-      <!-- <el-alert
-        v-if="error"
-        :title="error"
-        type="error"
-        center
-        class="mb-1"
-      /> -->
       <el-button type="primary" plain class="w-100" @click="submitForm('searchMemberForm')">
         搜尋{{ userTypeLabel }}
       </el-button>
       <div class="mt-4 text-center">
-        <el-link href="/member/create" type="info">建立會員</el-link>・
-        <el-link href="/employee/create" type="info">建立員工</el-link>・
+        <el-link href="/member/create" type="info">建立會員</el-link>
+        <el-divider direction="vertical"></el-divider>
+        <el-link href="/employee/create" type="info">建立員工</el-link>
+        <el-divider direction="vertical"></el-divider>
         <el-link href="/coach/create" type="info">建立場租教練</el-link>
       </div>
     </el-col>
-    <el-col v-else :sm="12" :md="12" :lg="6" :xl="6">
+    <el-col v-else-if="Object.keys(checkin).length === 0" :sm="12" :md="12" :lg="6" :xl="6">
       <h2 class="font-weight-light">
           歡迎，{{ memberName }}
       </h2>
@@ -151,13 +144,6 @@
         <el-form-item v-if="[3, 4].includes(memberType)" prop="checkinCost">
           <el-input v-model="ruleForm.checkinCost" placeholder="請輸入金額" />
         </el-form-item>
-        <!-- <el-alert
-          v-if="error"
-          :title="error"
-          type="error"
-          center
-          class="mb-1"
-        /> -->
         <el-button
           :loading="fullscreenLoading"
           type="primary"
@@ -167,6 +153,22 @@
           進場 <i class="la la-sign-in-alt" />
         </el-button>
       </el-form>
+    </el-col>
+    <el-col v-else :sm="12" :md="12" :lg="6" :xl="6">
+      <h1>{{ memberName }}</h1>
+      <p class="text-black-50 font-weight-bold">
+        {{ checkinTypeMap[checkin.checkinType] }}
+      </p>
+      <p class="my-0">
+        使用
+        <span class="font-weight-bold fs-2">
+          {{ checkin.checkinCost }}
+        </span>
+        點/堂
+      </p>
+      <p class="font-weight-bold my-0">
+        {{ checkin.checkinTime | moment('YYYY-MM-DD, HH:mm A') }}
+      </p>
     </el-col>
   </el-row>
 </template>
@@ -244,6 +246,9 @@ export default {
       const { memberTypeMap = {} } = this.selections;
       return memberTypeMap;
     },
+    checkinTypeMap() {
+      return this.selections.checkinTypeMap;
+    },
     checkinTypeOptions() {
       const { checkinTypeMap = {} } = this.selections;
       let optionsArray = [1, 2, 3, 4, 5, 6];
@@ -317,7 +322,8 @@ export default {
     },
     async saveCheckin() {
       this.fullscreenLoading = true;
-      const { data, code } = await apiCheckin.saveCheckin(this.ruleForm);
+      const { data } = await apiCheckin.saveCheckin(this.ruleForm);
+      const { code } = data;
       if (code !== 0) {
         this.$message({
           showClose: true,

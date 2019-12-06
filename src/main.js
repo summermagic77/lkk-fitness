@@ -20,6 +20,8 @@ Vue.use(VueQrcodeReader);
 Vue.use(device);
 Vue.use(require('vue-moment'));
 
+Vue.moment().locale('zh-tw');
+
 Vue.component('default-layout', Default);
 
 new Vue({
