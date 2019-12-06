@@ -74,7 +74,7 @@
             </el-col>
           </el-row>
           <el-row :gutter="10">
-            <el-col :span="21">
+            <el-col :span="20">
               <el-form-item prop="memberLineId">
                 <el-input v-model="ruleForm.memberLineId" placeholder="LINE ID">
                   <!-- <div slot="suffix">
@@ -92,7 +92,7 @@
                 </el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="3">
+            <el-col :span="4">
               <el-form-item prop="memberLineUrl" class="qrcode mb-0">
                 <i
                   :class="{
@@ -193,17 +193,17 @@ export default {
         memberLineUrl: null,
       },
       ruleForm: {
-        memberName: '',
+        memberName: 'chiquitta',
         memberSex: '男性',
-        memberPhone: '',
-        memberLineId: '',
-        memberLineUrl: '',
-        memberMail: '',
+        memberPhone: '0987098765',
+        memberLineId: 'test',
+        memberLineUrl: 'http',
+        memberMail: 'chiquitta.com@gmail.com',
         memberType: '一般會員',
         memberPoint: 0,
         memberLesson: 0,
         memberTreat: 0,
-        memberBirthDate: '',
+        memberBirthDate: new Date(),
         memberJoinDate: new Date(),
         memberEffectDate: '',
       },
