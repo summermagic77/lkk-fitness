@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '@/views/Home.vue';
 import Checkin from '@/components/Checkin.vue';
+import Create from '@/components/Create.vue';
 
 import Member from '@/views/Member.vue';
 // import MemberCheckin from '@/components/member/MemberCheckin.vue';
@@ -131,7 +132,7 @@ const routes = [
   {
     path: '/create',
     name: '加入',
-    component: Checkin,
+    component: Create,
   },
   {
     path: '/record',

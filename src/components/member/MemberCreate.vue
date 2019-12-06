@@ -1,305 +1,74 @@
 <template>
-  <el-row
-    type="flex"
-    class="row-bg h-100"
-    justify="center"
-    align="middle"
-  >
-    <el-col :sm="12" :md="12" :lg="8" :xl="8">
-      <el-steps :active="activeStep" align-center class="mb-1">
-        <el-step title="基本資料" description="填寫會員資料" />
-        <el-step title="入會資訊" description="填寫入會資訊" />
-      </el-steps>
-      <el-form
-        v-loading="loading"
-        :model="ruleForm"
-        :rules="rules"
-        status-icon
-        ref="ruleForm"
-        :label-position="activeStep === 1 ? 'top' : 'left'"
-      >
-        <div v-if="activeStep === 0">
-          <el-form-item prop="memberName">
-            <el-input v-model="ruleForm.memberName" placeholder="姓名" />
-          </el-form-item>
-          <el-form-item prop="memberSex">
-            <el-radio-group v-model="ruleForm.memberSex" class="w-100">
-              <el-row :gutter="10">
-                <el-col
-                  v-for="(item, idx) in sex"
-                  :key="idx"
-                  :span="8"
-                >
-                  <el-radio
-                    border
-                    class="w-100"
-                    :label="item"
-                  />
-                </el-col>
-              </el-row>
-            </el-radio-group>
-          </el-form-item>
-          <el-row :gutter="10">
-            <el-col :span="12">
-              <el-form-item prop="memberBirthDate">
-                <el-date-picker
-                  v-model="ruleForm.memberBirthDate"
-                  type="date"
-                  placeholder="選擇生日"
-                  class="w-100"
-                  :editable="false"
-                  :picker-options="pickerOptions"
-                />
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item prop="memberPhone">
-                <el-input v-model="ruleForm.memberPhone" placeholder="手機號碼" />
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row :gutter="10">
-            <el-col :span="21">
-              <el-form-item prop="memberLineId">
-                <el-input v-model="ruleForm.memberLineId" placeholder="LINE ID" />
-                <!-- <QrcodeStream @decode="onDecode" @init="onInit" class="mb-1" /> -->
-              </el-form-item>
-            </el-col>
-            <el-col :span="2">
-              <el-form-item prop="memberLineUrl" class="mb-0">
-                <i
-                  :class="{
-                    'la': true,
-                    'la-qrcode': true,
-                    'fs-3': true,
-                    'text-info': !ruleForm.memberLineUrl,
-                    'text-success': ruleForm.memberLineUrl
-                  }"
-                  @click="scanQRcode = true; fullscreen = true;"
-                />
-                <el-input
-                  v-model="ruleForm.memberLineUrl"
-                  placeholder="LINE qrCode"
-                  style="display: none;"
-                />
-                <!-- <i v-if="ruleForm.memberLineUrl" class="el-icon-circle-check" />
-                <i v-else class="el-icon-circle-close text-danger" /> -->
-                <div
-                  v-if="scanQRcode"
-                  :class="{ 'fullscreen': fullscreen }"
-                  ref="wrapper"
-                  @fullscreenchange="onFullscreenChange"
-                >
-                  <QrcodeStream
-                    @decode="onDecode"
-                    @init="logErrors"
-                    class="mb-1"
-                  >
-                    <i
-                      @click="fullscreen = !fullscreen; scanQRcode = false;"
-                      class="las la-compress-arrows-alt text-white ml-1 mt-1 fs-2"
-                    />
-                  </QrcodeStream>
-                </div>
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-form-item prop="memberMail">
-            <el-input v-model="ruleForm.memberMail" placeholder="Email" />
-          </el-form-item>
-        </div>
-        <div v-else>
-          <el-form-item label="會員類型" prop="memberType">
-            <el-radio-group v-model="ruleForm.memberType" class="w-100">
-              <el-row :gutter="10">
-                <el-col
-                  v-for="(item, idx) in memberType"
-                  :key="idx"
-                  :span="12"
-                >
-                  <el-radio
-                    border
-                    class="w-100"
-                    :label="item"
-                  />
-                </el-col>
-              </el-row>
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item label="會員點數" prop="memberPoint">
-            <el-input-number
-              v-model="ruleForm.memberPoint"
-              :step="100"
-              placeholder="會員點數"
-              class="w-100"
-            />
-          </el-form-item>
-          <el-row :gutter="10">
-            <!-- <el-col :span="10">
-              <el-form-item label="會員點數" prop="memberPoint">
-                <el-input-number
-                  v-model="ruleForm.memberPoint"
-                  :step="100"
-                  placeholder="會員點數"
-                  class="w-100"
-                />
-              </el-form-item>
-            </el-col> -->
-            <el-col :span="12">
-              <el-form-item label="私人課程" prop="memberLesson">
-                <el-input-number
-                  v-model="ruleForm.memberLesson"
-                  :step="1"
-                  placeholder="私人課程"
-                  class="w-100"
-                />
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item label="治療課" prop="memberTreat">
-                <el-input-number
-                  v-model="ruleForm.memberTreat"
-                  :step="1"
-                  placeholder="治療課"
-                  class="w-100"
-                />
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row :gutter="10">
-            <el-col :span="12">
-              <el-form-item label="加入日期" prop="memberJoinDate">
-                <el-date-picker
-                  v-model="ruleForm.memberJoinDate"
-                  type="date"
-                  placeholder="選擇加入日期"
-                  class="w-100"
-                />
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item label="月費到期日" prop="memberEffectDate">
-                <el-date-picker
-                  v-model="ruleForm.memberEffectDate"
-                  type="date"
-                  placeholder="月費到期日"
-                  class="w-100"
-                />
-              </el-form-item>
-            </el-col>
-          </el-row>
-        </div>
-        <el-form-item class="mt-2">
-          <!-- <div v-if="activeStep === 1"> -->
-          <el-button
-            v-if="activeStep === 0"
-            type="primary"
-            plain
+  <div>
+    <el-form-item label="會員點數" prop="memberPoint">
+      <el-input-number
+        v-model="ruleForm.memberPoint"
+        :step="100"
+        placeholder="會員點數"
+        class="w-100"
+      />
+    </el-form-item>
+    <el-row :gutter="10">
+      <el-col :span="12">
+        <el-form-item label="私人課程" prop="memberLesson">
+          <el-input-number
+            v-model="ruleForm.memberLesson"
+            :step="1"
+            placeholder="私人課程"
             class="w-100"
-            @click="firstStep('ruleForm')"
-          >
-            下一步
-          </el-button>
-          <!-- </div> -->
-          <div v-else>
-            <el-button @click="activeStep--">上一步</el-button>
-            <el-button type="primary" @click="submitForm('ruleForm')" class="float-right">
-              建立會員資料
-            </el-button>
-          </div>
-          <!-- <el-button type="success" icon="el-icon-check" circle /> -->
+          />
         </el-form-item>
-      </el-form>
-    </el-col>
-  </el-row>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="治療課" prop="memberTreat">
+          <el-input-number
+            v-model="ruleForm.memberTreat"
+            :step="1"
+            placeholder="治療課"
+            class="w-100"
+          />
+        </el-form-item>
+      </el-col>
+    </el-row>
+    <el-row :gutter="10">
+      <el-col :span="12">
+        <el-form-item label="加入日期" prop="memberJoinDate">
+          <el-date-picker
+            v-model="ruleForm.memberJoinDate"
+            type="date"
+            placeholder="選擇加入日期"
+            class="w-100"
+          />
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="月費到期日" prop="memberEffectDate">
+          <el-date-picker
+            v-model="ruleForm.memberEffectDate"
+            type="date"
+            placeholder="月費到期日"
+            class="w-100"
+            :picker-options="pickerOptions"
+          />
+        </el-form-item>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>
-import apiSelections from '@/api/selections';
-import mixinQRcodeReader from '@/mixins/qrCodeReader.vue';
+// import apiSelections from '@/api/selections';
+// import mixinQRcodeReader from '@/mixins/qrCodeReader.vue';
 
 export default {
-  mixins: [mixinQRcodeReader],
+  props: {
+    ruleForm: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
   data() {
     return {
-      loading: true,
-      activeStep: 0,
-      scanQRcode: false,
-      selections: {},
-      ruleForm: {
-        memberName: '',
-        memberSex: '男性',
-        memberPhone: '',
-        memberLineId: '',
-        memberLineUrl: '',
-        memberMail: '',
-        memberType: '一般會員',
-        memberPoint: 0,
-        memberLesson: 0,
-        memberTreat: 0,
-        memberBirthDate: '',
-        memberJoinDate: '',
-        memberEffectDate: '',
-      },
-      rules: {
-        memberName: [
-          { required: true, message: '請輸入姓名', trigger: 'blur' },
-        ],
-        memberPhone: [
-          {
-            // type: 'tel',
-            required: true,
-            message: '請輸入手機',
-            trigger: 'blur',
-          },
-        ],
-        memberSex: [
-          { required: true, message: '請選擇性別', trigger: 'change' },
-        ],
-        memberLineId: [
-          { required: true, message: '請輸入LINE ID', trigger: 'blur' },
-        ],
-        memberMail: [
-          { required: true, message: '請輸入Email', trigger: 'blur' },
-          { type: 'email', message: '請輸入正確的Email', trigger: ['blur', 'change'] },
-        ],
-        memberType: [
-          { required: true, message: '請選擇類型', trigger: 'change' },
-        ],
-        memberPoint: [
-          { required: true, message: '請輸入點數', trigger: 'change' },
-        ],
-        memberLesson: [
-          { required: true, message: '請輸入點數', trigger: 'change' },
-        ],
-        memberTreat: [
-          { required: true, message: '請輸入點數', trigger: 'change' },
-        ],
-        memberBirthDate: [
-          {
-            type: 'date',
-            required: true,
-            message: '請選擇生日',
-            trigger: 'blur',
-          },
-        ],
-        memberJoinDate: [
-          {
-            type: 'date',
-            required: true,
-            message: '請選擇加入日期',
-            trigger: 'blur',
-          },
-        ],
-        memberEffectDate: [
-          {
-            type: 'date',
-            required: true,
-            message: '請選擇生效日期',
-            trigger: 'blur',
-          },
-        ],
-      },
       pickerOptions: {
         disabledDate(time) {
           return time.getTime() > Date.now();
@@ -308,42 +77,8 @@ export default {
     };
   },
   computed: {
-    sex() {
-      return this.selections.sexMap;
-    },
-    memberType() {
-      const { memberTypeMap = {} } = this.selections;
-      return [
-        memberTypeMap[Object.keys(memberTypeMap)[0]],
-        memberTypeMap[Object.keys(memberTypeMap)[1]],
-      ];
-    },
   },
   methods: {
-    firstStep(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.activeStep += 1;
-        }
-      });
-    },
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        console.dir(valid);
-        // if (valid) {
-        //   console.dir('submit!');
-        // } else {
-        //   console.log('error submit!!');
-        //   return false;
-        // }
-      });
-    },
-  },
-  async created() {
-    const { data } = await apiSelections.get();
-    this.selections = data.data;
-    this.loading = false;
-    // const { sexMap } = data.data;
   },
 };
 </script>
