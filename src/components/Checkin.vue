@@ -253,9 +253,9 @@ export default {
       const { checkinTypeMap = {} } = this.selections;
       let optionsArray = [1, 2, 3, 4, 5, 6];
       if ([5, 6, 7].includes(this.memberType)) {
-        optionsArray = [9];
+        optionsArray = [...optionsArray, ...[9]];
       } else if ([3, 4].includes(this.memberType)) {
-        optionsArray = [7, 8];
+        optionsArray = [...optionsArray, ...[7, 8]];
       }
       return optionsArray.map(el => (
         {
@@ -263,7 +263,6 @@ export default {
           label: checkinTypeMap[Object.keys(checkinTypeMap)[el - 1]],
         }
       ));
-      // return Object.entries(checkinTypeMap).map(e => ({ label: e[1], value: e[0] }));
     },
     groupClassTypeMap() {
       return this.selections.groupClassTypeMap;
