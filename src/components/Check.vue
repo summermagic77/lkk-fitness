@@ -204,7 +204,7 @@ export default {
       fullscreenLoading: false,
       scanQRcode: false,
       selections: {},
-      checkInType: 'Phone',
+      checkInType: 'LineId',
       searchType: [
         {
           label: 'LINE',
@@ -219,7 +219,7 @@ export default {
       check: {},
       // checkout: {},
       ruleForm: {
-        checkinMember: '',
+        checkinMember: 'testline4',
         checkinType: null,
         checkinGroupClass: null,
         checkinCoach: null,
