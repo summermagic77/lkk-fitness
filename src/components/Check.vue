@@ -163,21 +163,27 @@
       </el-form>
     </el-col> -->
     <el-col :sm="12" :md="12" :lg="6" :xl="6">
-      <!-- <h1>{{ memberName }}，{{ userTypeLabel }}</h1> -->
-      <h1 class="mb-2">coach_A，{{ userTypeLabel }}</h1>
+        <!-- <h1>{{ memberName }}，{{ userTypeLabel }}</h1> -->
+      <h1 class="mb-1">coach_A，{{ userTypeLabel }}</h1>
+      <el-card :body-style="{ padding: '10px' }" shadow="always">
         <p class="text-black-50 font-weight-bold mb-1">
-        <!-- {{ checkinTypeMap[check.checkinType] || memberTypeMap[memberType]  }} -->
-        一般會員
-      </p>
-      <p class="mb-0">
-        本次消費
-      </p>
-      <div>
-        <span class="font-weight-bolder my-0 fs-3">
-          1,000
-        </span>
-        <span class="text-black-50 font-weight-light">點數/堂</span>
-      </div>
+          <!-- {{ checkinTypeMap[check.checkinType] || memberTypeMap[memberType]  }} -->
+          一般會員
+        </p>
+        <p class="mb-0">
+          本次消費
+        </p>
+        <div>
+          <span class="font-weight-bolder my-0 fs-3">
+            1,000
+          </span>
+          <span class="text-black-50 font-weight-light">點數/堂</span>
+        </div>
+        <p class="font-weight-bold">
+          <!-- {{ check.checkinTime | moment('YYYY-MM-DD, HH:mm A') }} -->
+          {{ checkTime }}
+        </p>
+      </el-card>
       <!-- <el-card :body-style="{ padding: '0px' }" shadow="hover" class="bg-brand">
         <div class="d-flex">
           <h1 class="ml-1 text-white">
@@ -196,10 +202,10 @@
         </span>
         點/堂
       </p> -->
-      <p class="font-weight-bold">
-        <!-- {{ check.checkinTime | moment('YYYY-MM-DD, HH:mm A') }} -->
+      <!-- <p class="font-weight-bold">
+        {{ check.checkinTime | moment('YYYY-MM-DD, HH:mm A') }}
         {{ checkTime }}
-      </p>
+      </p> -->
     </el-col>
   </el-row>
 </template>
