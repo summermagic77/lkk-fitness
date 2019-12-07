@@ -9,7 +9,7 @@
     align="middle"
     v-loading.fullscreen.lock="fullscreenLoading"
   >
-    <!-- <el-col
+    <el-col
       v-if="Object.keys(member).length === 0"
       :sm="12"
       :md="12"
@@ -102,8 +102,8 @@
       :md="12"
       :lg="6"
       :xl="6"
-    > -->
-      <!-- <h2 class="font-weight-light">
+    >
+      <h2 class="font-weight-light">
           歡迎，{{ memberName }}
       </h2>
       <p class="text-black-50">
@@ -161,25 +161,24 @@
           進場 <i class="la la-sign-in-alt" />
         </el-button>
       </el-form>
-    </el-col> -->
-    <el-col :sm="12" :md="12" :lg="6" :xl="6">
-        <!-- <h1>{{ memberName }}，{{ userTypeLabel }}</h1> -->
-      <h1 class="mb-1">coach_A，{{ userTypeLabel }}</h1>
+    </el-col>
+    <el-col v-else :sm="12" :md="12" :lg="6" :xl="6">
+      <h1 class="mb-1">{{ memberName }}，{{ userTypeLabel }}</h1>
+      <!-- <h1 class="mb-1">coach_A，{{ userTypeLabel }}</h1> -->
       <el-card :body-style="{ padding: '10px' }" shadow="always">
         <p class="text-black-50 font-weight-bold mb-1">
-          <!-- {{ checkinTypeMap[check.checkinType] || memberTypeMap[memberType]  }} -->
-          一般會員
+          {{ checkinTypeMap[check.checkinType] || memberTypeMap[memberType]  }}
         </p>
         <p class="mb-0">
           本次消費
         </p>
         <div>
           <span class="font-weight-bolder my-0 fs-3">
-            1,000
+            {{ check.checkinCost }}
           </span>
           <span class="text-black-50 font-weight-light">點數/堂</span>
         </div>
-        <p class="font-weight-bold">
+        <p class="font-weight-bold mt-1">
           <!-- {{ check.checkinTime | moment('YYYY-MM-DD, HH:mm A') }} -->
           {{ checkTime }}
         </p>

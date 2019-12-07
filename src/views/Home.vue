@@ -3,7 +3,7 @@
     <div class="overlap-bg" />
     <!-- <el-link href="/" :underline="false"  class="mb-2"> -->
     <el-image
-      style="height: 120px;"
+      style="height: 160px;"
       :src="require('@/assets/lkk-color.png')"
       fit="contain"
     />
@@ -16,7 +16,7 @@
       align="middle"
     >
       <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-        <el-card :body-style="{ padding: '10px' }" class="bg-brand text-white mt-1">
+        <!-- <el-card :body-style="{ padding: '10px' }" class="bg-brand text-white mt-1">
           <el-row>
             <el-col :span="8">
               <p class="fs-2 my-0 font-weight-bold">
@@ -37,7 +37,7 @@
               <span class="my-0">教練</span>
             </el-col>
           </el-row>
-        </el-card>
+        </el-card> -->
         <!-- <el-badge :value="2" class="item mr-2" type="primary">
           <el-button>會員</el-button>
         </el-badge>
