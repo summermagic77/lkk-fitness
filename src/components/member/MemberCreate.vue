@@ -4,7 +4,7 @@
       <el-input-number
         v-model="ruleForm.memberPoint"
         :step="100"
-        placeholder="會員點數"
+        placeholder="點數"
         class="w-100"
       />
     </el-form-item>
@@ -14,7 +14,7 @@
           <el-input-number
             v-model="ruleForm.memberLesson"
             :step="1"
-            placeholder="私人課程"
+            placeholder="堂數"
             class="w-100"
           />
         </el-form-item>
@@ -24,7 +24,7 @@
           <el-input-number
             v-model="ruleForm.memberTreat"
             :step="1"
-            placeholder="治療課"
+            placeholder="堂數"
             class="w-100"
           />
         </el-form-item>
@@ -37,6 +37,7 @@
             v-model="ruleForm.memberJoinDate"
             type="date"
             placeholder="選擇加入日期"
+            :editable="false"
             class="w-100"
           />
         </el-form-item>
@@ -48,6 +49,7 @@
             type="date"
             placeholder="月費到期日"
             class="w-100"
+            :editable="false"
             :picker-options="pickerOptions"
           />
         </el-form-item>

@@ -1,13 +1,13 @@
 <template>
   <el-row
     type="flex"
-    class="row-bg h-100 bg-light"
+    class="row-bg h-100"
     justify="center"
     align="middle"
   >
     <el-col :sm="12" :md="12" :lg="8" :xl="8">
       <el-steps :active="activeStep" align-center class="mb-1">
-        <el-step title="建立類型" description="" />
+        <el-step title="類型" description="" />
         <el-step title="基本資料" description="" />
         <el-step title="詳細資訊" description="" />
       </el-steps>
@@ -20,10 +20,10 @@
         >
         <div v-if="activeStep === 0">
           <el-form-item
-            label="建立類型"
+            label="加入類型"
             prop="memberType"
           >
-            <el-select v-model="ruleForm.memberType" placeholder="請選擇建立類型" class="w-100">
+            <el-select v-model="ruleForm.memberType" placeholder="請選擇加入類型" class="w-100">
               <el-option
                 v-for="(item, idx) in memberTypeOptions"
                 :key="idx"
@@ -193,17 +193,17 @@ export default {
         memberLineUrl: null,
       },
       ruleForm: {
-        memberName: 'chiquitta',
+        memberName: '',
         memberSex: '男性',
-        memberPhone: '0987098765',
-        memberLineId: 'test',
+        memberPhone: '',
+        memberLineId: '',
         memberLineUrl: '',
-        memberMail: 'chiquitta.com@gmail.com',
+        memberMail: '',
         memberType: '一般會員',
-        memberPoint: 0,
-        memberLesson: 0,
-        memberTreat: 0,
-        memberBirthDate: new Date(),
+        // memberPoint: '',
+        // memberLesson: '',
+        // memberTreat: '',
+        memberBirthDate: '',
         memberJoinDate: new Date(),
         memberEffectDate: '',
       },
@@ -213,7 +213,6 @@ export default {
         ],
         memberPhone: [
           {
-            // type: 'tel',
             required: true,
             message: '請輸入手機',
             trigger: 'blur',
@@ -236,13 +235,28 @@ export default {
           { required: true, message: '請選擇類型', trigger: 'change' },
         ],
         memberPoint: [
-          { required: true, message: '請輸入點數', trigger: 'change' },
+          {
+            type: 'integer',
+            required: true,
+            message: '請輸入點數',
+            trigger: ['blur', 'change'],
+          },
         ],
         memberLesson: [
-          { required: true, message: '請輸入點數', trigger: 'change' },
+          {
+            type: 'integer',
+            required: true,
+            message: '請輸入堂數',
+            trigger: ['blur', 'change'],
+          },
         ],
         memberTreat: [
-          { required: true, message: '請輸入點數', trigger: 'change' },
+          {
+            type: 'integer',
+            required: true,
+            message: '請輸入堂數',
+            trigger: ['blur', 'change'],
+          },
         ],
         memberBirthDate: [
           {
