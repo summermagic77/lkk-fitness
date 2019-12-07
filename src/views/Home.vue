@@ -3,23 +3,42 @@
     <div class="overlap-bg" />
     <!-- <el-link href="/" :underline="false"  class="mb-2"> -->
     <el-image
-      style="height: 160px;"
+      style="height: 120px;"
       :src="require('@/assets/lkk-color.png')"
       fit="contain"
     />
     <!-- </el-link> -->
-    <!-- <el-row
+    <el-row
       :gutter="20"
       type="flex"
-      class="row-bg h-100 mt-2"
+      class="row-bg h-100 mt-1"
       justify="center"
       align="middle"
     >
       <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-        <el-card shadow="always">
-          場內資訊
+        <el-card :body-style="{ padding: '10px' }" class="bg-brand text-white mt-1">
+          <el-row>
+            <el-col :span="8">
+              <p class="fs-2 my-0 font-weight-bold">
+                10
+              </p>
+              <span class="my-0">會員</span>
+            </el-col>
+            <el-col :span="8">
+              <p class="fs-2 my-0 font-weight-bold">
+                8
+              </p>
+              <span class="my-0">員工</span>
+            </el-col>
+            <el-col :span="8">
+              <p class="fs-2 my-0 font-weight-bold">
+                2
+              </p>
+              <span class="my-0">教練</span>
+            </el-col>
+          </el-row>
         </el-card>
-        <el-badge :value="2" class="item mr-2" type="primary">
+        <!-- <el-badge :value="2" class="item mr-2" type="primary">
           <el-button>會員</el-button>
         </el-badge>
         <el-badge :value="5" class="item mr-2" type="primary">
@@ -27,13 +46,13 @@
         </el-badge>
         <el-badge :value="2" class="item" type="primary">
           <el-button>教練</el-button>
-        </el-badge>
+        </el-badge> -->
       </el-col>
-    </el-row> -->
+    </el-row>
     <el-row
       :gutter="20"
       type="flex"
-      class="row-bg h-100 mt-2"
+      class="row-bg h-100"
       justify="center"
       align="middle"
     >
