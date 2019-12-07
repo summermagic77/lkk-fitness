@@ -33,14 +33,20 @@
           />
         </QrcodeStream>
       </div>
-      <div class="text-center">
+      <div>
         <el-image
           v-if="$device.mobile"
-          style="height: 50px;"
+          style="!height: 30px;"
           :src="require('@/assets/lkk-logo.png')"
-          fit="contain"
-          class="mb-4"
+          fit="fill"
+          class="w-30 mb-2"
         />
+        <h1 class="mb-0">
+          入場 <i class="las la-sign-in-alt text-brand" />
+        </h1>
+        <p class="text-black-50 mb-2">
+          使用手機號碼、LINE ID 或 QRcode 進場。
+        </p>
         <el-radio-group v-model="checkInType" class="w-100">
           <el-row :gutter="10">
             <el-col
@@ -68,7 +74,7 @@
         <el-form-item prop="checkinMember">
           <el-input
             v-model="ruleForm.checkinMember"
-            :placeholder="`請輸入${searchTypeLabel}搜尋`"
+            :placeholder="`請輸入 ${searchTypeLabel} 搜尋`"
             class="mt-2 input-lg"
             :disabled="checkInType === 'LineUrl'"
           >
@@ -213,7 +219,7 @@ export default {
       check: {},
       // checkout: {},
       ruleForm: {
-        checkinMember: '0912345678',
+        checkinMember: '',
         checkinType: null,
         checkinGroupClass: null,
         checkinCoach: null,

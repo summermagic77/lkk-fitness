@@ -69,7 +69,7 @@ const routes = [
   },
   {
     path: '/checkin',
-    name: '進場',
+    name: '入場',
     meta: { type: 'checkin' },
     component: Check,
   },

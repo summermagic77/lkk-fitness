@@ -101,14 +101,11 @@ body {
   justify-content: space-between;
   padding: 0.5rem 0.8rem;
 }
-.bg-lkk {
-  background-color: #29526b;
-}
-.home-header {
+/* .home-header {
   background-color: #29526b;
   height: 50% !important;
 }
 .home-main {
   margin-top: -298px;
-}
+} */
 </style>
