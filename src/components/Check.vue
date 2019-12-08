@@ -47,7 +47,7 @@
           <i v-else class="las la-door-open text-brand" />
         </h1>
         <p class="text-black-50 mb-2">
-          使用手機號碼、LINE ID 或 QRcode {{ userTypeLabel }}。
+          輸入手機號碼、LINE ID 或 QRcode {{ userTypeLabel }}。
         </p>
         <el-radio-group v-model="checkInType" class="w-100">
           <el-row :gutter="10">
@@ -91,8 +91,14 @@
           </el-input>
         </el-form-item>
       </el-form>
-      <el-button type="primary" plain class="w-100" @click="submitForm('searchMemberForm')">
-        搜尋{{ userTypeLabel }}
+      <el-button
+        type="primary"
+        :plain="checkin"
+        class="w-100"
+        @click="submitForm('searchMemberForm')"
+      >
+        <span v-if="checkin">搜尋會員</span>
+        <span v-else>{{ userTypeLabel }}</span>
       </el-button>
       <div class="mt-4 text-center">
         <el-link href="/create" type="info">加入新成員</el-link>
