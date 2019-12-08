@@ -42,7 +42,6 @@
           class="w-30 mb-2"
         />
         <h1 class="mb-0">
-          <!-- <span v-if="checkin">歡迎</span> -->
           {{ userTypeLabel }}
           <i v-if="checkin" class="las la-sign-in-alt text-brand" />
           <i v-else class="las la-door-open text-brand" />
@@ -111,7 +110,7 @@
       :md="12"
       :lg="6"
       :xl="6"
-    >
+      >
       <h2 class="font-weight-light">
           歡迎，{{ memberName }}
       </h2>
@@ -172,48 +171,33 @@
       </el-form>
     </el-col>
     <el-col v-else :sm="12" :md="12" :lg="6" :xl="6">
-      <h1 class="mb-1">{{ memberName }}，{{ userTypeLabel }}</h1>
-      <!-- <h1 class="mb-1">coach_A，{{ userTypeLabel }}</h1> -->
-      <el-card :body-style="{ padding: '10px' }" shadow="always">
-        <p class="text-black-50 font-weight-bold mb-1">
-          {{ checkinTypeMap[check.checkinType] || memberTypeMap[memberType]  }}
+      <!-- <h1 class="mb-1">{{ memberName }}，{{ userTypeLabel }}</h1> -->
+      <h1 class="mb-0">Chiquitta，{{ userTypeLabel }}</h1>
+      <!-- <el-card :body-style="{ padding: '10px' }" shadow="always"> -->
+      <p class="text-black-50 mt-0 mb-3">
+        {{ checkinTypeMap[check.checkinType] || memberTypeMap[memberType]  }}
+        <!-- 一般會員 -->
+      </p>
+      <div v-if="checkin">
+        <p class="mb-0">
+          本次消費
         </p>
-        <div v-if="checkin">
-          <p class="mb-0">
-            本次消費
-          </p>
-          <span class="font-weight-bolder my-0 fs-3">
-            {{ check.checkinCost }}
-          </span>
-          <span class="text-black-50 font-weight-light">點數/堂</span>
-        </div>
-        <p class="font-weight-bold mt-1">
-          <!-- {{ check.checkinTime | moment('YYYY-MM-DD, HH:mm A') }} -->
-          {{ checkTime }}
-        </p>
-      </el-card>
-      <!-- <el-card :body-style="{ padding: '0px' }" shadow="hover" class="bg-brand">
-        <div class="d-flex">
-          <h1 class="ml-1 text-white">
-            1,000
-          </h1>
-          <h4 class="mr-1 ml-auto text-white">
-            點數/堂
-          </h4>
-        </div>
-      </el-card> -->
-      <!-- <p v-if="checkin">
-        使用
-        <span class="font-weight-bold fs-2">
+        <span class="font-weight-bolder my-0 fs-3">
           {{ check.checkinCost }}
-          100
+          <!-- 1,000 -->
         </span>
-        點/堂
-      </p> -->
-      <!-- <p class="font-weight-bold">
-        {{ check.checkinTime | moment('YYYY-MM-DD, HH:mm A') }}
+        <span class="text-black-50 font-weight-light">點數/堂</span>
+      </div>
+      <p class="font-weight-bold mt-1">
+        <!-- {{ check.checkinTime | moment('YYYY-MM-DD, HH:mm A') }} -->
         {{ checkTime }}
-      </p> -->
+      </p>
+      <div class="text-center">
+        <el-button class="w-95 fixed-bottom" style="margin: 10px">
+          回首頁
+        </el-button>
+      </div>
+      <!-- </el-card> -->
     </el-col>
   </el-row>
 </template>
