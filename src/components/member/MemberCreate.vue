@@ -50,7 +50,7 @@
             placeholder="月費到期日"
             class="w-100"
             :editable="false"
-            :picker-options="pickerOptions"
+            :picker-options="pickerDisableAfter"
           />
         </el-form-item>
       </el-col>
@@ -71,9 +71,14 @@ export default {
   },
   data() {
     return {
-      pickerOptions: {
+      // pickerDisableBefore: {
+      //   disabledDate(time) {
+      //     return time.getTime() > Date.now();
+      //   },
+      // },
+      pickerDisableAfter: {
         disabledDate(time) {
-          return time.getTime() > Date.now();
+          return time.getTime() < Date.now();
         },
       },
     };

@@ -41,15 +41,13 @@
             <el-radio-group v-model="ruleForm.memberSex" class="w-100">
               <el-row :gutter="10">
                 <el-col
-                  v-for="(item, idx) in sex"
+                  v-for="(item, idx) in sexOptions"
                   :key="idx"
                   :span="8"
                 >
-                  <el-radio
-                    border
-                    class="w-100"
-                    :label="item"
-                  />
+                  <el-radio border class="w-100" :label="item.value">
+                    {{ item.label }}
+                  </el-radio>
                 </el-col>
               </el-row>
             </el-radio-group>
@@ -174,6 +172,7 @@
 </template>
 
 <script>
+import apiMember from '@/api/member';
 import MemberCreate from '@/components/member/MemberCreate.vue';
 import apiSelections from '@/api/selections';
 import mixinQRcodeReader from '@/mixins/qrCodeReader.vue';
@@ -193,19 +192,20 @@ export default {
         memberLineUrl: null,
       },
       ruleForm: {
-        memberName: '',
-        memberSex: '男性',
-        memberPhone: '',
-        memberLineId: '',
-        memberLineUrl: '',
-        memberMail: '',
-        memberType: '一般會員',
+        memberName: 'chiquitta',
+        memberSex: '1',
+        memberPhone: '0998563786',
+        memberLineId: 'chiquitta',
+        memberLineUrl: 'http',
+        memberMail: 'chiquitta@gmail.com',
+        memberType: '',
         // memberPoint: '',
         // memberLesson: '',
         // memberTreat: '',
         memberBirthDate: '',
         memberJoinDate: new Date(),
-        memberEffectDate: '',
+        // memberEffectDate: new Date().setMonth(new Date().getMonth() + 1),
+        memberEffectDate: new Date(),
       },
       rules: {
         memberName: [
@@ -291,8 +291,9 @@ export default {
     };
   },
   computed: {
-    sex() {
-      return this.selections.sexMap;
+    sexOptions() {
+      const { sexMap = {} } = this.selections;
+      return Object.entries(sexMap).map(e => ({ label: e[1], value: e[0] }));
     },
     memberTypeOptions() {
       const { memberTypeMap = {} } = this.selections;
@@ -318,9 +319,30 @@ export default {
         }
       });
     },
+    async saveMember() {
+      this.fullscreenLoading = true;
+      const { data } = await apiMember.saveMember(this.ruleForm);
+      const { code } = data;
+      if (code !== 0) {
+        this.$message({
+          showClose: true,
+          message: data.message,
+          type: 'error',
+        });
+      } else {
+        this.$message({
+          showClose: true,
+          message: '恭喜你，加入成功。',
+          type: 'success',
+        });
+      }
+      this.fullscreenLoading = false;
+    },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
-        console.dir(valid);
+        if (valid) {
+          console.dir(this.ruleForm);
+        }
         // if (valid) {
         //   console.dir('submit!');
         // } else {
@@ -334,7 +356,6 @@ export default {
     const { data } = await apiSelections.get();
     this.selections = data.data;
     this.loading = false;
-    // const { sexMap } = data.data;
   },
 };
 </script>

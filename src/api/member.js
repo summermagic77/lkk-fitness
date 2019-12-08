@@ -12,7 +12,7 @@ export default {
   getByType(memberType) {
     return axios.get(`${uri}/getByType/${memberType}`);
   },
-  saveMember(params) {
-    return axios.post(`${uri}/saveMember`, { params });
+  saveMember(data) {
+    return axios.post(`${uri}/saveMember`, data);
   },
 };
