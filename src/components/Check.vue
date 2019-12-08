@@ -42,6 +42,7 @@
           class="w-30 mb-2"
         />
         <h1 class="mb-0">
+          <!-- <span v-if="checkin">歡迎</span> -->
           {{ userTypeLabel }}
           <i v-if="checkin" class="las la-sign-in-alt text-brand" />
           <i v-else class="las la-door-open text-brand" />
