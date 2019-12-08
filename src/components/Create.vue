@@ -341,14 +341,9 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.dir(this.ruleForm);
+          // console.dir(this.ruleForm);
+          this.saveMember();
         }
-        // if (valid) {
-        //   console.dir('submit!');
-        // } else {
-        //   console.log('error submit!!');
-        //   return false;
-        // }
       });
     },
   },
