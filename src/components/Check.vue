@@ -171,10 +171,10 @@
         <p class="text-black-50 font-weight-bold mb-1">
           {{ checkinTypeMap[check.checkinType] || memberTypeMap[memberType]  }}
         </p>
-        <p class="mb-0">
-          本次消費
-        </p>
-        <div>
+        <div v-if="checkin">
+          <p class="mb-0">
+            本次消費
+          </p>
           <span class="font-weight-bolder my-0 fs-3">
             {{ check.checkinCost }}
           </span>

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-link href="/member/create" class="float-right mb-2">
-      建立新會員
+    <el-link href="/create" class="float-right mb-2">
+      <i class="el-icon-plus" /> 建立新會員
     </el-link>
     <div v-if="!$device.mobile">
       <el-table
@@ -79,17 +79,28 @@
         suffix-icon="el-icon-search"
         class="mb-1"
       />
-      <div v-infinite-scroll="load" style="overflow:auto">
+      <div
+        v-loading="loading"
+        v-infinite-scroll="load"
+        infinite-scroll-disabled="disabled"
+        style="overflow:auto"
+      >
         <el-card
           v-for="(item, idx) in tableData"
           :key="idx"
-          :body-style="{ padding: '5px', display: 'flex' }"
-          shadow="always"
+          :body-style="{ padding: '5px' }"
+          shadow="hover"
+          class="mb-1"
         >
-          <p>
-            {{ item.memberName }}
+          <div class="d-flex">
+            <p class="font-weight-bold">
+              {{ item.memberName }}
+            </p>
+            <el-button type="text" size="small" class="ml-auto">編輯</el-button>
+          </div>
+          <p class="text-black-50 my-0">
+            {{ memberTypeMap[item.memberType] }}
           </p>
-          <el-button type="text" size="small" class="ml-auto">編輯</el-button>
         </el-card>
       </div>
     </div>
@@ -108,36 +119,56 @@ export default {
   data() {
     return {
       loading: true,
+      count: 0,
       search: '',
+      lists: [],
       tableData: [],
       selections: {},
     };
   },
   computed: {
+    noMore() {
+      return this.count >= this.total - 1;
+    },
+    disabled() {
+      return this.loading || this.noMore;
+    },
     sex() {
       return this.selections.sexMap || {};
     },
     total() {
-      return this.tableData.length;
+      return this.lists.length;
+    },
+    memberTypeMap() {
+      return this.selections.memberTypeMap;
     },
   },
   methods: {
-    goBack() {
-      this.$router.go(-1);
-    },
     load() {
-      console.log('load');
+      this.loading = true;
+      setTimeout(() => {
+        this.count += 2;
+        this.loadMoreData();
+      }, 2000);
     },
     handleClick(row) {
       console.log(row);
     },
+    loadMoreData() {
+      this.tableData.push(this.lists[this.count - 1]);
+      if (!this.noMore) {
+        this.tableData.push(this.lists[this.count]);
+      }
+      this.loading = false;
+    },
     async getTableData() {
       const { data } = await apiMember.getByType('1+2+3+4+5+6+7+8+9');
-      this.tableData = data.data;
+      const [first, second] = data.data;
+      this.tableData = [first, second];
+      this.lists = data.data;
       this.loading = false;
     },
     formatterSex(row, { property }) {
-      // console.dir(property)
       return this.sex[row[property]];
     },
     formatterDate(row, { property }) {
