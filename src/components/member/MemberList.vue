@@ -53,8 +53,14 @@
           label="操作"
           width="100">
           <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-            <el-button type="text" size="small">編輯</el-button>
+            <el-link
+              :href="`/member/${scope.row.memberPhone}`"
+              size="small"
+              class="ml-auto"
+            >
+              查看
+          </el-link>
+            <!-- <el-button type="text" size="small">編輯</el-button> -->
           </template>
         </el-table-column>
       </el-table>
@@ -96,7 +102,13 @@
             <p class="font-weight-bold">
               {{ item.memberName }}
             </p>
-            <el-button type="text" size="small" class="ml-auto">編輯</el-button>
+            <el-link
+              :href="`/${item.memberPhone}`"
+              size="small"
+              class="ml-auto"
+            >
+              編輯
+          </el-link>
           </div>
           <p class="text-black-50 my-0">
             {{ memberTypeMap[item.memberType] }}

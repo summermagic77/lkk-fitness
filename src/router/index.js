@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '@/views/Home.vue';
 import Check from '@/components/Check.vue';
 import Create from '@/components/Create.vue';
+import Detail from '@/components/Detail.vue';
 
 import Member from '@/views/Member.vue';
 import MemberList from '@/components/member/MemberList.vue';
@@ -35,6 +36,11 @@ const routes = [
         path: '',
         name: '會員列表',
         component: MemberList,
+      },
+      {
+        path: ':id',
+        name: '會員詳情',
+        component: Detail,
       },
     ],
   },
