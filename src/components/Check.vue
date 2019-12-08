@@ -42,10 +42,12 @@
           class="w-30 mb-2"
         />
         <h1 class="mb-0">
-          入場 <i class="las la-sign-in-alt text-brand" />
+          {{ userTypeLabel }}
+          <i v-if="checkin" class="las la-sign-in-alt text-brand" />
+          <i v-else class="las la-door-open text-brand" />
         </h1>
         <p class="text-black-50 mb-2">
-          使用手機號碼、LINE ID 或 QRcode 進場。
+          使用手機號碼、LINE ID 或 QRcode {{ userTypeLabel }}。
         </p>
         <el-radio-group v-model="checkInType" class="w-100">
           <el-row :gutter="10">
@@ -90,10 +92,10 @@
         </el-form-item>
       </el-form>
       <el-button type="primary" plain class="w-100" @click="submitForm('searchMemberForm')">
-        搜尋
+        搜尋{{ userTypeLabel }}
       </el-button>
       <div class="mt-4 text-center">
-        <el-link href="/create" type="info">建立新成員</el-link>
+        <el-link href="/create" type="info">加入新成員</el-link>
       </div>
     </el-col>
     <el-col
