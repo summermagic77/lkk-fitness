@@ -39,6 +39,7 @@
             placeholder="選擇加入日期"
             :editable="false"
             class="w-100"
+            value-format="yyyy-MM-dd"
           />
         </el-form-item>
       </el-col>
@@ -51,6 +52,7 @@
             class="w-100"
             :editable="false"
             :picker-options="pickerDisableAfter"
+            value-format="yyyy-MM-dd"
           />
         </el-form-item>
       </el-col>
@@ -60,7 +62,6 @@
 
 <script>
 // import apiSelections from '@/api/selections';
-// import mixinQRcodeReader from '@/mixins/qrCodeReader.vue';
 
 export default {
   props: {
@@ -78,7 +79,7 @@ export default {
       // },
       pickerDisableAfter: {
         disabledDate(time) {
-          return time.getTime() < Date.now();
+          return time.getTime() < Date.now() - 24 * 60 * 60 * 1000;
         },
       },
     };

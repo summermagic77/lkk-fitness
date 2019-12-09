@@ -18,24 +18,8 @@
         ref="ruleForm"
         :label-position="activeStep === 1 ? 'top' : 'left'"
         >
-        <!-- <div v-if="activeStep === 0">
-          <el-form-item
-            label="加入類型"
-            prop="memberType"
-          >
-            <el-select v-model="ruleForm.memberType" placeholder="請選擇加入類型" class="w-100">
-              <el-option
-                v-for="(item, idx) in memberTypeOptions"
-                :key="idx"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
-          </el-form-item>
-        </div> -->
         <div v-if="activeStep === 0">
           <el-form-item
-            label="加入類型"
             prop="memberType"
           >
             <el-select v-model="ruleForm.memberType" placeholder="請選擇加入類型" class="w-100">
@@ -75,6 +59,7 @@
                   class="w-100"
                   :editable="false"
                   :picker-options="pickerOptions"
+                  value-format="yyyy-MM-dd"
                 />
               </el-form-item>
             </el-col>
@@ -85,25 +70,13 @@
             </el-col>
           </el-row>
           <el-row :gutter="10">
-            <el-col :span="20">
+            <el-col :span="21">
               <el-form-item prop="memberLineId">
                 <el-input v-model="ruleForm.memberLineId" placeholder="LINE ID">
-                  <!-- <div slot="suffix">
-                    <i
-                      :class="{
-                        'la': true,
-                        'la-qrcode': true,
-                        'fs-3': true,
-                        'text-info': !ruleForm.memberLineUrl,
-                        'text-success': ruleForm.memberLineUrl,
-                      }"
-                      @click="openFullScreenScanner"
-                    />
-                  </div> -->
                 </el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="4">
+            <el-col :span="3">
               <el-form-item prop="memberLineUrl" class="qrcode mb-0">
                 <i
                   :class="{
@@ -144,20 +117,19 @@
           </el-form-item>
         </div>
         <MemberCreate
-          v-else-if="activeStep === 2"
+          v-else
           :ruleForm.sync="ruleForm"
         />
         <el-form-item class="mt-2">
           <el-button
-            v-if="[1, 2].includes(activeStep)"
+            v-if="[1].includes(activeStep)"
             @click="activeStep--"
             plain
-            icon="el-icon-back"
           >
             上一步
           </el-button>
           <el-button
-            v-if="[0, 1].includes(activeStep)"
+            v-if="[0].includes(activeStep)"
             type="primary"
             :class="{
               'w-100': activeStep === 0,
@@ -166,18 +138,16 @@
             @click="firstStep('ruleForm')"
           >
             下一步
-            <i class="el-icon-right el-icon--right"></i>
+            <!-- <i class="el-icon-right el-icon--right"></i> -->
           </el-button>
           <el-button
-            v-if="activeStep === 2"
+            v-if="activeStep === 1"
             type="primary"
             @click="submitForm('ruleForm')"
             class="float-right"
-            icon="el-icon-plus"
           >
-            建立會員資料
+            {{ saveBtnLabel }}資料
           </el-button>
-          <!-- <el-button type="success" icon="el-icon-check" circle /> -->
         </el-form-item>
       </el-form>
     </el-col>
@@ -199,14 +169,13 @@ export default {
     return {
       loading: true,
       activeStep: 0,
-      scanQRcode: false,
       selections: {},
       errors: {
         memberLineUrl: null,
       },
       ruleForm: {
         memberName: '',
-        memberSex: '1',
+        memberSex: '',
         memberPhone: '',
         memberLineId: '',
         memberLineUrl: '',
@@ -218,7 +187,7 @@ export default {
         memberBirthDate: '',
         memberJoinDate: new Date(),
         // memberEffectDate: new Date().setMonth(new Date().getMonth() + 1),
-        memberEffectDate: new Date(),
+        memberEffectDate: '',
       },
       rules: {
         memberName: [
@@ -234,12 +203,12 @@ export default {
         memberSex: [
           { required: true, message: '請選擇性別', trigger: 'change' },
         ],
-        memberLineId: [
-          { required: true, message: '請輸入LINE ID', trigger: 'blur' },
-        ],
-        memberLineUrl: [
-          { required: true, message: '請掃碼', trigger: 'change' },
-        ],
+        // memberLineId: [
+        //   { required: true, message: '請輸入LINE ID', trigger: 'blur' },
+        // ],
+        // memberLineUrl: [
+        //   { required: true, message: '請掃碼', trigger: 'change' },
+        // ],
         memberMail: [
           { required: true, message: '請輸入Email', trigger: 'blur' },
           { type: 'email', message: '請輸入正確的Email', trigger: ['blur', 'change'] },
@@ -273,7 +242,7 @@ export default {
         ],
         memberBirthDate: [
           {
-            type: 'date',
+            // type: 'date',
             required: true,
             message: '請選擇生日',
             trigger: 'blur',
@@ -281,7 +250,7 @@ export default {
         ],
         memberJoinDate: [
           {
-            type: 'date',
+            // type: 'date',
             required: true,
             message: '請選擇加入日期',
             trigger: 'blur',
@@ -289,7 +258,7 @@ export default {
         ],
         memberEffectDate: [
           {
-            type: 'date',
+            // type: 'date',
             required: true,
             message: '請選擇生效日期',
             trigger: 'blur',
@@ -306,11 +275,14 @@ export default {
   computed: {
     sexOptions() {
       const { sexMap = {} } = this.selections;
-      return Object.entries(sexMap).map(e => ({ label: e[1], value: e[0] }));
+      return Object.entries(sexMap).map(e => ({ label: e[1], value: Number(e[0]) }));
     },
     memberTypeOptions() {
       const { memberTypeMap = {} } = this.selections;
-      return Object.entries(memberTypeMap).map(e => ({ label: e[1], value: e[0] }));
+      return Object.entries(memberTypeMap).map(e => ({ label: e[1], value: Number(e[0]) }));
+    },
+    saveBtnLabel() {
+      return this.$route.name;
     },
   },
   methods: {
@@ -345,7 +317,7 @@ export default {
       } else {
         this.$message({
           showClose: true,
-          message: '恭喜你，加入成功。',
+          message: data.message,
           type: 'success',
         });
       }
@@ -354,15 +326,23 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          // console.dir(this.ruleForm);
           this.saveMember();
         }
       });
     },
   },
   async created() {
-    const { data } = await apiSelections.get();
-    this.selections = data.data;
+    const { data: { data = {} } } = await apiSelections.get();
+    this.selections = data;
+
+    if (this.$route.params.id) {
+      const info = await apiMember.getByKey(
+        'phone',
+        { memberPhone: this.$route.params.id },
+      );
+      this.ruleForm = info.data.data;
+    }
+
     this.loading = false;
   },
 };

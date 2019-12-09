@@ -78,26 +78,15 @@ export default {
 html {
   height: 100%;
   width: 100%;
-  overflow:hidden;
+  overflow: hidden;
+  touch-action: manipulation;
 }
 body {
   border: 0; margin: 0; padding: 0;
-  /* font-family: 'Lato'; */
   height: 100%;
   width: 100%;
-  /* background: rgb(101,31,87);
-  background:
-    linear-gradient(45deg,
-    rgba(101,31,87,1) 0%,
-    rgba(225,113,87,1) 48%,
-    rgba(249,248,113,1) 100%); */
+  touch-action: manipulation;
 }
-/* .logo {
-  align-self: center;
-  color: #fff;
-  font-weight: bold;
-  font-family: 'Lato'
-} */
 .main-nav {
   display: flex;
   justify-content: space-between;
@@ -108,6 +97,6 @@ body {
   height: 50% !important;
 }
 .home-main {
-  margin-top: -338px;
+  margin-top: -228px;
 }
 </style>

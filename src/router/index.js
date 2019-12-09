@@ -2,8 +2,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '@/views/Home.vue';
 import Check from '@/components/Check.vue';
-import Create from '@/components/Create.vue';
-import Detail from '@/components/Detail.vue';
+import CreateAndUpdate from '@/components/CreateAndUpdate.vue';
+// import Detail from '@/components/Detail.vue';
 import Search from '@/components/Search.vue';
 
 import Member from '@/views/Member.vue';
@@ -40,8 +40,9 @@ const routes = [
       },
       {
         path: ':id',
-        name: '會員詳情',
-        component: Detail,
+        name: '更新',
+        // meta: { typeLabel: '更新' },
+        component: CreateAndUpdate,
       },
     ],
   },
@@ -99,7 +100,7 @@ const routes = [
   {
     path: '/create',
     name: '加入',
-    component: Create,
+    component: CreateAndUpdate,
   },
   {
     path: '/record',

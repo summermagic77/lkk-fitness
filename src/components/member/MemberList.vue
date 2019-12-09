@@ -3,7 +3,7 @@
     <el-link href="/create" class="float-right mb-2">
       <i class="el-icon-plus" /> 建立新會員
     </el-link>
-    <div v-if="!$device.mobile">
+    <div>
       <el-table
         v-loading="loading"
         :data="lists"
@@ -15,15 +15,19 @@
           label="姓名">
         </el-table-column>
         <el-table-column
+          prop="memberType"
+          label="類型">
+        </el-table-column> -->
+        <el-table-column
           prop="memberPhone"
           label="電話">
         </el-table-column>
-        <el-table-column
+        <!-- <el-table-column
           prop="memberSex"
           label="性別"
           :formatter="formatterSex">
-        </el-table-column>
-        <el-table-column
+        </el-table-column> -->
+        <!-- <el-table-column
           prop="memberType"
           label="等級">
         </el-table-column>
@@ -31,47 +35,47 @@
           prop="memberPoint"
           label="點數"
           :formatter="formatterPrice">
-        </el-table-column>
-        <el-table-column
+        </el-table-column> -->
+        <!-- <el-table-column
           prop="memberBirthDate"
           label="生日"
           :formatter="formatterDate">
-        </el-table-column>
-        <el-table-column
+        </el-table-column> -->
+        <!-- <el-table-column
           prop="memberJoinDate"
           label="加入時間"
           :formatter="formatterDate">
-        </el-table-column>
-        <el-table-column
+        </el-table-column> -->
+        <!-- <el-table-column
           prop="memberCheckDate"
           label="最近進場時間"
           width="170"
           :formatter="formatterDateTime">
-          <!-- <template slot-scope="scope">
+          <template slot-scope="scope">
             <i class="el-icon-time"></i>
             <span>
               {{ scope.row.memberCheckDate || new Date() | moment('YYYY-MM-DD, HH:mm A') }}
             </span>
-          </template> -->
-        </el-table-column>
+          </template>
+        </el-table-column> -->
         <el-table-column
           fixed="right"
           label="操作"
           width="150">
           <template slot-scope="scope">
-            <el-button
+            <!-- <el-button
               size="mini"
               type="primary"
               plain
               @click="handleClick(scope.row)"
             >
               查看
-          </el-button>
+          </el-button> -->
           <el-button
             size="mini"
-            type="info"
+            type="primary"
             plain
-            @click="handleEdit(scope.$index, scope.row)">編輯</el-button>
+            @click="handleEdit(scope.row)">編輯</el-button>
             <!-- <el-button type="text" size="small">編輯</el-button> -->
           </template>
         </el-table-column>
@@ -85,12 +89,12 @@
         </el-pagination>
       </div>
     </div>
-    <div v-else>
-      <!-- <div class="text-right">
+    <!-- <div v-else>
+      <div class="text-right">
         <el-button type="text">
           過濾
         </el-button>
-      </div> -->
+      </div>
       <el-input
         v-model="search"
         placeholder="請輸入姓名或電話"
@@ -127,7 +131,7 @@
           </p>
         </el-card>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -178,8 +182,8 @@ export default {
     handleClick(row) {
       this.$router.push({ path: `/member/${row.memberPhone}` });
     },
-    handleEdit(index, row) {
-      console.log(index, row);
+    handleEdit({ memberPhone }) {
+      this.$router.push({ path: `/member/${memberPhone}` });
     },
     loadMoreData() {
       this.tableData.push(this.lists[this.count - 1]);
