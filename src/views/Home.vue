@@ -137,7 +137,7 @@
       align="middle"
     >
       <el-col :xs="8" :sm="8" :md="4" :lg="4" :xl="4">
-        <el-card :body-style="{ padding: '10px' }" shadow="hover">
+        <el-card :body-style="{ padding: '10px' }" shadow="always">
           <el-link href="/consume" class="w-100" :underline="false">
             <i class="la la-shopping-bag text-brand fs-3"/>
             <h4 class="my-1">消費</h4>
@@ -145,7 +145,7 @@
         </el-card>
       </el-col>
       <el-col :xs="8" :sm="8" :md="4" :lg="4" :xl="4">
-        <el-card :body-style="{ padding: '10px' }" shadow="hover">
+        <el-card :body-style="{ padding: '10px' }" shadow="always">
           <el-link href="/search" class="w-100" :underline="false">
             <i class="las la-search text-brand fs-3" />
             <h4 class="my-1">查詢</h4>
@@ -153,7 +153,7 @@
         </el-card>
       </el-col>
       <el-col :xs="8" :sm="8" :md="4" :lg="4" :xl="4">
-        <el-card :body-style="{ padding: '10px' }" shadow="hover">
+        <el-card :body-style="{ padding: '10px' }" shadow="always">
           <el-link href="/record" class="w-100" :underline="false">
             <i class="lar la-clipboard text-brand fs-3" />
             <h4 class="my-1">紀錄</h4>
