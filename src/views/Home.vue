@@ -129,7 +129,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-row
+    <!-- <el-row
       :gutter="10"
       type="flex"
       class="row-bg h-100"
@@ -160,7 +160,7 @@
           </el-link>
         </el-card>
       </el-col>
-    </el-row>
+    </el-row> -->
   </div>
     <!-- </el-main>
   </el-container> -->

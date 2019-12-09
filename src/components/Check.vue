@@ -171,7 +171,7 @@
           </el-button>
         </el-form>
       </el-col>
-      <!-- <el-col v-else :sm="12" :md="12" :lg="6" :xl="6">
+      <el-col v-else :sm="12" :md="12" :lg="6" :xl="6">
         <h1 class="mb-0">{{ memberName }}，{{ userTypeLabel }}</h1>
         <p class="text-black-50 mt-0 mb-3">
           {{ checkinTypeMap[check.checkinType] || memberTypeMap[memberType]  }}
@@ -193,85 +193,8 @@
             回首頁
           </el-button>
         </div>
-      </el-col> -->
-      <el-col v-else :xs="12" :sm="12" :md="12" :lg="12" :xl="12" class="w-100">
-        <h1 class="mb-1">{{ memberName }}，{{ userTypeLabel }}</h1>
-        <p class="text-black-50 mt-0 mb-1">
-          {{ checkinTypeMap[check.checkinType] || memberTypeMap[memberType]  }}
-        </p>
-        <!-- <el-card :body-style="{ padding: '10px' }" class="bg-light-slate-gray text-white">
-          <h4 class="my-1">
-            <span class="mr-1">{{ new Date() | moment('dddd') }}</span>
-            {{ new Date() | moment('YYYY-MM-DD') }}
-            <el-divider direction="vertical"></el-divider>
-          </h4>
-        </el-card> -->
-        <el-row
-          :gutter="20"
-          type="flex"
-          class="row-bg h-100 text-center mt-1"
-          justify="center"
-          align="middle"
-        >
-          <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6">
-            <el-card
-              :body-style="{ padding: '10px' }"
-              shadow="always"
-              class="bg-light-steel border-light-slate"
-            >
-              <h3 class="mb-1 mt-0">入場</h3>
-              <b class="text-success">
-                {{ checkinTime }}
-              </b>
-            </el-card>
-          </el-col>
-          <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6">
-            <el-card
-              :body-style="{ padding: '10px' }"
-              shadow="always"
-              class="bg-light-steel border-light-slate"
-            >
-              <h3 class="mb-1 mt-0">離場</h3>
-              <b class="text-danger">
-                {{ checkoutTime }}
-              </b>
-            </el-card>
-          </el-col>
-        </el-row>
       </el-col>
     </el-row>
-    <!-- <el-row
-      :gutter="20"
-      type="flex"
-      class="row-bg h-100 text-center mt-1"
-      justify="center"
-      align="middle"
-    >
-      <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6">
-        <el-card
-          :body-style="{ padding: '10px' }"
-          shadow="always"
-          class="bg-light-steel border-light-slate"
-        >
-          <h3 class="mb-1 mt-0">入場</h3>
-          <b class="text-success">
-            {{ checkinTime }}
-          </b>
-        </el-card>
-      </el-col>
-      <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6">
-        <el-card
-          :body-style="{ padding: '10px' }"
-          shadow="always"
-          class="bg-light-steel border-light-slate"
-        >
-          <h3 class="mb-1 mt-0">離場</h3>
-          <b class="text-danger">
-            {{ checkoutTime }}
-          </b>
-        </el-card>
-      </el-col>
-    </el-row> -->
   </div>
 </template>
 
@@ -476,6 +399,7 @@ export default {
                 delete this.ruleForm[key];
               }
             });
+            // TODO BUG
             if (this.checkin) {
               this.saveCheckin();
             } else {

@@ -7,7 +7,7 @@
   >
     <el-col :sm="12" :md="12" :lg="8" :xl="8">
       <el-steps :active="activeStep" align-center class="mb-1">
-        <el-step title="類型" description="" />
+        <!-- <el-step title="類型" description="" /> -->
         <el-step title="基本資料" description="" />
         <el-step title="詳細資訊" description="" />
       </el-steps>
@@ -18,6 +18,21 @@
         ref="ruleForm"
         :label-position="activeStep === 1 ? 'top' : 'left'"
         >
+        <!-- <div v-if="activeStep === 0">
+          <el-form-item
+            label="加入類型"
+            prop="memberType"
+          >
+            <el-select v-model="ruleForm.memberType" placeholder="請選擇加入類型" class="w-100">
+              <el-option
+                v-for="(item, idx) in memberTypeOptions"
+                :key="idx"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
+          </el-form-item>
+        </div> -->
         <div v-if="activeStep === 0">
           <el-form-item
             label="加入類型"
@@ -32,8 +47,6 @@
               />
             </el-select>
           </el-form-item>
-        </div>
-        <div v-if="activeStep === 1">
           <el-form-item prop="memberName">
             <el-input v-model="ruleForm.memberName" placeholder="姓名" />
           </el-form-item>
@@ -192,16 +205,16 @@ export default {
         memberLineUrl: null,
       },
       ruleForm: {
-        memberName: 'chiquitta',
+        memberName: '',
         memberSex: '1',
-        memberPhone: '0998563786',
-        memberLineId: 'chiquitta',
-        memberLineUrl: 'http',
-        memberMail: 'chiquitta@gmail.com',
+        memberPhone: '',
+        memberLineId: '',
+        memberLineUrl: '',
+        memberMail: '',
         memberType: '',
-        // memberPoint: '',
-        // memberLesson: '',
-        // memberTreat: '',
+        memberPoint: '0',
+        memberLesson: '0',
+        memberTreat: '0',
         memberBirthDate: '',
         memberJoinDate: new Date(),
         // memberEffectDate: new Date().setMonth(new Date().getMonth() + 1),

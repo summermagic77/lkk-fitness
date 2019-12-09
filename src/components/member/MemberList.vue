@@ -173,7 +173,7 @@ export default {
       setTimeout(() => {
         this.count += 2;
         this.loadMoreData();
-      }, 2000);
+      }, 0);
     },
     handleClick(row) {
       this.$router.push({ path: `/member/${row.memberPhone}` });
