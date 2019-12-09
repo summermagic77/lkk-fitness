@@ -1,7 +1,7 @@
 <template>
   <el-container
     :class="{
-      'vh-100': true
+      'vh-100': true,
     }"
   >
     <el-header
@@ -37,7 +37,8 @@
     </el-aside>
     <el-main
       :class="{
-        'home-main': $route.path === '/'
+        'home-main': $route.path === '/',
+        'page-component__scroll': true
       }"
     >
       <slot />
@@ -45,6 +46,7 @@
     <!-- <el-footer v-if="$device.mobile">
       <i class="la la-home"></i>
     </el-footer> -->
+    <el-backtop target=".page-component__scroll"></el-backtop>
   </el-container>
 </template>
 

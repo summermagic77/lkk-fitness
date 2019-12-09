@@ -6,7 +6,7 @@
     <div v-if="!$device.mobile">
       <el-table
         v-loading="loading"
-        :data="tableData"
+        :data="lists"
         empty-text="暫無數據"
         stripe
         border
