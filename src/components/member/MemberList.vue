@@ -9,7 +9,6 @@
         :data="lists"
         empty-text="暫無數據"
         stripe
-        border
         class="w-100">
         <el-table-column
           prop="memberName"
