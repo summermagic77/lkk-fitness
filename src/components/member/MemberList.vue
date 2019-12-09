@@ -96,14 +96,14 @@
           :key="idx"
           :body-style="{ padding: '5px' }"
           shadow="hover"
-          class="mb-1"
+          style="margin-bottom: 5px;"
         >
           <div class="d-flex">
             <p class="font-weight-bold">
               {{ item.memberName }}
             </p>
             <el-link
-              :href="`/${item.memberPhone}`"
+              :href="`/member/${item.memberPhone}`"
               size="small"
               class="ml-auto"
             >
