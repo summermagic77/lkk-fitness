@@ -1,26 +1,33 @@
 <template>
-  <div>
-    <el-input
-      v-model="search"
-      placeholder="請輸入姓名、手機或LINE ID"
-      suffix-icon="el-icon-search"
-      class="mb-1"
-    />
-    <el-scrollbar style="height: 5%;">
-      <el-radio-group v-model="filterMember">
-        <el-radio-button
-          v-for="(item, idx) in memberTypeOptions"
-          :key="idx"
-          :label="item.value"
-          :value="item.value"
-          type="primary"
-          class="d-inline-block"
-        >
-          {{ item.label }}
-        </el-radio-button>
-      </el-radio-group>
-    </el-scrollbar>
-  </div>
+  <el-row
+    type="flex"
+    class="row-bg h-100"
+    justify="center"
+    align="middle"
+  >
+    <el-col :sm="12" :md="12" :lg="8" :xl="8">
+      <el-input
+        v-model="search"
+        placeholder="請輸入姓名、手機或LINE ID"
+        suffix-icon="el-icon-search"
+        class="mb-1"
+      />
+      <el-scrollbar v-if="$device.mobile" style="height: 5%;">
+        <el-radio-group v-model="filterMember">
+          <el-radio-button
+            v-for="(item, idx) in memberTypeOptions"
+            :key="idx"
+            :label="item.value"
+            :value="item.value"
+            type="primary"
+            class="d-inline-block mr-1"
+          >
+            {{ item.label }}
+          </el-radio-button>
+        </el-radio-group>
+      </el-scrollbar>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
