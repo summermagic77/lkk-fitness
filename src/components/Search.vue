@@ -13,14 +13,18 @@
         class="mb-1"
       />
       <el-scrollbar v-if="$device.mobile" style="height: 5%;">
-        <el-radio-group v-model="filterMember">
+        <el-radio-group
+          v-for="(item, idx) in memberTypeOptions"
+          :key="idx"
+          v-model="filterMember"
+          style="margin-right: 5px;"
+          size="mini"
+        >
           <el-radio-button
-            v-for="(item, idx) in memberTypeOptions"
-            :key="idx"
             :label="item.value"
             :value="item.value"
             type="primary"
-            class="d-inline-block mr-1"
+            class="d-inline-block"
           >
             {{ item.label }}
           </el-radio-button>
