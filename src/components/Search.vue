@@ -7,7 +7,7 @@
   >
     <el-col :sm="12" :md="12" :lg="8" :xl="8">
       <h1>
-        搜索會員
+        搜尋會員
         <i class="las la-search text-brand" />
       </h1>
       <!-- <p class="text-black-50 mb-2">
@@ -30,7 +30,6 @@
           <el-radio-button
             :label="item.value"
             :value="item.value"
-            type="primary"
             class="d-inline-block"
           >
             {{ item.label }}
