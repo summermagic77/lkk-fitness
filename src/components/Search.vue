@@ -1,38 +1,69 @@
 <template>
   <div>
-    查詢
+    <el-input
+      v-model="search"
+      placeholder="請輸入姓名、手機或LINE ID"
+      suffix-icon="el-icon-search"
+      class="mb-1"
+    />
+    <el-scrollbar style="height: 5%;">
+      <el-radio-group v-model="filterMember">
+        <el-radio-button
+          v-for="(item, idx) in memberTypeOptions"
+          :key="idx"
+          :label="item.value"
+          :value="item.value"
+          type="primary"
+          class="d-inline-block"
+        >
+          {{ item.label }}
+        </el-radio-button>
+      </el-radio-group>
+    </el-scrollbar>
   </div>
 </template>
 
 <script>
-import apiMember from '@/api/member';
-// import apiSelections from '@/api/selections';
+// import apiMember from '@/api/member';
+import apiSelections from '@/api/selections';
 
 export default {
-  name: 'detail',
+  name: 'search',
   components: {
   },
   data() {
     return {
-      selections: {},
+      search: '',
+      filterMember: '0',
+      memberTypeMap: {},
       member: {},
     };
   },
-  // computed: {
-  // },
+  computed: {
+    memberTypeOptions() {
+      const options = Object.entries(this.memberTypeMap).map(e => ({ label: e[1], value: e[0] }));
+      return [{ label: '全部', value: '0' }, ...options];
+    },
+  },
   // methods: {
   // },
   async created() {
-    // const { data } = await apiSelections.get();
-    // this.selections = data.data;
     this.fullscreenLoading = true;
-    const { data = null } = await apiMember.getByKey(
-      'phone',
-      { memberPhone: this.$route.params.id },
-    );
-    this.member = data.data;
+    const { data: { data: { memberTypeMap = {} } } } = await apiSelections.get();
+    this.memberTypeMap = memberTypeMap;
+    // const { data = null } = await apiMember.getByKey(
+    //   'phone',
+    //   { memberPhone: this.$route.params.id },
+    // );
+    // this.member = data.data;
   },
 };
 </script>
-<style scoped>
+<style>
+.el-scrollbar__wrap {
+  overflow-x: hidden;
+}
+.el-scrollbar .el-scrollbar__wrap .el-scrollbar__view{
+   white-space: nowrap;
+}
 </style>
