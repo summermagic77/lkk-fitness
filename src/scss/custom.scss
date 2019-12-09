@@ -1,5 +1,9 @@
 :root {
   --brand: #29526b;
+  --dark-orange: #f67A1C;
+  --light-steel: #f2f4f4;
+  --light-slate: #94acb4;
+  --light-slate-gray: #7791a1;
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -27,6 +31,15 @@
 }
 .bg-light {
   background-color: var(--light);
+}
+.bg-light-steel {
+  background-color: var(--light-steel);
+}
+.bg-light-slate {
+  background-color: var(--light-slate);
+}
+.bg-light-slate-gray {
+  background-color: var(--light-slate-gray);
 }
 .w-25 {
   width: 25%;
@@ -173,6 +186,21 @@
 .my-1 {
   margin-top: 1em;
   margin-bottom: 1em;
+}
+.border-0 {
+  border: 0;
+}
+.border-brand {
+  border-color: var(--barnd);
+}
+.border-light-steel {
+  border-color: var(--light-steel);
+}
+.border-light-slate {
+  border-color: var(--light-slate);
+}
+.border-light-slate-gray {
+  border-color: var(--light-slate-gray);
 }
 .input-lg {
   font-size: 1rem;

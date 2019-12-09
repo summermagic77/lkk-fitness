@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueQrcodeReader from 'vue-qrcode-reader';
 import ElementUI from 'element-ui';
 import device from 'vue-device-detector';
+import moment from 'moment';
 
 import App from './App.vue';
 import './registerServiceWorker';
@@ -13,12 +14,14 @@ import './theme/index.css';
 import './scss/custom.scss';
 import 'vue-material-design-icons/styles.css';
 
+require('moment/locale/zh-tw');
+
 Vue.config.productionTip = false;
 
 Vue.use(ElementUI);
 Vue.use(VueQrcodeReader);
 Vue.use(device);
-Vue.use(require('vue-moment'));
+Vue.use(require('vue-moment'), { moment });
 
 Vue.moment().locale('zh-tw');
 
