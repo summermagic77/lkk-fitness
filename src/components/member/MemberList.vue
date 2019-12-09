@@ -46,7 +46,14 @@
         <el-table-column
           prop="memberCheckDate"
           label="最近進場時間"
-          :formatter="formatterDate">
+          width="170"
+          :formatter="formatterDateTime">
+          <!-- <template slot-scope="scope">
+            <i class="el-icon-time"></i>
+            <span>
+              {{ scope.row.memberCheckDate || new Date() | moment('YYYY-MM-DD, HH:mm A') }}
+            </span>
+          </template> -->
         </el-table-column>
         <el-table-column
           fixed="right"
@@ -194,6 +201,9 @@ export default {
     },
     formatterDate(row, { property }) {
       return this.$moment(row[property]).format('YYYY-MM-DD');
+    },
+    formatterDateTime(row, { property }) {
+      return this.$moment(row[property]).format('YYYY-MM-DD, HH:mm A');
     },
     formatterPrice(row, { property }) {
       return row[property].toLocaleString();
