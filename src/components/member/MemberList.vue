@@ -45,21 +45,27 @@
         </el-table-column>
         <el-table-column
           prop="memberCheckDate"
-          label="最近打卡時間"
+          label="最近進場時間"
           :formatter="formatterDate">
         </el-table-column>
         <el-table-column
           fixed="right"
           label="操作"
-          width="100">
+          width="150">
           <template slot-scope="scope">
-            <el-link
-              :href="`/member/${scope.row.memberPhone}`"
-              size="small"
-              class="ml-auto"
+            <el-button
+              size="mini"
+              type="primary"
+              plain
+              @click="handleClick(scope.row)"
             >
               查看
-          </el-link>
+          </el-button>
+          <el-button
+            size="mini"
+            type="info"
+            plain
+            @click="handleEdit(scope.$index, scope.row)">編輯</el-button>
             <!-- <el-button type="text" size="small">編輯</el-button> -->
           </template>
         </el-table-column>
@@ -164,7 +170,10 @@ export default {
       }, 2000);
     },
     handleClick(row) {
-      console.log(row);
+      this.$router.push({ path: `/member/${row.memberPhone}` });
+    },
+    handleEdit(index, row) {
+      console.log(index, row);
     },
     loadMoreData() {
       this.tableData.push(this.lists[this.count - 1]);

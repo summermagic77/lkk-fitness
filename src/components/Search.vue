@@ -7,7 +7,7 @@
   >
     <el-col :sm="12" :md="12" :lg="8" :xl="8">
       <h1>
-        搜尋會員
+        查詢會員
         <i class="las la-search text-brand" />
       </h1>
       <!-- <p class="text-black-50 mb-2">
