@@ -6,6 +6,13 @@
     align="middle"
   >
     <el-col :sm="12" :md="12" :lg="8" :xl="8">
+      <h1>
+        搜索會員
+        <i class="las la-search text-brand" />
+      </h1>
+      <!-- <p class="text-black-50 mb-2">
+        輸入手機號碼、LINE ID 或 QRcode {{ userTypeLabel }}。
+      </p> -->
       <el-input
         v-model="search"
         placeholder="請輸入姓名、手機或LINE ID"
