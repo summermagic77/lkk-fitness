@@ -6,6 +6,7 @@
       style="height: 160px;"
       :src="require('@/assets/lkk-color.png')"
       fit="contain"
+      class="mb-4"
     />
     <!-- </el-link> -->
     <!-- <el-row
