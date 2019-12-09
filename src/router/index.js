@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue';
 import Check from '@/components/Check.vue';
 import Create from '@/components/Create.vue';
 import Detail from '@/components/Detail.vue';
+import Search from '@/components/Search.vue';
 
 import Member from '@/views/Member.vue';
 import MemberList from '@/components/member/MemberList.vue';
@@ -93,7 +94,7 @@ const routes = [
   {
     path: '/search',
     name: '查詢',
-    component: Check,
+    component: Search,
   },
   {
     path: '/create',
