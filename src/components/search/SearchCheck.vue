@@ -168,7 +168,7 @@ export default {
       },
       rules: {
         checkinMember: [
-          { required: true, message: '請輸入登入資訊', trigger: 'blur' },
+          { required: true, message: '請輸入搜尋資訊', trigger: 'blur' },
         ],
       },
     };
