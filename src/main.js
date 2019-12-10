@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueQrcodeReader from 'vue-qrcode-reader';
 import ElementUI from 'element-ui';
+import locale from 'element-ui/lib/locale/lang/zh-TW';
 import device from 'vue-device-detector';
 import moment from 'moment';
 
@@ -18,7 +19,7 @@ require('moment/locale/zh-tw');
 
 Vue.config.productionTip = false;
 
-Vue.use(ElementUI);
+Vue.use(ElementUI, { locale });
 Vue.use(VueQrcodeReader);
 Vue.use(device);
 Vue.use(require('vue-moment'), { moment });

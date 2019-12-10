@@ -97,6 +97,6 @@ body {
   height: 50% !important;
 }
 .home-main {
-  margin-top: -228px;
+  margin-top: -258px;
 }
 </style>

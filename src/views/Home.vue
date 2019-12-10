@@ -125,7 +125,7 @@
     <el-row
       :gutter="10"
       type="flex"
-      class="row-bg h-100"
+      class="row-bg h-100 mt-3"
       justify="center"
       align="middle"
     >

@@ -1,94 +1,79 @@
 <template>
-  <div>
-    <el-link href="/create" class="float-right mb-2">
-      <i class="el-icon-plus" /> 建立新會員
-    </el-link>
-    <div>
-      <el-table
-        v-loading="loading"
-        :data="lists"
-        empty-text="暫無數據"
-        stripe
-        class="w-100">
-        <el-table-column
-          prop="memberName"
-          label="姓名">
-        </el-table-column>
-        <el-table-column
-          prop="memberType"
-          label="類型">
-        </el-table-column> -->
-        <el-table-column
-          prop="memberPhone"
-          label="電話">
-        </el-table-column>
-        <!-- <el-table-column
-          prop="memberSex"
-          label="性別"
-          :formatter="formatterSex">
-        </el-table-column> -->
-        <!-- <el-table-column
-          prop="memberType"
-          label="等級">
-        </el-table-column>
-        <el-table-column
-          prop="memberPoint"
-          label="點數"
-          :formatter="formatterPrice">
-        </el-table-column> -->
-        <!-- <el-table-column
-          prop="memberBirthDate"
-          label="生日"
-          :formatter="formatterDate">
-        </el-table-column> -->
-        <!-- <el-table-column
-          prop="memberJoinDate"
-          label="加入時間"
-          :formatter="formatterDate">
-        </el-table-column> -->
-        <!-- <el-table-column
-          prop="memberCheckDate"
-          label="最近進場時間"
-          width="170"
-          :formatter="formatterDateTime">
-          <template slot-scope="scope">
-            <i class="el-icon-time"></i>
-            <span>
-              {{ scope.row.memberCheckDate || new Date() | moment('YYYY-MM-DD, HH:mm A') }}
-            </span>
-          </template>
-        </el-table-column> -->
-        <el-table-column
-          fixed="right"
-          label="操作"
-          width="150">
-          <template slot-scope="scope">
-            <!-- <el-button
+  <el-row
+    type="flex"
+    :class="{
+      'h-100': false,
+    }"
+    justify="center"
+    align="middle"
+  >
+    <el-col :sm="24" :md="24" :lg="24" :xl="24">
+      <el-link href="/create" class="float-right mb-1">
+        <i class="el-icon-plus" /> 建立新會員
+      </el-link>
+      <div>
+        <el-table
+          v-loading="loading"
+          :data="tableData"
+          stripe
+          class="w-100">
+          <el-table-column
+            v-if="!$device.mobile"
+            type="index"
+            width="50">
+          </el-table-column>
+          <el-table-column
+            prop="memberName"
+            label="姓名">
+            <template slot-scope="scope">
+              <b class="text-brand">{{ scope.row.memberName }}</b>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="memberType"
+            label="類型"
+            :formatter="formatterType">
+          </el-table-column>
+          <el-table-column
+            prop="memberPhone"
+            label="電話">
+          </el-table-column>
+          <el-table-column
+            fixed="right"
+            label="操作"
+            width="80">
+            <template slot-scope="scope">
+            <el-button
               size="mini"
               type="primary"
               plain
-              @click="handleClick(scope.row)"
-            >
-              查看
-          </el-button> -->
-          <el-button
-            size="mini"
-            type="primary"
-            plain
-            @click="handleEdit(scope.row)">編輯</el-button>
-            <!-- <el-button type="text" size="small">編輯</el-button> -->
-          </template>
-        </el-table-column>
-      </el-table>
-      <div class="text-center block">
-        <el-pagination
-          background
-          class="mt-2"
-          layout="total, prev, pager, next"
-          :total="total">
-        </el-pagination>
+              @click="handleEdit(scope.row)">編輯</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <div class="text-center">
+          <el-pagination
+            v-if="$device.mobile"
+            background
+            class="mt-2"
+            :pager-count="5"
+            @current-change="handleCurrentChange"
+            :current-page.sync="currentPage"
+            layout="total, prev, next, jumper"
+            :total="total">
+          </el-pagination>
+          <el-pagination
+            v-else
+            background
+            class="mt-2"
+            :page-size="pageSize"
+            @current-change="handleCurrentChange"
+            layout="total, prev, pager, next"
+            :total="total">
+          </el-pagination>
+        </div>
       </div>
-    </div>
+    </el-col>
     <!-- <div v-else>
       <div class="text-right">
         <el-button type="text">
@@ -132,7 +117,7 @@
         </el-card>
       </div>
     </div> -->
-  </div>
+    </el-row>
 </template>
 
 <script>
@@ -148,28 +133,25 @@ export default {
     return {
       loading: true,
       count: 0,
+      pageSize: 10,
+      total: 0,
+      currentPage: 1,
       search: '',
       lists: [],
       tableData: [],
-      selections: {},
+      memberTypeMap: {},
     };
   },
   computed: {
-    noMore() {
-      return this.count >= this.total - 1;
-    },
-    disabled() {
-      return this.loading || this.noMore;
-    },
-    sex() {
-      return this.selections.sexMap || {};
-    },
-    total() {
-      return this.lists.length;
-    },
-    memberTypeMap() {
-      return this.selections.memberTypeMap;
-    },
+    // noMore() {
+    //   return this.count >= this.total - 1;
+    // },
+    // disabled() {
+    //   return this.loading || this.noMore;
+    // },
+    // sex() {
+    //   return this.selections.sexMap || {};
+    // },
   },
   methods: {
     load() {
@@ -185,37 +167,45 @@ export default {
     handleEdit({ memberPhone }) {
       this.$router.push({ path: `/member/${memberPhone}` });
     },
-    loadMoreData() {
-      this.tableData.push(this.lists[this.count - 1]);
-      if (!this.noMore) {
-        this.tableData.push(this.lists[this.count]);
-      }
-      this.loading = false;
+    handleCurrentChange(val) {
+      this.loading = true;
+      this.tableData = this.lists.slice((val - 1) * this.pageSize, val * this.pageSize);
+      setTimeout(() => { this.loading = false; }, 300);
     },
+    // loadMoreData() {
+    //   this.tableData.push(this.lists[this.count - 1]);
+    //   if (!this.noMore) {
+    //     this.tableData.push(this.lists[this.count]);
+    //   }
+    //   this.loading = false;
+    // },
     async getTableData() {
-      const { data } = await apiMember.getByType('1+2+3+4+5+6+7+8+9');
-      const [first, second] = data.data;
-      this.tableData = [first, second];
-      this.lists = data.data;
+      const { data: { data = {} } } = await apiMember.getByType('1+2+3+4+5+6+7+8+9');
+      this.lists = data;
+      this.total = data.length;
+      this.tableData = data.slice(0, this.pageSize);
       this.loading = false;
     },
-    formatterSex(row, { property }) {
-      return this.sex[row[property]];
-    },
-    formatterDate(row, { property }) {
-      return this.$moment(row[property]).format('YYYY-MM-DD');
-    },
-    formatterDateTime(row, { property }) {
-      return this.$moment(row[property]).format('YYYY-MM-DD, HH:mm A');
-    },
-    formatterPrice(row, { property }) {
-      return row[property].toLocaleString();
+    // formatterSex(row, { property }) {
+    //   return this.sex[row[property]];
+    // },
+    // formatterDate(row, { property }) {
+    //   return this.$moment(row[property]).format('YYYY-MM-DD');
+    // },
+    // formatterDateTime(row, { property }) {
+    //   return this.$moment(row[property]).format('YYYY-MM-DD, HH:mm A');
+    // },
+    // formatterPrice(row, { property }) {
+    //   return row[property].toLocaleString();
+    // },
+    formatterType(row, { property }) {
+      return this.memberTypeMap[row[property]];
     },
   },
   async created() {
     this.getTableData();
-    const { data } = await apiSelections.get();
-    this.selections = data.data;
+    const { data: { data: { memberTypeMap } } } = await apiSelections.get();
+    this.memberTypeMap = memberTypeMap;
   },
 };
 </script>
