@@ -173,7 +173,6 @@
       <h1 class="mb-0">{{ memberName }}，{{ userTypeLabel }}</h1>
       <p class="text-black-50 mt-0 mb-3">
         {{ memberTypeMap[memberType]  }}
-          <!-- 一般會員 -->
       </p>
       <div v-if="checkin">
         <p class="mb-0">
@@ -181,7 +180,6 @@
         </p>
         <span class="font-weight-bolder my-0 fs-3">
           {{ check.checkinCost }}
-          <!-- {{ 100 }} -->
         </span>
         <span class="text-black-50 font-weight-light">點數/堂</span>
       </div>

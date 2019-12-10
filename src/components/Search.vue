@@ -6,14 +6,33 @@
     align="middle"
   >
     <el-col :sm="12" :md="12" :lg="8" :xl="8">
-      <h1>
-        查詢會員
+      <h1 class="mb-1">
+        搜尋資料
         <i class="las la-search text-brand" />
       </h1>
+      <el-card
+        v-for="(item, idx) in searchItems"
+        :key="idx"
+        :body-style="{ padding: '10px' }"
+        class="mb-1"
+        shadow="always">
+        <div class="d-flex">
+          <i
+            :class="{
+            [item.icon]: true,
+            'fs-2': true,
+            }"
+          ></i>
+          <h3 class="my-0 font-weight-normal" style="margin-left: 10px;">
+            {{ item.name }}
+          </h3>
+        </div>
+      </el-card>
+
       <!-- <p class="text-black-50 mb-2">
         輸入手機號碼、LINE ID 或 QRcode {{ userTypeLabel }}。
       </p> -->
-      <el-input
+      <!-- <el-input
         v-model="search"
         placeholder="請輸入姓名、手機或LINE ID"
         suffix-icon="el-icon-search"
@@ -35,7 +54,7 @@
             {{ item.label }}
           </el-radio-button>
         </el-radio-group>
-      </el-scrollbar>
+      </el-scrollbar> -->
     </el-col>
   </el-row>
 </template>
@@ -54,6 +73,24 @@ export default {
       filterMember: '0',
       memberTypeMap: {},
       member: {},
+      searchItems: [
+        {
+          name: '會員資料',
+          icon: 'la la-user',
+        },
+        {
+          name: '運動資料',
+          icon: 'las la-running',
+        },
+        {
+          name: '消費資料',
+          icon: 'las la-shopping-bag',
+        },
+        {
+          name: '入場資料',
+          icon: 'las la-sign-in-alt',
+        },
+      ],
     };
   },
   computed: {

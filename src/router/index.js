@@ -7,7 +7,7 @@ import CreateAndUpdate from '@/components/CreateAndUpdate.vue';
 import Search from '@/components/Search.vue';
 
 import Member from '@/views/Member.vue';
-import MemberList from '@/components/member/MemberList.vue';
+import List from '@/components/List.vue';
 
 import Employee from '@/views/Employee.vue';
 import Coach from '@/views/Coach.vue';
@@ -36,7 +36,8 @@ const routes = [
       {
         path: '',
         name: '會員列表',
-        component: MemberList,
+        meta: { type: 'member' },
+        component: List,
       },
       {
         path: ':id',
@@ -54,7 +55,8 @@ const routes = [
       {
         path: '',
         name: '員工列表',
-        component: MemberList,
+        meta: { type: 'employee' },
+        component: List,
       },
     ],
   },
@@ -66,7 +68,8 @@ const routes = [
       {
         path: '',
         name: '教練列表',
-        component: MemberList,
+        meta: { type: 'coach' },
+        component: List,
       },
       // {
       //   path: 'create',
