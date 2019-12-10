@@ -6,7 +6,7 @@ export default {
   getAll() {
     return axios.get(`${uri}/getAll`);
   },
-  getByCon(type, data) {
+  getByCon(data) {
     return axios.post(`${uri}/getByCon/`, data);
   },
   getByKey(type, data) {

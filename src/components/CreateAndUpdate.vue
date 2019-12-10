@@ -5,7 +5,7 @@
     justify="center"
     align="middle"
   >
-    <el-col :sm="12" :md="12" :lg="8" :xl="8">
+    <el-col v-if="Object.keys(member).length === 0" :sm="12" :md="12" :lg="8" :xl="8">
       <el-steps :active="activeStep" align-center class="mb-1">
         <!-- <el-step title="類型" description="" /> -->
         <el-step title="基本資料" description="" />
@@ -151,6 +151,9 @@
         </el-form-item>
       </el-form>
     </el-col>
+    <el-col v-else :sm="12" :md="12" :lg="6" :xl="6">
+      <el-result :member="member" :selections="selections" :failure="failure" />
+    </el-col>
   </el-row>
 </template>
 
@@ -158,16 +161,20 @@
 import apiMember from '@/api/member';
 import MemberCreate from '@/components/member/MemberCreate.vue';
 import apiSelections from '@/api/selections';
+import ElResult from '@/components/basic/Result.vue';
 import mixinQRcodeReader from '@/mixins/qrCodeReader.vue';
 
 export default {
   components: {
     MemberCreate,
+    ElResult,
   },
   mixins: [mixinQRcodeReader],
   data() {
     return {
       loading: true,
+      failure: false,
+      member: {},
       activeStep: 0,
       selections: {},
       errors: {
@@ -306,21 +313,21 @@ export default {
     },
     async saveMember() {
       this.fullscreenLoading = true;
-      const { data } = await apiMember.saveMember(this.ruleForm);
-      const { code } = data;
-      if (code !== 0) {
-        this.$message({
-          showClose: true,
-          message: data.message,
-          type: 'error',
-        });
-      } else {
-        this.$message({
-          showClose: true,
-          message: data.message,
-          type: 'success',
-        });
+      let api = 'saveMember';
+      if (this.$route.params.id) {
+        api = 'updateMember';
       }
+      const { data: { data = {}, code, message } } = await apiMember[api](this.ruleForm);
+      if (code !== 0) {
+        this.failure = true;
+        // this.$message({
+        //   showClose: true,
+        //   message,
+        //   type: 'error',
+        // });
+        console.dir(data);
+      }
+      this.member = { ...{ memberName: this.memberName, message }, ...data };
       this.fullscreenLoading = false;
     },
     submitForm(formName) {

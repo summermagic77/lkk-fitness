@@ -15,20 +15,27 @@
         v-for="(item, idx) in searchItems"
         :key="idx"
         :body-style="{ padding: '0px' }"
-        class="mb-1 bg-light-steel"
-        shadow="always">
-        <div class="d-flex p-1">
-          <i
-            :class="{
-            [item.icon]: true,
-            'fs-1-5': true,
-            }"
-          ></i>
-          <h4 class="my-0" style="margin-left: 10px;">
-            {{ item.name }}
-          </h4>
-          <i class="la la-angle-right text-black-50 ml-auto"></i>
-        </div>
+        class="mb-1 bg-light-steel search"
+        shadow="hover">
+        <el-link
+          :href="`/search/${item.href}`"
+          class="w-100"
+          :underline="false"
+          style="justify-content: normal"
+        >
+          <div class="d-flex p-1 w-100">
+            <i
+              :class="{
+              [item.icon]: true,
+              'fs-1-5': true,
+              }"
+            ></i>
+            <h4 class="my-0" style="margin-left: 10px;">
+              {{ item.name }}
+            </h4>
+            <i class="la la-angle-right text-black-50 ml-auto"></i>
+          </div>
+        </el-link>
       </el-card>
 
       <!-- <p class="text-black-50 mb-2">
@@ -80,6 +87,7 @@ export default {
       searchItems: [
         {
           name: '會員資料',
+          href: 'member',
           icon: 'la la-user',
         },
         {
@@ -123,5 +131,8 @@ export default {
 }
 .el-scrollbar .el-scrollbar__wrap .el-scrollbar__view{
    white-space: nowrap;
+}
+.search .el-link--inner {
+  width: 90%;
 }
 </style>

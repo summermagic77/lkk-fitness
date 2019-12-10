@@ -167,7 +167,8 @@
       </el-form>
     </el-col>
     <el-col v-else :sm="12" :md="12" :lg="6" :xl="6">
-      <h1 class="mb-0">{{ memberName }}，{{ userTypeLabel }}</h1>
+      <el-result :member="check" :selections="selections" :failure="failure" />
+      <!-- <h1 class="mb-0">{{ memberName }}，{{ userTypeLabel }}</h1>
       <p class="text-black-50 mt-0 mb-3">
         {{ memberTypeMap[memberType]  }}
       </p>
@@ -194,7 +195,7 @@
           :style="$device.mobile ? 'margin: 10px' : ''">
           回首頁
         </el-button>
-      </div>
+      </div> -->
     </el-col>
   </el-row>
 </template>
@@ -204,20 +205,21 @@ import apiMember from '@/api/member';
 import apiCheckin from '@/api/checkin';
 import apiSelections from '@/api/selections';
 import ElTitle from '@/components/basic/Title.vue';
+import ElResult from '@/components/basic/Result.vue';
 import mixinQRcodeReader from '@/mixins/qrCodeReader.vue';
 
 export default {
   name: 'checkin',
   components: {
     ElTitle,
+    ElResult,
   },
   mixins: [mixinQRcodeReader],
   data() {
     return {
       loading: false,
-      error: null,
+      failure: false,
       fullscreenLoading: false,
-      scanQRcode: false,
       selections: {},
       checkInType: 'LineId',
       searchType: [
@@ -348,6 +350,7 @@ export default {
         { [`member${this.checkInType}`]: this.ruleForm.checkinMember },
       );
       if (data.data === null) {
+        this.failure = true;
         // this.error = `查無此${this.userTypeLabel}，請確認資訊是否正確。`;
         this.$message({
           showClose: true,
@@ -362,17 +365,16 @@ export default {
     },
     async saveCheckin() {
       this.fullscreenLoading = true;
-      const { data } = await apiCheckin.saveCheckin(this.ruleForm);
-      const { code } = data;
+      const { data: { data = {}, code, message = '' } } = await apiCheckin.saveCheckin(this.ruleForm);
       if (code !== 0) {
-        this.$message({
-          showClose: true,
-          message: data.message,
-          type: 'error',
-        });
-      } else {
-        this.check = data.data;
+        this.failure = true;
+        // this.$message({
+        //   showClose: true,
+        //   message: data.message,
+        //   type: 'error',
+        // });
       }
+      this.check = { ...{ memberName: this.memberName, message }, ...data };
       this.fullscreenLoading = false;
     },
     async saveCheckout() {
@@ -381,14 +383,17 @@ export default {
         checkinMember: this.ruleForm.checkinMember,
       });
       if (code !== 0) {
+        this.failure = true;
         this.$message({
           showClose: true,
           message,
           type: 'error',
         });
       } else {
-        this.check = data.slice(-1).pop();
-        this.member = data.slice(-1).pop();
+        // this.check = data.slice(-1).pop();
+        // this.member = data.slice(-1).pop();
+        this.check = data;
+        this.member = data;
       }
       this.fullscreenLoading = false;
     },

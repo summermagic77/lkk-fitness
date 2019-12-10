@@ -4,7 +4,9 @@ import Home from '@/views/Home.vue';
 import Check from '@/components/Check.vue';
 import CreateAndUpdate from '@/components/CreateAndUpdate.vue';
 // import Detail from '@/components/Detail.vue';
-import Search from '@/components/Search.vue';
+import Search from '@/views/Search.vue';
+import SearchCategory from '@/components/search/SearchCategory.vue';
+import SearchCheck from '@/components/search/SearchCheck.vue';
 
 import Member from '@/views/Member.vue';
 import List from '@/components/List.vue';
@@ -97,8 +99,20 @@ const routes = [
   },
   {
     path: '/search',
-    name: '查詢',
+    // name: '查詢',
     component: Search,
+    children: [
+      {
+        path: '',
+        name: '查詢',
+        component: SearchCategory,
+      },
+      {
+        path: 'member',
+        name: '搜尋會員資料',
+        component: SearchCheck,
+      },
+    ],
   },
   {
     path: '/create',
