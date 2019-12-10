@@ -237,7 +237,7 @@ export default {
       check: {},
       // checkout: {},
       ruleForm: {
-        checkinMember: '0987111222',
+        checkinMember: '',
         checkinType: null,
         checkinGroupClass: null,
         checkinCoach: null,
