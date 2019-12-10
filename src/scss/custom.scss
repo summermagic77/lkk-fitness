@@ -211,6 +211,11 @@
 .border-light-slate-gray {
   border-color: var(--light-slate-gray);
 }
+.border-pill {
+  // padding-right: 0.6em;
+  // padding-left: 0.6em;
+  border-radius: 2rem;
+}
 .input-lg {
   font-size: 1rem;
   line-height: 1.5;
