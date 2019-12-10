@@ -2,9 +2,9 @@
   <div>
     <h1 class="mb-0">{{ memberName }}，{{ userTypeLabel }}{{ failureLabel }}</h1>
     <p class="text-black-50 mt-0 mb-3">
-      {{ selections.memberTypeMap[member.memberType]  }}
+      {{ selections.memberTypeMap[memberType]  }}
     </p>
-    <div v-if="member.checkinCost">
+    <div v-if="pageType === 'checkin'">
       <p class="mb-0">
         本次消費
       </p>
@@ -13,11 +13,11 @@
       </span>
       <span class="text-black-50 font-weight-light">點數/堂</span>
       <p class="font-weight-bold mt-1">
-        {{ member.checkinTime }}
+        {{ checkinTime }}
       </p>
     </div>
-    <div v-if="member.memberJoinTime">
-      {{ member.memberJoinTime }}
+    <div v-else-if="pageType === 'create'">
+      {{ memberJoinTime }}
     </div>
     <el-alert
       v-if="failure"
@@ -25,9 +25,9 @@
       type="error"
       show-icon>
     </el-alert>
-    <!-- <div v-else>
+    <div v-else-if="pageType === 'checkout'">
       {{ checkoutTime }}
-    </div> -->
+    </div>
     <div class="text-center">
       <el-button
         @click="$router.push({ path: '/' })"
@@ -100,25 +100,34 @@ export default {
     userTypeLabel() {
       return this.$route.name;
     },
+    pageType() {
+      return this.$route.meta.type;
+    },
     failureLabel() {
       return this.failure ? '失敗' : '成功';
     },
     memberName() {
       return this.member.memberName || this.member.checkinMemberName;
     },
+    memberType() {
+      return this.member.memberType;
+    },
+    checkinTime() {
+      return this.$moment(this.member.checkinTime).utc().format('YYYY-MM-DD, HH:mm A');
+    },
     checkoutTime() {
       const { checkinList = [] } = this.member;
       const latest = checkinList.slice(-1).pop();
       const { checkoutTime = null } = latest;
-      console.dir(checkoutTime);
-      return checkoutTime !== null ? this.$moment(checkoutTime).utc().format('YYYY-MM-DD, HH:mm A') : null;
+      // console.dir(checkoutTime);
+      return this.$moment(checkoutTime).utc().format('YYYY-MM-DD, HH:mm A');
     },
     // memberType() {
     //   return this.member.memberType;
     // },
-    // memberJoinTime() {
-    //   return this.$moment(this.member.memberJoinTime).utc().format('YYYY-MM-DD, HH:mm A');
-    // },
+    memberJoinTime() {
+      return this.$moment(this.member.memberJoinTime).utc().format('YYYY-MM-DD, HH:mm A');
+    },
   },
   methods: {
   },

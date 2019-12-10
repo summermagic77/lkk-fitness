@@ -44,7 +44,7 @@ const routes = [
       {
         path: ':id',
         name: '更新',
-        // meta: { typeLabel: '更新' },
+        meta: { type: 'update' },
         component: CreateAndUpdate,
       },
     ],
@@ -117,6 +117,7 @@ const routes = [
   {
     path: '/create',
     name: '加入',
+    meta: { type: 'create' },
     component: CreateAndUpdate,
   },
   {

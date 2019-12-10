@@ -33,13 +33,6 @@
         </QrcodeStream>
       </div>
       <div>
-        <el-image
-          v-if="$device.mobile"
-          style="!height: 30px;"
-          :src="require('@/assets/lkk-logo.png')"
-          fit="fill"
-          class="w-30 mb-2"
-        />
         <el-title
           :title="userTypeLabel"
           icon="la la-user"
