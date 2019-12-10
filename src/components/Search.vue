@@ -6,10 +6,11 @@
     align="middle"
   >
     <el-col :sm="12" :md="12" :lg="8" :xl="8">
-      <h1 class="mb-1">
-        搜尋資料
-        <i class="las la-search text-brand" />
-      </h1>
+        <el-title
+          title="搜尋資料"
+          icon="las la-search"
+          class="mb-1"
+        />
       <el-card
         v-for="(item, idx) in searchItems"
         :key="idx"
@@ -62,10 +63,12 @@
 <script>
 // import apiMember from '@/api/member';
 import apiSelections from '@/api/selections';
+import ElTitle from '@/components/basic/Title.vue';
 
 export default {
   name: 'search',
   components: {
+    ElTitle,
   },
   data() {
     return {

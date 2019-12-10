@@ -40,14 +40,11 @@
           fit="fill"
           class="w-30 mb-2"
         />
-        <h1 class="mb-0">
-          {{ userTypeLabel }}
-          <i v-if="checkin" class="las la-sign-in-alt text-brand" />
-          <i v-else class="las la-door-open text-brand" />
-        </h1>
-        <p class="text-black-50 mb-2">
-          輸入手機號碼、LINE ID 或 QRcode {{ userTypeLabel }}。
-        </p>
+        <el-title
+          :title="userTypeLabel"
+          :icon="checkin ? 'las la-sign-in-alt' : 'las la-door-open'"
+          :sub-title="`輸入手機號碼、LINE ID 或 QRcode${userTypeLabel}`"
+        />
         <el-radio-group v-model="checkInType" class="w-100">
           <el-row :gutter="10">
             <el-col
@@ -206,11 +203,13 @@
 import apiMember from '@/api/member';
 import apiCheckin from '@/api/checkin';
 import apiSelections from '@/api/selections';
+import ElTitle from '@/components/basic/Title.vue';
 import mixinQRcodeReader from '@/mixins/qrCodeReader.vue';
 
 export default {
   name: 'checkin',
   components: {
+    ElTitle,
   },
   mixins: [mixinQRcodeReader],
   data() {
