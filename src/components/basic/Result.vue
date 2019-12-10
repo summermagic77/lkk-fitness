@@ -5,16 +5,18 @@
       {{ selections.memberTypeMap[memberType]  }}
     </p>
     <div v-if="pageType === 'checkin'">
-      <p class="mb-0">
-        本次消費
-      </p>
-      <span class="font-weight-bolder my-0 fs-3">
-        {{ member.checkinCost }}
-      </span>
-      <span class="text-black-50 font-weight-light">點數/堂</span>
-      <p class="font-weight-bold mt-1">
-        {{ checkinTime }}
-      </p>
+      <div v-if="!failure">
+        <p class="mb-0">
+          本次消費
+        </p>
+        <span class="font-weight-bolder my-0 fs-3">
+          {{ member.checkinCost }}
+        </span>
+        <span class="text-black-50 font-weight-light">點數/堂</span>
+        <p class="font-weight-bold mt-1">
+          {{ checkinTime }}
+        </p>
+      </div>
     </div>
     <div v-else-if="pageType === 'create'">
       {{ memberJoinTime }}
