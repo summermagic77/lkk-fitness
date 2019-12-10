@@ -38,7 +38,7 @@
     <el-main
       :class="{
         'home-main': $route.path === '/',
-        'page-component__scroll': true
+        'page-component__scroll': true,
       }"
     >
       <slot />

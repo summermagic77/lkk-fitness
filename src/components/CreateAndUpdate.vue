@@ -143,7 +143,7 @@
           <el-button
             v-if="activeStep === 1"
             type="primary"
-            @click="submitForm('ruleForm')"
+            @click.stop="submitForm('ruleForm')"
             class="float-right"
           >
             {{ saveBtnLabel }}資料
