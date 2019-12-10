@@ -15,19 +15,19 @@
         v-for="(item, idx) in searchItems"
         :key="idx"
         :body-style="{ padding: '0px' }"
-        class="mb-1 bg-light-steel border-pill"
+        class="mb-1 bg-light-steel"
         shadow="always">
         <div class="d-flex p-1">
           <i
             :class="{
             [item.icon]: true,
-            'fs-1': true,
+            'fs-1-5': true,
             }"
           ></i>
-          <p class="my-0  font-weight-normal" style="margin-left: 10px;">
+          <h4 class="my-0" style="margin-left: 10px;">
             {{ item.name }}
-          </p>
-          <i class="la la-angle-right ml-auto"></i>
+          </h4>
+          <i class="la la-angle-right text-black-50 ml-auto"></i>
         </div>
       </el-card>
 
