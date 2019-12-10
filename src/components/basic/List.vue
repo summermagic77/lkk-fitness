@@ -55,9 +55,9 @@
 export default {
   props: {
     datas: {
-      type: Object,
+      type: Array,
       required: true,
-      default: () => ({}),
+      default: () => [],
     },
     columns: {
       type: Array,
@@ -71,10 +71,10 @@ export default {
   },
   data() {
     return {
-      loading: true,
+      loading: false,
       count: 0,
       // pageSize: 10,
-      total: 0,
+      // total: 0,
       currentPage: 1,
       search: '',
       // lists: [],
@@ -83,6 +83,9 @@ export default {
     };
   },
   computed: {
+    total() {
+      return this.datas.length;
+    },
   },
   methods: {
     handleCurrentChange(val) {
@@ -99,6 +102,7 @@ export default {
     // },
   },
   async created() {
+    this.tableData = this.datas.slice(0, this.pageSize);
     // this.getTableData();
     // const { data: { data: { memberTypeMap } } } = await apiSelections.get();
     // this.memberTypeMap = memberTypeMap;
