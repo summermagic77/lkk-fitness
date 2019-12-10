@@ -47,6 +47,38 @@
 
 export default {
   name: 'b-result',
+  data() {
+    return {
+      checkinSuccess: {
+        member: '',
+        checkinType: '',
+        checkinCost: '',
+        checkinTime: '',
+      },
+      checkinFailed: {
+        member: '',
+        checkinType: '',
+        message: '',
+      },
+      checkoutSuccess: {
+        member: '',
+        checkoutTime: '',
+      },
+      checkoutFailed: {
+        member: '',
+        message: '',
+      },
+      cuSuccess: {
+        memberName: '',
+        memberType: '',
+        memberJoinTime: '',
+      },
+      cuFailed: {
+        memberName: '',
+        message: '',
+      },
+    };
+  },
   props: {
     member: {
       type: Object,
