@@ -9,24 +9,24 @@
         <el-title
           title="搜尋資料"
           icon="las la-search"
-          class="mb-1"
+          class="mb-2"
         />
       <el-card
         v-for="(item, idx) in searchItems"
         :key="idx"
-        :body-style="{ padding: '10px' }"
+        :body-style="{ padding: '0px' }"
         class="mb-1"
         shadow="always">
-        <div class="d-flex">
+        <div class="d-flex p-1">
           <i
             :class="{
             [item.icon]: true,
             'fs-2': true,
             }"
           ></i>
-          <h3 class="my-0 font-weight-normal" style="margin-left: 10px;">
+          <h2 class="my-0 font-weight-normal" style="margin-left: 10px;">
             {{ item.name }}
-          </h3>
+          </h2>
         </div>
       </el-card>
 
