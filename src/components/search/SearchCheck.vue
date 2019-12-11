@@ -92,10 +92,10 @@
     </el-col>
     <el-col
       v-else
-      :sm="12"
-      :md="12"
-      :lg="6"
-      :xl="6"
+      :sm="24"
+      :md="24"
+      :lg="24"
+      :xl="24"
       >
       <el-list :datas="members" :columns="columns"></el-list>
     </el-col>
@@ -146,16 +146,17 @@ export default {
           label: '姓名',
         },
         {
-          prop: 'memberName',
+          prop: 'memberPhone',
           label: '手機',
         },
         {
           prop: 'memberType',
           label: '類型',
+          formatter: this.formatterType,
         },
       ],
       check: {},
-      // checkout: {},
+      memberTypeMap: {},
       ruleForm: {
         checkinMember: '',
       },
@@ -191,6 +192,9 @@ export default {
     },
   },
   methods: {
+    formatterType(row, { property }) {
+      return this.memberTypeMap[row[property]];
+    },
     async searchMember() {
       this.fullscreenLoading = true;
       const { data: { data = null, code, message } } = await apiMember.getByCon(
@@ -216,8 +220,8 @@ export default {
     },
   },
   async created() {
-    const { data } = await apiSelections.get();
-    this.selections = data.data;
+    const { data: { data: { memberTypeMap } } } = await apiSelections.get();
+    this.memberTypeMap = memberTypeMap;
   },
 };
 </script>

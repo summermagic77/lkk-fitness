@@ -19,6 +19,7 @@
             :key="idx"
             :label="item.label"
             :prop="item.prop"
+            :formatter="item.formatter"
             >
           </el-table-column>
         </el-table>
