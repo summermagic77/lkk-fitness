@@ -22,6 +22,18 @@
             :formatter="item.formatter"
             >
           </el-table-column>
+          <el-table-column
+            fixed="right"
+            label="操作"
+            width="80">
+            <template slot-scope="scope">
+            <el-button
+              size="mini"
+              type="primary"
+              plain
+              @click="handleEdit(scope.row)">編輯</el-button>
+            </template>
+          </el-table-column>
         </el-table>
         <div class="text-center">
           <el-pagination
@@ -93,6 +105,9 @@ export default {
       this.loading = true;
       this.tableData = this.datas.slice((val - 1) * this.pageSize, val * this.pageSize);
       setTimeout(() => { this.loading = false; }, 300);
+    },
+    handleEdit({ memberPhone }) {
+      this.$router.push({ path: `/member/${memberPhone}` });
     },
     // async getTableData() {
     //   const { data: { data = {} } } = await apiMember.getByType(this.pageType);
