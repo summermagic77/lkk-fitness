@@ -49,7 +49,7 @@
           <el-pagination
             v-else
             background
-            class="mt-2"
+            class="mt-1"
             :page-size="pageSize"
             @current-change="handleCurrentChange"
             layout="total, prev, pager, next"
