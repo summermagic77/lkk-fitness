@@ -109,7 +109,7 @@ const routes = [
       },
       {
         path: 'member',
-        name: '搜尋會員資料',
+        name: '搜尋會員',
         component: SearchCheck,
       },
     ],

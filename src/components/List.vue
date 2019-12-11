@@ -74,7 +74,7 @@
         </div>
       </div>
     </el-col>
-    </el-row>
+  </el-row>
 </template>
 
 <script>

@@ -2,7 +2,7 @@
   <el-row
     type="flex"
     :class="{
-      'h-100': true,
+      'h-100': members.length === 0,
     }"
     justify="center"
     align="middle"
