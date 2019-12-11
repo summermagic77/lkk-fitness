@@ -13,7 +13,7 @@
           v-loading="loading"
           :data="tableData"
           stripe
-          class="w-100">
+          class="w-100 mt-4">
           <el-table-column
             v-for="(item, idx) in columns"
             :key="idx"
