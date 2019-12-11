@@ -1,64 +1,53 @@
 <template>
-  <el-row
-    type="flex"
-    :class="{
-      'h-100': false,
-    }"
-    justify="center"
-    align="middle"
-  >
-    <el-col :sm="24" :md="24" :lg="24" :xl="24">
-      <div>
-        <el-table
-          v-loading="loading"
-          :data="tableData"
-          stripe
-          class="w-100 mt-4">
-          <el-table-column
-            v-for="(item, idx) in columns"
-            :key="idx"
-            :label="item.label"
-            :prop="item.prop"
-            :formatter="item.formatter"
-            >
-          </el-table-column>
-          <el-table-column
-            fixed="right"
-            label="操作"
-            width="80">
-            <template slot-scope="scope">
-            <el-button
-              size="mini"
-              type="primary"
-              plain
-              @click="handleEdit(scope.row)">編輯</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-        <div class="text-center">
-          <el-pagination
-            v-if="$device.mobile"
-            background
-            class="mt-2"
-            :pager-count="5"
-            @current-change="handleCurrentChange"
-            :current-page.sync="currentPage"
-            layout="total, prev, next, jumper"
-            :total="total">
-          </el-pagination>
-          <el-pagination
-            v-else
-            background
-            class="mt-1"
-            :page-size="pageSize"
-            @current-change="handleCurrentChange"
-            layout="total, prev, pager, next"
-            :total="total">
-          </el-pagination>
-        </div>
-      </div>
-    </el-col>
-    </el-row>
+  <div>
+    <el-table
+      v-loading="loading"
+      :data="tableData"
+      stripe
+      class="w-100 mt-4">
+      <el-table-column
+        v-for="(item, idx) in columns"
+        :key="idx"
+        :label="item.label"
+        :prop="item.prop"
+        :formatter="item.formatter"
+        >
+      </el-table-column>
+      <el-table-column
+        fixed="right"
+        label="操作"
+        width="80">
+        <template slot-scope="scope">
+        <el-button
+          size="mini"
+          type="primary"
+          plain
+          @click="handleEdit(scope.row)">編輯</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <div class="text-center">
+      <el-pagination
+        v-if="$device.mobile"
+        background
+        class="mt-2"
+        :pager-count="5"
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage"
+        layout="total, prev, next, jumper"
+        :total="total">
+      </el-pagination>
+      <el-pagination
+        v-else
+        background
+        class="mt-1"
+        :page-size="pageSize"
+        @current-change="handleCurrentChange"
+        layout="total, prev, pager, next"
+        :total="total">
+      </el-pagination>
+    </div>
+  </div>
 </template>
 
 <script>
