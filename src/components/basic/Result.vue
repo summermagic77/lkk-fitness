@@ -133,9 +133,9 @@ export default {
   },
   methods: {
   },
-  created() {
-    console.dir(this.member);
-  },
+  // created() {
+  //   console.dir(this.member);
+  // },
 };
 </script>
 <style>

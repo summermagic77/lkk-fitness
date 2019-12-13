@@ -345,20 +345,21 @@ export default {
     },
     async searchMember() {
       this.fullscreenLoading = true;
-      const { data = null } = await apiMember.getByKey(
+      const { data: { data = null, message } } = await apiMember.getByKey(
         this.checkInType.toLowerCase(),
         { [`member${this.checkInType}`]: this.ruleForm.checkinMember },
       );
-      if (data.data === null) {
+      if (data === null) {
         this.failure = true;
         // this.error = `查無此${this.userTypeLabel}，請確認資訊是否正確。`;
         this.$message({
           showClose: true,
-          message: data.message,
+          message,
           type: 'error',
         });
       } else {
-        this.member = data.data;
+        this.member = data;
+        this.ruleForm.checkinMember = data.memberPhone;
       }
       this.fullscreenLoading = false;
       // this.$router.push({ path: `/member/checkin/${this.input}` });
