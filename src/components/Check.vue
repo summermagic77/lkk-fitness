@@ -124,8 +124,7 @@
             <el-checkbox
               label="現金入場"
               type="checkinAndPay"
-              border
-              size="medium">
+              border>
             </el-checkbox>
           </el-checkbox-group>
         </el-form-item>
