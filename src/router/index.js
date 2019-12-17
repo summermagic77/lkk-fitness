@@ -9,7 +9,7 @@ import SearchCategory from '@/components/search/SearchCategory.vue';
 import SearchCheck from '@/components/search/SearchCheck.vue';
 
 import Member from '@/views/Member.vue';
-import List from '@/components/List.vue';
+import MemberTypeList from '@/components/member/MemberTypeList.vue';
 
 import Employee from '@/views/Employee.vue';
 import Coach from '@/views/Coach.vue';
@@ -30,7 +30,7 @@ const routes = [
         path: '',
         name: '會員列表',
         meta: { type: 'member' },
-        component: List,
+        component: MemberTypeList,
       },
       {
         path: ':id',
@@ -49,7 +49,7 @@ const routes = [
         path: '',
         name: '員工列表',
         meta: { type: 'employee' },
-        component: List,
+        component: MemberTypeList,
       },
     ],
   },
@@ -62,7 +62,7 @@ const routes = [
         path: '',
         name: '教練列表',
         meta: { type: 'coach' },
-        component: List,
+        component: MemberTypeList,
       },
       // {
       //   path: 'create',

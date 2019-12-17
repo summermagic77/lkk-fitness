@@ -18,11 +18,13 @@
         label="操作"
         width="80">
         <template slot-scope="scope">
-        <el-button
-          size="mini"
-          type="primary"
-          plain
-          @click="handleEdit(scope.row)">編輯</el-button>
+          <el-button
+            size="mini"
+            type="primary"
+            plain
+            @click="handleEdit(scope.row)">
+            編輯
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -70,10 +72,14 @@ export default {
       type: Number,
       default: 10,
     },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
-      loading: false,
+      // loading: false,
       count: 0,
       // pageSize: 10,
       // total: 0,
@@ -91,9 +97,10 @@ export default {
   },
   methods: {
     handleCurrentChange(val) {
-      this.loading = true;
+      // this.loading = true;
+      this.$emit('update:loading', true);
       this.tableData = this.datas.slice((val - 1) * this.pageSize, val * this.pageSize);
-      setTimeout(() => { this.loading = false; }, 300);
+      setTimeout(() => { this.$emit('update:loading', false); }, 300);
     },
     handleEdit({ memberPhone }) {
       this.$router.push({ path: `/member/${memberPhone}` });
@@ -106,11 +113,13 @@ export default {
     //   this.loading = false;
     // },
   },
-  async created() {
-    this.tableData = this.datas.slice(0, this.pageSize);
-    // this.getTableData();
-    // const { data: { data: { memberTypeMap } } } = await apiSelections.get();
-    // this.memberTypeMap = memberTypeMap;
+  watch: {
+    datas: {
+      immediate: true,
+      handler(val) {
+        this.tableData = val.slice(0, this.pageSize);
+      },
+    },
   },
 };
 </script>

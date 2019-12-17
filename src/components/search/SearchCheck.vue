@@ -97,7 +97,7 @@
       :lg="24"
       :xl="24"
       >
-      <el-list :datas="members" :columns="columns"></el-list>
+      <el-list :datas="members" :columns="tableColumns"></el-list>
     </el-col>
   </el-row>
 </template>
@@ -155,6 +155,20 @@ export default {
           formatter: this.formatterType,
         },
       ],
+      columnsPlus: [
+        {
+          prop: 'memberPoint',
+          label: '點數',
+        },
+        {
+          prop: 'memberLesson',
+          label: '課程',
+        },
+        {
+          prop: 'memberTreat',
+          label: '治療',
+        },
+      ],
       check: {},
       memberTypeMap: {},
       ruleForm: {
@@ -168,6 +182,9 @@ export default {
     };
   },
   computed: {
+    tableColumns() {
+      return this.$device.mobile ? this.columns : [...this.columns, ...this.columnsPlus];
+    },
     userTypeLabel() {
       return this.$route.name;
     },

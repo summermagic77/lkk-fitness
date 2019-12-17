@@ -119,6 +119,16 @@
         :rules="rules"
         ref="ruleForm"
       >
+        <el-form-item prop="checkinAndPay" class="float-right">
+          <el-checkbox-group v-model="ruleForm.checkinAndPay">
+            <el-checkbox
+              label="現金入場"
+              type="checkinAndPay"
+              border
+              size="medium">
+            </el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
         <el-form-item label="入場類型" prop="checkinType">
           <el-select v-model="ruleForm.checkinType" placeholder="請選擇入場類型" class="w-100">
             <el-option
@@ -241,6 +251,7 @@ export default {
         checkinGroupClass: null,
         checkinCoach: null,
         checkinCost: null,
+        checkinAndPay: false,
       },
       rules: {
         checkinMember: [
